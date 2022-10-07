@@ -6,8 +6,8 @@ from PyQt5 import QtGui
 from PyQt5.QtCore import QThread,pyqtSignal,Qt
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from DemoGUI import Ui_MainWindow
-from MainTable import Ui_MainWindow1
+from MainUI import Ui_MainWindow
+from TableUI import Ui_MainWindow1
 
 
 class MainWindow(QMainWindow):

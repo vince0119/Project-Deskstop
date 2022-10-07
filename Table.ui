@@ -26,11 +26,11 @@
     <property name="currentIndex">
      <number>4</number>
     </property>
-    <widget class="QWidget" name="tab_1">
+    <widget class="QWidget" name="wgCard">
      <attribute name="title">
       <string>Card</string>
      </attribute>
-     <widget class="QLineEdit" name="txtID">
+     <widget class="QLineEdit" name="txtCardId">
       <property name="enabled">
        <bool>true</bool>
       </property>
@@ -52,7 +52,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtArea">
+     <widget class="QLineEdit" name="txtCardUser">
       <property name="geometry">
        <rect>
         <x>220</x>
@@ -71,7 +71,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="lblActiveCard">
+     <widget class="QLabel" name="lblCardCreator">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -81,10 +81,10 @@
        </rect>
       </property>
       <property name="text">
-       <string>Active</string>
+       <string>Created by</string>
       </property>
      </widget>
-     <widget class="QLabel" name="lblIDCar">
+     <widget class="QLabel" name="lblCardCarLicense">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -97,7 +97,7 @@
        <string>Car License</string>
       </property>
      </widget>
-     <widget class="QLabel" name="lblAreaCard">
+     <widget class="QLabel" name="lblCardUser">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -107,10 +107,10 @@
        </rect>
       </property>
       <property name="text">
-       <string>Area</string>
+       <string>User</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="btnAddCard">
+     <widget class="QPushButton" name="btnCardNew">
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -123,7 +123,7 @@
        <string>New</string>
       </property>
      </widget>
-     <widget class="QTableWidget" name="tblTableCard">
+     <widget class="QTableWidget" name="tblCard">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -133,7 +133,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="btnDeleteCard">
+     <widget class="QPushButton" name="btnCardDisable">
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -146,7 +146,7 @@
        <string>Disable</string>
       </property>
      </widget>
-     <widget class="QLabel" name="lblIDCard">
+     <widget class="QLabel" name="lblCardId">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -159,7 +159,7 @@
        <string>ID Card</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtIdCar">
+     <widget class="QLineEdit" name="txtCardCarNumber">
       <property name="geometry">
        <rect>
         <x>220</x>
@@ -178,7 +178,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="btnOkCard">
+     <widget class="QPushButton" name="btnCardOk">
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -191,7 +191,7 @@
        <string>OK</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="btnCancelCard">
+     <widget class="QPushButton" name="btnCardCancel">
       <property name="geometry">
        <rect>
         <x>680</x>
@@ -204,12 +204,31 @@
        <string>Cancel</string>
       </property>
      </widget>
+     <widget class="QLineEdit" name="txtCardCreator">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>160</y>
+        <width>311</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
     </widget>
-    <widget class="QWidget" name="tab_2">
+    <widget class="QWidget" name="wgPark">
      <attribute name="title">
       <string>Park</string>
      </attribute>
-     <widget class="QLineEdit" name="txtNOS">
+     <widget class="QLineEdit" name="txtParkNoS">
       <property name="geometry">
        <rect>
         <x>220</x>
@@ -225,7 +244,7 @@
        </font>
       </property>
      </widget>
-     <widget class="QLabel" name="lblID_2">
+     <widget class="QLabel" name="lblParkArea">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -238,7 +257,7 @@
        <string>Area</string>
       </property>
      </widget>
-     <widget class="QLabel" name="lblIDCar_2">
+     <widget class="QLabel" name="lblParkAvailable">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -251,7 +270,7 @@
        <string>Available</string>
       </property>
      </widget>
-     <widget class="QTableWidget" name="tblTable_2">
+     <widget class="QTableWidget" name="tblPark">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -261,7 +280,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="btnDisablePark">
+     <widget class="QPushButton" name="btnParkDisable">
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -274,7 +293,7 @@
        <string>Disable</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtAvai">
+     <widget class="QLineEdit" name="txtParkAvailable">
       <property name="geometry">
        <rect>
         <x>220</x>
@@ -290,7 +309,7 @@
        </font>
       </property>
      </widget>
-     <widget class="QLabel" name="lblKhu_2">
+     <widget class="QLabel" name="lblParkNoS">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -300,10 +319,10 @@
        </rect>
       </property>
       <property name="text">
-       <string>Number Of Seat</string>
+       <string>Number Of Slot</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="btnAddPark">
+     <widget class="QPushButton" name="btnParkNew">
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -316,7 +335,7 @@
        <string>New</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtAreaG">
+     <widget class="QLineEdit" name="txtParkArea">
       <property name="geometry">
        <rect>
         <x>220</x>
@@ -332,7 +351,7 @@
        </font>
       </property>
      </widget>
-     <widget class="QPushButton" name="OkParkButton">
+     <widget class="QPushButton" name="btnParkOK">
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -345,7 +364,7 @@
        <string>OK</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="btnCancelPark">
+     <widget class="QPushButton" name="btnParkCancel">
       <property name="geometry">
        <rect>
         <x>680</x>
@@ -358,12 +377,44 @@
        <string>Cancel</string>
       </property>
      </widget>
+     <widget class="QLineEdit" name="txtParkCreator">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>160</y>
+        <width>311</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblParkCreator">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>160</y>
+        <width>201</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Created by</string>
+      </property>
+     </widget>
     </widget>
-    <widget class="QWidget" name="tab">
+    <widget class="QWidget" name="wgCarLog">
      <attribute name="title">
-      <string>Car In-Out</string>
+      <string>Car Log</string>
      </attribute>
-     <widget class="QLineEdit" name="txtLiscense">
+     <widget class="QLineEdit" name="txtCarLogCarNumber">
       <property name="geometry">
        <rect>
         <x>220</x>
@@ -382,7 +433,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="lblID_3">
+     <widget class="QLabel" name="lblCardLogCardId">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -395,7 +446,7 @@
        <string>ID Card</string>
       </property>
      </widget>
-     <widget class="QLabel" name="lblIDCar_3">
+     <widget class="QLabel" name="lblCarLogDate">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -408,7 +459,7 @@
        <string>DateTime</string>
       </property>
      </widget>
-     <widget class="QLabel" name="lblActive_3">
+     <widget class="QLabel" name="lblCarLogType">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -421,7 +472,7 @@
        <string>In/Out</string>
       </property>
      </widget>
-     <widget class="QTableWidget" name="tblTable_3">
+     <widget class="QTableWidget" name="tblCarLog">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -431,7 +482,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtDO">
+     <widget class="QLineEdit" name="txtCarLogDate">
       <property name="geometry">
        <rect>
         <x>220</x>
@@ -450,7 +501,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="lblKhu_3">
+     <widget class="QLabel" name="lblCarLogCarNumber">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -463,12 +514,12 @@
        <string>License Plates</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtDI">
+     <widget class="QLineEdit" name="txtCarLogType">
       <property name="geometry">
        <rect>
         <x>220</x>
         <y>160</y>
-        <width>311</width>
+        <width>121</width>
         <height>41</height>
        </rect>
       </property>
@@ -482,7 +533,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtIDCarIO">
+     <widget class="QLineEdit" name="txtCarLogCardId">
       <property name="geometry">
        <rect>
         <x>220</x>
@@ -501,16 +552,11 @@
        <bool>true</bool>
       </property>
      </widget>
-    </widget>
-    <widget class="QWidget" name="tab_4">
-     <attribute name="title">
-      <string>User</string>
-     </attribute>
-     <widget class="QLineEdit" name="txtIDCarU">
+     <widget class="QLineEdit" name="txtCarLogCreator">
       <property name="geometry">
        <rect>
         <x>220</x>
-        <y>60</y>
+        <y>210</y>
         <width>311</width>
         <height>41</height>
        </rect>
@@ -525,20 +571,70 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="lblID_5">
+     <widget class="QLabel" name="lblCarLogCreator">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>10</y>
+        <y>210</y>
         <width>201</width>
         <height>41</height>
        </rect>
       </property>
       <property name="text">
-       <string>ID User</string>
+       <string>Created by</string>
       </property>
      </widget>
-     <widget class="QLabel" name="lblIDCar_5">
+    </widget>
+    <widget class="QWidget" name="wgUser">
+     <attribute name="title">
+      <string>User</string>
+     </attribute>
+     <widget class="QLineEdit" name="txtUserCarNumber">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>10</y>
+        <width>311</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblUserCreator">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>260</y>
+        <width>201</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Created by</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblUserFullName">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>201</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Full Name</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblUserPersonalId">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -548,23 +644,10 @@
        </rect>
       </property>
       <property name="text">
-       <string>Full Name</string>
+       <string>Personal Id</string>
       </property>
      </widget>
-     <widget class="QLabel" name="lblActive_5">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>160</y>
-        <width>201</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>CCCD</string>
-      </property>
-     </widget>
-     <widget class="QTableWidget" name="tblTable_5">
+     <widget class="QTableWidget" name="tblUser">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -574,7 +657,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="btnDelete_5">
+     <widget class="QPushButton" name="btnUserDisable">
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -587,7 +670,39 @@
        <string>Disable</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtName">
+     <widget class="QLineEdit" name="txtUserFullName">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>60</y>
+        <width>311</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblUserCarNumber">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>201</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Car License</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtUserPersonalId">
       <property name="geometry">
        <rect>
         <x>220</x>
@@ -606,39 +721,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="lblKhu_5">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>60</y>
-        <width>201</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Car License</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="txtCCCD">
-      <property name="geometry">
-       <rect>
-        <x>220</x>
-        <y>160</y>
-        <width>311</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnAdd_5">
+     <widget class="QPushButton" name="btnUserNew">
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -651,11 +734,11 @@
        <string>New</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtIDUser">
+     <widget class="QLineEdit" name="txtUserCreator">
       <property name="geometry">
        <rect>
         <x>220</x>
-        <y>10</y>
+        <y>260</y>
         <width>311</width>
         <height>41</height>
        </rect>
@@ -670,11 +753,11 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="lblTelefon_2">
+     <widget class="QLabel" name="lblUserPhoneNumber">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>210</y>
+        <y>160</y>
         <width>201</width>
         <height>41</height>
        </rect>
@@ -683,20 +766,33 @@
        <string>Phone Number</string>
       </property>
      </widget>
-     <widget class="QLabel" name="lblEmail_2">
+     <widget class="QLabel" name="lblUserEmail">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>260</y>
+        <y>210</y>
         <width>201</width>
         <height>41</height>
        </rect>
       </property>
       <property name="text">
-       <string>Address</string>
+       <string>Email</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtPhone">
+     <widget class="QLineEdit" name="txtUserPhoneNumber">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>160</y>
+        <width>311</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtUserEmail">
       <property name="geometry">
        <rect>
         <x>220</x>
@@ -709,20 +805,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtAddress">
-      <property name="geometry">
-       <rect>
-        <x>220</x>
-        <y>260</y>
-        <width>311</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="OkCardButton_3">
+     <widget class="QPushButton" name="btnUserOK">
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -735,7 +818,7 @@
        <string>OK</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="OkCardButton_4">
+     <widget class="QPushButton" name="btnUserCancel">
       <property name="geometry">
        <rect>
         <x>680</x>
@@ -749,15 +832,15 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_5">
+    <widget class="QWidget" name="wgStaff">
      <attribute name="title">
-      <string>Nhan Vien</string>
+      <string>Staff</string>
      </attribute>
-     <widget class="QLineEdit" name="txtUserName">
+     <widget class="QLineEdit" name="txtStaffUserName">
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>60</y>
+        <x>230</x>
+        <y>10</y>
         <width>311</width>
         <height>41</height>
        </rect>
@@ -772,24 +855,11 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="lblID_6">
+     <widget class="QLabel" name="lblStaffPassword">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>201</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>ID Staff</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lblIDCar_6">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>110</y>
+        <x>20</x>
+        <y>60</y>
         <width>201</width>
         <height>41</height>
        </rect>
@@ -798,11 +868,11 @@
        <string>Password</string>
       </property>
      </widget>
-     <widget class="QLabel" name="lblActive_6">
+     <widget class="QLabel" name="lblStaffFullName">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>160</y>
+        <x>20</x>
+        <y>110</y>
         <width>201</width>
         <height>41</height>
        </rect>
@@ -811,7 +881,7 @@
        <string>Full Name</string>
       </property>
      </widget>
-     <widget class="QTableWidget" name="tblTable_6">
+     <widget class="QTableWidget" name="tblStaff">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -821,7 +891,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="btnDelete_6">
+     <widget class="QPushButton" name="btnStaffDisable">
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -834,10 +904,42 @@
        <string>Disable</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtPassword">
+     <widget class="QLineEdit" name="txtStaffPassword">
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>230</x>
+        <y>60</y>
+        <width>311</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblStaffUserName">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>201</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>UserName</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtStaffFullName">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
         <y>110</y>
         <width>311</width>
         <height>41</height>
@@ -853,39 +955,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLabel" name="lblKhu_6">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>60</y>
-        <width>201</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>UserName</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="txtFullName">
-      <property name="geometry">
-       <rect>
-        <x>220</x>
-        <y>160</y>
-        <width>311</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnAdd_6">
+     <widget class="QPushButton" name="btnStaffNew">
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -898,43 +968,24 @@
        <string>New</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtIDNV">
+     <widget class="QLabel" name="lblStaffPersonalId">
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>10</y>
-        <width>311</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lblTelefon_3">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>210</y>
+        <x>20</x>
+        <y>160</y>
         <width>201</width>
         <height>41</height>
        </rect>
       </property>
       <property name="text">
-       <string>CCCD</string>
+       <string>Personal Id</string>
       </property>
      </widget>
-     <widget class="QLabel" name="lblEmail_3">
+     <widget class="QLabel" name="lblStaffAddress">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>260</y>
+        <x>20</x>
+        <y>210</y>
         <width>201</width>
         <height>41</height>
        </rect>
@@ -943,10 +994,23 @@
        <string>Address</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtCCCDNV">
+     <widget class="QLineEdit" name="txtStaffPersonalId">
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>230</x>
+        <y>160</y>
+        <width>311</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtStaffAddress">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
         <y>210</y>
         <width>311</width>
         <height>41</height>
@@ -956,20 +1020,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtAddressNV">
-      <property name="geometry">
-       <rect>
-        <x>220</x>
-        <y>260</y>
-        <width>311</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="OkCardButton_5">
+     <widget class="QPushButton" name="btnStaffOK">
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -982,7 +1033,7 @@
        <string>OK</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="OkCardButton_6">
+     <widget class="QPushButton" name="btnStaffCancel">
       <property name="geometry">
        <rect>
         <x>680</x>
