@@ -36,7 +36,7 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>160</x>
         <y>10</y>
         <width>311</width>
         <height>41</height>
@@ -55,7 +55,7 @@
      <widget class="QLineEdit" name="txtCardUser">
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>160</x>
         <y>60</y>
         <width>311</width>
         <height>41</height>
@@ -162,7 +162,7 @@
      <widget class="QLineEdit" name="txtCardCarNumber">
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>160</x>
         <y>110</y>
         <width>311</width>
         <height>41</height>
@@ -205,9 +205,12 @@
       </property>
      </widget>
      <widget class="QLineEdit" name="txtCardCreator">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>160</x>
         <y>160</y>
         <width>311</width>
         <height>41</height>
@@ -231,8 +234,8 @@
      <widget class="QLineEdit" name="txtParkNoS">
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>60</y>
+        <x>150</x>
+        <y>70</y>
         <width>311</width>
         <height>41</height>
        </rect>
@@ -242,6 +245,9 @@
         <family>Times New Roman</family>
         <pointsize>14</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QLabel" name="lblParkArea">
@@ -296,8 +302,8 @@
      <widget class="QLineEdit" name="txtParkAvailable">
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>110</y>
+        <x>150</x>
+        <y>120</y>
         <width>311</width>
         <height>41</height>
        </rect>
@@ -307,6 +313,9 @@
         <family>Times New Roman</family>
         <pointsize>14</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QLabel" name="lblParkNoS">
@@ -338,8 +347,8 @@
      <widget class="QLineEdit" name="txtParkArea">
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>10</y>
+        <x>150</x>
+        <y>20</y>
         <width>311</width>
         <height>41</height>
        </rect>
@@ -349,6 +358,9 @@
         <family>Times New Roman</family>
         <pointsize>14</pointsize>
        </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QPushButton" name="btnParkOK">
@@ -378,10 +390,13 @@
       </property>
      </widget>
      <widget class="QLineEdit" name="txtParkCreator">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>160</y>
+        <x>150</x>
+        <y>170</y>
         <width>311</width>
         <height>41</height>
        </rect>
@@ -592,8 +607,8 @@
      <widget class="QLineEdit" name="txtUserCarNumber">
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>10</y>
+        <x>160</x>
+        <y>210</y>
         <width>311</width>
         <height>41</height>
        </rect>
@@ -625,7 +640,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>60</y>
+        <y>10</y>
         <width>201</width>
         <height>41</height>
        </rect>
@@ -638,7 +653,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>110</y>
+        <y>60</y>
         <width>201</width>
         <height>41</height>
        </rect>
@@ -673,8 +688,8 @@
      <widget class="QLineEdit" name="txtUserFullName">
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>60</y>
+        <x>160</x>
+        <y>10</y>
         <width>311</width>
         <height>41</height>
        </rect>
@@ -693,7 +708,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>10</y>
+        <y>210</y>
         <width>201</width>
         <height>41</height>
        </rect>
@@ -705,8 +720,8 @@
      <widget class="QLineEdit" name="txtUserPersonalId">
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>110</y>
+        <x>160</x>
+        <y>60</y>
         <width>311</width>
         <height>41</height>
        </rect>
@@ -735,9 +750,12 @@
       </property>
      </widget>
      <widget class="QLineEdit" name="txtUserCreator">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>160</x>
         <y>260</y>
         <width>311</width>
         <height>41</height>
@@ -757,7 +775,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>160</y>
+        <y>110</y>
         <width>201</width>
         <height>41</height>
        </rect>
@@ -770,7 +788,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>210</y>
+        <y>160</y>
         <width>201</width>
         <height>41</height>
        </rect>
@@ -782,11 +800,17 @@
      <widget class="QLineEdit" name="txtUserPhoneNumber">
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>160</y>
+        <x>160</x>
+        <y>110</y>
         <width>311</width>
         <height>41</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>14</pointsize>
+       </font>
       </property>
       <property name="readOnly">
        <bool>true</bool>
@@ -795,11 +819,17 @@
      <widget class="QLineEdit" name="txtUserEmail">
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>210</y>
+        <x>160</x>
+        <y>160</y>
         <width>311</width>
         <height>41</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>14</pointsize>
+       </font>
       </property>
       <property name="readOnly">
        <bool>true</bool>
@@ -839,8 +869,8 @@
      <widget class="QLineEdit" name="txtStaffUserName">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>10</y>
+        <x>160</x>
+        <y>20</y>
         <width>311</width>
         <height>41</height>
        </rect>
@@ -858,7 +888,7 @@
      <widget class="QLabel" name="lblStaffPassword">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>10</x>
         <y>60</y>
         <width>201</width>
         <height>41</height>
@@ -871,7 +901,7 @@
      <widget class="QLabel" name="lblStaffFullName">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>10</x>
         <y>110</y>
         <width>201</width>
         <height>41</height>
@@ -907,8 +937,8 @@
      <widget class="QLineEdit" name="txtStaffPassword">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>60</y>
+        <x>160</x>
+        <y>70</y>
         <width>311</width>
         <height>41</height>
        </rect>
@@ -926,7 +956,7 @@
      <widget class="QLabel" name="lblStaffUserName">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>10</x>
         <y>10</y>
         <width>201</width>
         <height>41</height>
@@ -939,8 +969,8 @@
      <widget class="QLineEdit" name="txtStaffFullName">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>110</y>
+        <x>160</x>
+        <y>120</y>
         <width>311</width>
         <height>41</height>
        </rect>
@@ -971,7 +1001,7 @@
      <widget class="QLabel" name="lblStaffPersonalId">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>10</x>
         <y>160</y>
         <width>201</width>
         <height>41</height>
@@ -984,7 +1014,7 @@
      <widget class="QLabel" name="lblStaffAddress">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>10</x>
         <y>210</y>
         <width>201</width>
         <height>41</height>
@@ -997,11 +1027,17 @@
      <widget class="QLineEdit" name="txtStaffPersonalId">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>160</y>
+        <x>160</x>
+        <y>170</y>
         <width>311</width>
         <height>41</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>14</pointsize>
+       </font>
       </property>
       <property name="readOnly">
        <bool>true</bool>
@@ -1010,11 +1046,17 @@
      <widget class="QLineEdit" name="txtStaffAddress">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>210</y>
+        <x>160</x>
+        <y>220</y>
         <width>311</width>
         <height>41</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>14</pointsize>
+       </font>
       </property>
       <property name="readOnly">
        <bool>true</bool>
