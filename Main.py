@@ -1,4 +1,3 @@
-from re import T
 import sys
 import cv2
 import numpy as np
@@ -16,6 +15,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.uic = Ui_MainWindow()
         self.uic.setupUi(self)
+        # self.showMaximized()
         
         self.uic.btnTable.clicked.connect(self.showScreen)
         
