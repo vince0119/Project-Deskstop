@@ -4,34 +4,42 @@ import numpy as np
 from PyQt5 import QtGui
 from PyQt5.QtCore import QThread,pyqtSignal,Qt
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
 from MainUI import Ui_MainWindow
 from TableUI import Ui_MainWindow1
 
+import mysql.connector
 
+db = mysql.connector.connect(user = 'root', password = '1234', host = '127.0.0.1', database = 'asp')
+
+CardReDB = 'SELECT * FROM cardregistered LIMIT 0, 5'
+ParksDB = 'SELECT * FROM parking_area LIMIT 0, 5'
+CarLogDB = 'SELECT * FROM cardlog LIMIT 0, 5'
+UserDB = 'SELECT * FROM users LIMIT 0, 5'
+CarTypeDB = 'SELECT * FROM cardtype LIMIT 0, 5'
+StaffDB = 'SELECT * FROM staffs LIMIT 0, 5'
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.uic = Ui_MainWindow()
         self.uic.setupUi(self)
-        # self.showMaximized()
         
         self.uic.btnTable.clicked.connect(self.showScreen)
         
-        #self.uic.btnStop.clicked.connect(self.stop_capture_video)
-        
-    
+
 
     def showScreen(self):
         self.sub_win = QMainWindow()
         self.uic1 = Ui_MainWindow1()
         self.uic1.setupUi(self.sub_win)
         self.sub_win.show()
+
         self.uic1.cbCardType.addItem("User")
         self.uic1.cbCardType.addItem("Guest")
         self.uic1.cbCardType.setCurrentIndex(-1)
         self.HideOkAndCancelButton()
+        self.uic1.btnLoadDataStaffs.clicked.connect(self.load_data_staffs)
         
         #Card tab button controller
         self.uic1.btnCardNew.clicked.connect(self.CardNewButtonClick)
@@ -65,6 +73,28 @@ class MainWindow(QMainWindow):
         self.uic1.btnStaffCancel.clicked.connect(self.StaffCancelButtonClick)
         
         self.thread = {}
+
+    def load_data_staffs(self):
+        
+        mycuror =db.cursor()
+        mycuror.execute(StaffDB)
+        result = mycuror.fetchall()
+        print(result)
+
+        self.uic1.tblStaff.setRowCount(11)
+        self.uic1.tblStaff.setColumnCount(7)
+
+        table_row = 0
+        for row in result:
+            self.uic1.tblStaff.setItem(table_row, 0 , QTableWidgetItem(row[0]))
+            self.uic1.tblStaff.setItem(table_row, 1 , QTableWidgetItem(row[1]))
+            self.uic1.tblStaff.setItem(table_row, 2 , QTableWidgetItem(row[2]))
+            self.uic1.tblStaff.setItem(table_row, 3 , QTableWidgetItem(row[3]))
+            self.uic1.tblStaff.setItem(table_row, 4 , QTableWidgetItem(row[4]))
+            self.uic1.tblStaff.setItem(table_row, 5 , QTableWidgetItem(str(row[5])))
+            self.uic1.tblStaff.setItem(table_row, 6 , QTableWidgetItem(str(row[6])))
+            table_row += 1
+
 
     #Start of Card tab Event
     def CardButtonEvent(self, _isEditing):
@@ -250,48 +280,6 @@ class MainWindow(QMainWindow):
         self.uic1.btnStaffCancel.setVisible(False)
         self.uic1.btnCardTypeCancel.setVisible(False)
     
-    def closeEvent(self, event):
-        self.stop_capture_video()
-    def stop_capture_video(self):
-        self.thread[1].stop()
-        
-    def start_capture_video(self):
-        self.thread[1] = capture_video(index=1)
-        self.thread[1].start()
-        self.thread[1].signal.connect(self.show_wedcam)
-        
-    def show_wedcam(self, cv_img):
-        """Updates the image_label with a new opencv image"""
-        qt_img = self.convert_cv_qt(cv_img)
-        self.uic.CamIn.setPixmap(qt_img)
-
-    def convert_cv_qt(self, cv_img):
-        """Convert from an opencv image to QPixmap"""
-        rgb_image = cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)
-        h, w, ch = rgb_image.shape
-        bytes_per_line = ch * w
-        convert_to_Qt_format = QtGui.QImage(rgb_image.data, w, h, bytes_per_line, QtGui.QImage.Format_RGB888)
-        p = convert_to_Qt_format.scaled(490, 430, Qt.KeepAspectRatio)
-        return QPixmap.fromImage(p)
-
-        
-class capture_video(QThread):
-    signal = pyqtSignal(np.ndarray)
-    def __init__(self, index):
-        self.index = index
-        print("start threading", self.index)
-        super(capture_video, self).__init__()
-
-    def run(self):
-        cap = cv2.VideoCapture(0)
-        while True:
-            ret, cv_img = cap.read()
-            if ret:
-                self.signal.emit(cv_img)
-    def stop(self):
-        print("stop threading", self.index)
-        self.terminate()
-
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
