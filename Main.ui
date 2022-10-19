@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1782</width>
-    <height>726</height>
+    <width>1783</width>
+    <height>960</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>APS</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>0</y>
-      <width>111</width>
+      <x>190</x>
+      <y>40</y>
+      <width>121</width>
       <height>31</height>
      </rect>
     </property>
@@ -30,15 +30,15 @@
      </font>
     </property>
     <property name="text">
-     <string>Camera In</string>
+     <string>Car Front In</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>710</x>
-      <y>0</y>
-      <width>111</width>
+      <x>1210</x>
+      <y>30</y>
+      <width>141</width>
       <height>31</height>
      </rect>
     </property>
@@ -49,15 +49,15 @@
      </font>
     </property>
     <property name="text">
-     <string>Face In</string>
+     <string>Car Front Out</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>340</y>
-      <width>111</width>
+      <x>200</x>
+      <y>500</y>
+      <width>121</width>
       <height>31</height>
      </rect>
     </property>
@@ -68,15 +68,15 @@
      </font>
     </property>
     <property name="text">
-     <string>Camera Out</string>
+     <string>Car Back In</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>710</x>
-      <y>340</y>
-      <width>111</width>
+      <x>1200</x>
+      <y>490</y>
+      <width>141</width>
       <height>31</height>
      </rect>
     </property>
@@ -87,14 +87,14 @@
      </font>
     </property>
     <property name="text">
-     <string>Face out</string>
+     <string>Car Back Out</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>1130</x>
-      <y>40</y>
+      <x>570</x>
+      <y>500</y>
       <width>151</width>
       <height>31</height>
      </rect>
@@ -112,8 +112,8 @@
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>1480</x>
-      <y>40</y>
+      <x>1540</x>
+      <y>490</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -131,8 +131,8 @@
    <widget class="QLabel" name="CamIn">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>30</y>
+      <x>30</x>
+      <y>70</y>
       <width>491</width>
       <height>301</height>
      </rect>
@@ -150,8 +150,8 @@
    <widget class="QLabel" name="label_8">
     <property name="geometry">
      <rect>
-      <x>530</x>
-      <y>30</y>
+      <x>1030</x>
+      <y>70</y>
       <width>491</width>
       <height>301</height>
      </rect>
@@ -169,8 +169,8 @@
    <widget class="QLabel" name="CamOut">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>370</y>
+      <x>30</x>
+      <y>530</y>
       <width>491</width>
       <height>301</height>
      </rect>
@@ -188,8 +188,8 @@
    <widget class="QLabel" name="label_10">
     <property name="geometry">
      <rect>
-      <x>530</x>
-      <y>370</y>
+      <x>1020</x>
+      <y>520</y>
       <width>491</width>
       <height>301</height>
      </rect>
@@ -207,46 +207,8 @@
    <widget class="QLabel" name="LPIn">
     <property name="geometry">
      <rect>
-      <x>1040</x>
-      <y>80</y>
-      <width>171</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::Box</enum>
-    </property>
-    <property name="lineWidth">
-     <number>2</number>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_12">
-    <property name="geometry">
-     <rect>
-      <x>1220</x>
-      <y>80</y>
-      <width>171</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::Box</enum>
-    </property>
-    <property name="lineWidth">
-     <number>2</number>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_13">
-    <property name="geometry">
-     <rect>
-      <x>1410</x>
-      <y>80</y>
+      <x>560</x>
+      <y>540</y>
       <width>171</width>
       <height>81</height>
      </rect>
@@ -264,8 +226,8 @@
    <widget class="QLabel" name="label_14">
     <property name="geometry">
      <rect>
-      <x>1590</x>
-      <y>80</y>
+      <x>1540</x>
+      <y>530</y>
       <width>171</width>
       <height>81</height>
      </rect>
@@ -283,14 +245,66 @@
    <widget class="QPushButton" name="btnTable">
     <property name="geometry">
      <rect>
-      <x>1680</x>
+      <x>1642</x>
       <y>10</y>
-      <width>93</width>
-      <height>28</height>
+      <width>131</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="text">
      <string>Table</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnSwitchCarFrontOut">
+    <property name="geometry">
+     <rect>
+      <x>1210</x>
+      <y>380</y>
+      <width>121</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Off</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnSwitchCarBackOut">
+    <property name="geometry">
+     <rect>
+      <x>1200</x>
+      <y>840</y>
+      <width>121</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Off</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnSwitchCarBackIn">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>840</y>
+      <width>121</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Off</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnSwitchCarFrontIn">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>380</y>
+      <width>121</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Off</string>
     </property>
    </widget>
   </widget>
