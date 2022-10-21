@@ -454,7 +454,7 @@ class Ui_MainWindow1(object):
         self.lblCardId.setText(_translate("MainWindow1", "Card Id"))
         self.btnCardOk.setText(_translate("MainWindow1", "OK"))
         self.btnCardCancel.setText(_translate("MainWindow1", "Cancel"))
-        self.wgTab.setTabText(self.wgTab.indexOf(self.wgCard), _translate("MainWindow1", "Cards"))
+        self.wgTab.setTabText(self.wgTab.indexOf(self.wgCard), _translate("MainWindow1", "Card Registered"))
         self.lblParkArea.setText(_translate("MainWindow1", "Area"))
         self.lblParkAvailable.setText(_translate("MainWindow1", "Available"))
         self.btnParkDisable.setText(_translate("MainWindow1", "Disable"))
