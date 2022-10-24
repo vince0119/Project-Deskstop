@@ -28,7 +28,7 @@
     </property>
     <widget class="QWidget" name="wgCard">
      <attribute name="title">
-      <string>Cards</string>
+      <string>Card Registered</string>
      </attribute>
      <widget class="QLineEdit" name="txtCardId">
       <property name="enabled">
