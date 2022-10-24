@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="wgCard">
      <attribute name="title">
@@ -226,6 +226,19 @@
        <bool>true</bool>
       </property>
      </widget>
+     <widget class="QPushButton" name="btnLoadDataCard">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>170</y>
+        <width>93</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Load Data</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="wgPark">
      <attribute name="title">
@@ -422,6 +435,19 @@
       </property>
       <property name="text">
        <string>Created by</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnLoadDataPark">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>170</y>
+        <width>93</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Load Data</string>
       </property>
      </widget>
     </widget>
@@ -632,6 +658,19 @@
       </property>
       <property name="text">
        <string>Area</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnLoadDataCar">
+      <property name="geometry">
+       <rect>
+        <x>610</x>
+        <y>10</y>
+        <width>93</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Load Data</string>
       </property>
      </widget>
     </widget>
@@ -864,6 +903,19 @@
        <string>Cancel</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="btnLoadDataUser">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>170</y>
+        <width>93</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Load Data</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="wgCardType">
      <attribute name="title">
@@ -1034,6 +1086,19 @@
       </property>
       <property name="readOnly">
        <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnLoadDataCardType">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>190</y>
+        <width>93</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Load Data</string>
       </property>
      </widget>
     </widget>
@@ -1263,6 +1328,19 @@
        <string>Cancel</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="btnLoadDataStaffs">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>170</y>
+        <width>93</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Load Data</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -1272,7 +1350,7 @@
      <x>0</x>
      <y>0</y>
      <width>932</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
