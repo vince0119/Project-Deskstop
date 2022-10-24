@@ -1,13 +1,115 @@
-from unittest import result
 import mysql.connector
-import numpy
+from PyQt5.QtWidgets import QTableWidgetItem
 
 db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='asp')
 
-code_8 = 'SELECT * FROM staffs'
-mycursor = db.cursor()
-mycursor.execute(code_8)
+CardReDB = 'SELECT * FROM cardregistered LIMIT 0, 5'
+ParksDB = 'SELECT * FROM parking_area LIMIT 0, 5'
+CarLogDB = 'SELECT * FROM car_log LIMIT 0, 5'
+UserDB = 'SELECT * FROM users LIMIT 0, 5'
+CarTypeDB = 'SELECT * FROM cardtype LIMIT 0, 5'
+StaffDB = 'SELECT * FROM staffs LIMIT 0, 5'
 
-result = mycursor.fetchall()
 
-print(result)
+#load data
+def load_data_card(self):
+
+    mycuror =db.cursor()
+    mycuror.execute(CardReDB)
+    
+    result = mycuror.fetchall()
+
+    num = 0
+    for row in result:
+        num = len(row)
+    self.uic1.tblCard.setRowCount(len(result))
+    self.uic1.tblCard.setColumnCount(num)
+
+    for row_number, row_data in enumerate(result):
+        for column_number, data in enumerate(row_data):
+            self.uic1.tblCard.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+
+def load_data_park(self):
+
+    mycuror =db.cursor()
+    mycuror.execute(ParksDB)
+    
+    result = mycuror.fetchall()
+
+    num = 0
+    for row in result:
+        num = len(row)
+    self.uic1.tblPark.setRowCount(len(result))
+    self.uic1.tblPark.setColumnCount(num)
+
+    for row_number, row_data in enumerate(result):
+        for column_number, data in enumerate(row_data):
+            self.uic1.tblPark.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+
+def load_data_user(self):
+
+    mycuror =db.cursor()
+    mycuror.execute(UserDB)
+    
+    result = mycuror.fetchall()
+
+    num = 0
+    for row in result:
+        num = len(row)
+    self.uic1.tblUser.setRowCount(len(result))
+    self.uic1.tblUser.setColumnCount(num)
+
+    for row_number, row_data in enumerate(result):
+        for column_number, data in enumerate(row_data):
+            self.uic1.tblUser.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+
+def load_data_cardType(self):
+
+    mycuror =db.cursor()
+    mycuror.execute(CarTypeDB)
+    
+    result = mycuror.fetchall()
+
+    num = 0
+    for row in result:
+        num = len(row)
+    self.uic1.tblCardType.setRowCount(len(result))
+    self.uic1.tblCardType.setColumnCount(num)
+
+    for row_number, row_data in enumerate(result):
+        for column_number, data in enumerate(row_data):
+            self.uic1.tblCardType.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+
+def load_data_staffs(self):
+
+    mycuror =db.cursor()
+    mycuror.execute(StaffDB)
+    
+    result = mycuror.fetchall()
+
+    num = 0
+    for row in result:
+        num = len(row)
+    self.uic1.tblStaff.setRowCount(len(result))
+    self.uic1.tblStaff.setColumnCount(num)
+
+    for row_number, row_data in enumerate(result):
+        for column_number, data in enumerate(row_data):
+            self.uic1.tblStaff.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+
+def load_data_car(self):
+
+    mycuror =db.cursor()
+    mycuror.execute(CarLogDB)
+    
+    result = mycuror.fetchall()
+
+    num = 0
+    for row in result:
+        num = len(row)
+    self.uic1.tblCarLog.setRowCount(len(result))
+    self.uic1.tblCarLog.setColumnCount(num)
+
+    for row_number, row_data in enumerate(result):
+        for column_number, data in enumerate(row_data):
+            self.uic1.tblCarLog.setItem(row_number, column_number, QTableWidgetItem(str(data)))

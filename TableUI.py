@@ -458,7 +458,7 @@ class Ui_MainWindow1(object):
         MainWindow1.setMenuBar(self.menubar)
 
         self.retranslateUi(MainWindow1)
-        self.wgTab.setCurrentIndex(5)
+        self.wgTab.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow1)
 
     def retranslateUi(self, MainWindow1):
