@@ -3,31 +3,33 @@ from PyQt5.QtWidgets import QTableWidgetItem
 
 db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='asp')
 
-CardReDB = 'SELECT * FROM cardregistered LIMIT 0, 5'
-ParksDB = 'SELECT * FROM parking_area LIMIT 0, 5'
-CarLogDB = 'SELECT * FROM car_log LIMIT 0, 5'
-UserDB = 'SELECT * FROM users LIMIT 0, 5'
-CarTypeDB = 'SELECT * FROM cardtype LIMIT 0, 5'
-StaffDB = 'SELECT * FROM staffs LIMIT 0, 5'
+CardReDB = 'SELECT * FROM cardregistered LIMIT 0, 11'
+ParksDB = 'SELECT * FROM parking_area LIMIT 0, 11'
+CarLogDB = 'SELECT * FROM car_log LIMIT 0, 11'
+UserDB = 'SELECT * FROM users LIMIT 0, 11'
+CarTypeDB = 'SELECT * FROM cardtype LIMIT 0, 11'
+StaffDB = 'SELECT * FROM staffs LIMIT 0, 11'
 
 
 #load data
 def load_data_card(self):
+    try:
+        mycuror =db.cursor()
+        mycuror.execute(CardReDB)
+        
+        result = mycuror.fetchall()
 
-    mycuror =db.cursor()
-    mycuror.execute(CardReDB)
-    
-    result = mycuror.fetchall()
+        num = 0
+        for row in result:
+            num = len(row)
+        self.uic1.tblCard.setRowCount(len(result))
+        self.uic1.tblCard.setColumnCount(num)
 
-    num = 0
-    for row in result:
-        num = len(row)
-    self.uic1.tblCard.setRowCount(len(result))
-    self.uic1.tblCard.setColumnCount(num)
-
-    for row_number, row_data in enumerate(result):
-        for column_number, data in enumerate(row_data):
-            self.uic1.tblCard.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+        for row_number, row_data in enumerate(result):
+            for column_number, data in enumerate(row_data):
+                self.uic1.tblCard.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+    except mysql.connector.Error as e:
+        print('Fail')
 
 def load_data_park(self):
 

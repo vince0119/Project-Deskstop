@@ -5,7 +5,7 @@ import numpy as np
 from PyQt5 import QtGui
 from PyQt5.QtCore import QThread,pyqtSignal,Qt
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from MainUI import Ui_MainWindow
 from TableUI import Ui_MainWindow1
 import mysql.connector
@@ -21,16 +21,17 @@ class MainWindow(QMainWindow):
         
 
     def showScreen(self):
-        self.sub_win = QMainWindow()
+        # self.sub_win = QMainWindow()
         self.uic1 = Ui_MainWindow1()
-        self.uic1.setupUi(self.sub_win)
-        self.sub_win.show()
+        self.uic1.setupUi(self)
+        # self.sub_win.show()
 
         self.uic1.cbCardType.addItem("User")
         self.uic1.cbCardType.addItem("Guest")
         self.uic1.cbCardType.setCurrentIndex(-1)
         self.HideOkAndCancelButton()
-
+        self.HideDisableButton()
+        
         #Card tab button controller
         self.uic1.btnCardNew.clicked.connect(self.CardNewButtonClick)
         self.uic1.btnCardOk.clicked.connect(self.CardOkButtonClick)
@@ -76,6 +77,7 @@ class MainWindow(QMainWindow):
     def CardButtonEvent(self, _isEditing):
         self.uic1.btnCardOk.setVisible(_isEditing)
         self.uic1.btnCardCancel.setVisible(_isEditing)
+        self.uic1.btnCardDisable.setEnabled(False)
         self.uic1.txtCardId.setReadOnly(not _isEditing)
         self.uic1.txtCardId.setText("")
         self.uic1.txtCardUser.setReadOnly(not _isEditing)
@@ -110,6 +112,7 @@ class MainWindow(QMainWindow):
     def ParkButtonEvent(self,_isEditing):
         self.uic1.btnParkOK.setVisible(_isEditing)
         self.uic1.btnParkCancel.setVisible(_isEditing)
+        self.uic1.btnParkDisable.setEnabled(False)
         self.uic1.txtParkArea.setReadOnly(not _isEditing)
         self.uic1.txtParkArea.setText("")
         self.uic1.txtParkNoS.setReadOnly(not _isEditing)
@@ -147,6 +150,7 @@ class MainWindow(QMainWindow):
     def UserButtonEnvent(self,_isEditing):
         self.uic1.btnUserOK.setVisible(_isEditing)
         self.uic1.btnUserCancel.setVisible(_isEditing) 
+        self.uic1.btnUserDisable.setEnabled(False)
         self.uic1.txtUserEmail.setText("")
         self.uic1.txtUserEmail.setReadOnly(not _isEditing)   
         self.uic1.txtUserFullName.setText("")
@@ -202,6 +206,7 @@ class MainWindow(QMainWindow):
     #Start of Card Type tab Event 
     def CardTypeButtonEvent(self, _isEditing):
         self.uic1.btnCardTypeOK.setVisible(_isEditing)
+        self.uic1.btnCardTypeDisable.setEnabled(False)
         self.uic1.btnCardTypeCancel.setVisible(_isEditing)
         self.uic1.txtCardTypeCardId.setReadOnly(not _isEditing)
         self.uic1.txtCardTypeCardId.setText("")
@@ -235,6 +240,7 @@ class MainWindow(QMainWindow):
     def StaffButtonEvent(self, _isEditing):
         self.uic1.btnStaffOK.setVisible(_isEditing)
         self.uic1.btnStaffCancel.setVisible(_isEditing)
+        self.uic1.btnStaffDisable.setEnabled(False)
         self.uic1.txtStaffUserName.setReadOnly(not _isEditing)
         self.uic1.txtStaffPassword.setReadOnly(not _isEditing)
         self.uic1.txtStaffFullName.setReadOnly(not _isEditing)
@@ -264,14 +270,15 @@ class MainWindow(QMainWindow):
             PersonalId = self.uic1.txtStaffPersonalId.text()
             Address = self.uic1.txtStaffAddress.text()
 
-            query = "INSERT INTO staffs (UserName, Password, FullName, PersonalId, Address) VALUES (%s, %s, %s, %s,%s)"
+            query = ("INSERT INTO staffs (UserName, Password, FullName, PersonalId, Address)" "VALUES (%s, %s, %s, %s, %s)")
             val = (UserName, Password, FullName, PersonalId, Address)
 
             result = mycursor.execute(query, val)
 
             db.commit()
-            print('123',result)
-            # self.uic1.btnStaffOK.clicked.connect(self.StaffOKButtonClick)
+            QMessageBox.about(self, 'Inserted', 'Data insert successfully')
+            db.close()
+            load_data_staffs(self)
 
         except mysql.connector.Error as e:
             print('abc',result)
@@ -306,6 +313,13 @@ class MainWindow(QMainWindow):
         self.uic1.btnUserCancel.setVisible(False)
         self.uic1.btnStaffCancel.setVisible(False)
         self.uic1.btnCardTypeCancel.setVisible(False)
+
+    def HideDisableButton(self):
+        self.uic1.btnCardDisable.setEnabled(False)
+        self.uic1.btnParkDisable.setEnabled(False)
+        self.uic1.btnUserDisable.setEnabled(False)
+        self.uic1.btnStaffDisable.setEnabled(False)
+        self.uic1.btnCardTypeDisable.setEnabled(False)
     
 
 if __name__ == "__main__":

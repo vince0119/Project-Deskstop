@@ -18,7 +18,7 @@ class Ui_MainWindow1(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow1)
         self.centralwidget.setObjectName("centralwidget")
         self.wgTab = QtWidgets.QTabWidget(self.centralwidget)
-        self.wgTab.setGeometry(QtCore.QRect(10, 10, 911, 691))
+        self.wgTab.setGeometry(QtCore.QRect(10, 10, 911, 701))
         self.wgTab.setObjectName("wgTab")
         self.wgCard = QtWidgets.QWidget()
         self.wgCard.setObjectName("wgCard")
@@ -390,7 +390,9 @@ class Ui_MainWindow1(object):
         self.lblStaffFullName.setGeometry(QtCore.QRect(10, 110, 201, 41))
         self.lblStaffFullName.setObjectName("lblStaffFullName")
         self.tblStaff = QtWidgets.QTableWidget(self.wgStaff)
-        self.tblStaff.setGeometry(QtCore.QRect(10, 320, 891, 341))
+        self.tblStaff.setGeometry(QtCore.QRect(10, 320, 891, 351))
+        self.tblStaff.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.tblStaff.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.tblStaff.setObjectName("tblStaff")
         self.tblStaff.setColumnCount(0)
         self.tblStaff.setRowCount(0)
@@ -458,12 +460,12 @@ class Ui_MainWindow1(object):
         MainWindow1.setMenuBar(self.menubar)
 
         self.retranslateUi(MainWindow1)
-        self.wgTab.setCurrentIndex(0)
+        self.wgTab.setCurrentIndex(5)
         QtCore.QMetaObject.connectSlotsByName(MainWindow1)
 
     def retranslateUi(self, MainWindow1):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow1.setWindowTitle(_translate("MainWindow1", "MainWindow"))
+        MainWindow1.setWindowTitle(_translate("MainWindow1", "Database Manager"))
         self.lblCardCreator.setText(_translate("MainWindow1", "Created by"))
         self.lblCardCarLicense.setText(_translate("MainWindow1", "Car License"))
         self.lblCardUser.setText(_translate("MainWindow1", "User"))
@@ -473,7 +475,7 @@ class Ui_MainWindow1(object):
         self.btnCardOk.setText(_translate("MainWindow1", "OK"))
         self.btnCardCancel.setText(_translate("MainWindow1", "Cancel"))
         self.btnLoadDataCard.setText(_translate("MainWindow1", "Load Data"))
-        self.wgTab.setTabText(self.wgTab.indexOf(self.wgCard), _translate("MainWindow1", "Cards"))
+        self.wgTab.setTabText(self.wgTab.indexOf(self.wgCard), _translate("MainWindow1", "Card Registered"))
         self.lblParkArea.setText(_translate("MainWindow1", "Area"))
         self.lblParkAvailable.setText(_translate("MainWindow1", "Available"))
         self.btnParkDisable.setText(_translate("MainWindow1", "Disable"))

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Database Manager</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTabWidget" name="wgTab">
@@ -20,15 +20,15 @@
       <x>10</x>
       <y>10</y>
       <width>911</width>
-      <height>691</height>
+      <height>701</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="wgCard">
      <attribute name="title">
-      <string>Cards</string>
+      <string>Card Registered</string>
      </attribute>
      <widget class="QLineEdit" name="txtCardId">
       <property name="enabled">
@@ -1157,8 +1157,14 @@
         <x>10</x>
         <y>320</y>
         <width>891</width>
-        <height>341</height>
+        <height>351</height>
        </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
       </property>
      </widget>
      <widget class="QPushButton" name="btnStaffDisable">
