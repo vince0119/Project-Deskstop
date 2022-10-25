@@ -1,3 +1,7 @@
+
+Create table APS
+use APS 
+
 CREATE TABLE Staffs (
 	 Username nvarchar(50) NOT NULL PRIMARY KEY,
      Password nvarchar(50) NOT NULL,
@@ -59,7 +63,7 @@ CREATE TABLE  CardLog (
      FOREIGN KEY (CreatedBy) REFERENCES Staffs(Username)
      );
 
-insert into Staffs values ('admin', '1234', 'Luong Khai Xuong', '039583840', '27 tran phu cuong', b);
+insert into Staffs values ('admin', '1234', 'Luong Khai Xuong', '039583840', '27 tran phu cuong');
 insert into CardType values ('abcdef', 1, 1, 'admin');
 
 

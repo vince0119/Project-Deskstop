@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from MainUI import Ui_MainWindow
 from TableUI import Ui_MainWindow1
 import mysql.connector
-from Crud import load_data_card, load_data_user, load_data_staffs, load_data_car, load_data_cardType, load_data_park
+from Crud import load_data_card, load_data_user, load_data_staffs, load_data_carlog, load_data_cardType, load_data_park
 from AddNew import insert_data_card, insert_data_cardtype, insert_data_park, insert_data_staff, insert_data_user
 
 class MainWindow(QMainWindow):
@@ -38,38 +38,37 @@ class MainWindow(QMainWindow):
         self.uic1.btnCardOk.clicked.connect(self.CardOkButtonClick)
         self.uic1.btnCardCancel.clicked.connect(self.CardCancelButtonClick)
         self.uic1.btnCardDisable.clicked.connect(self.CardDisableButtonclick)
-        self.uic1.btnLoadDataCard.clicked.connect(self.load_data_card)
+        self.uic1.btnLoadDataCard.clicked.connect(lambda: load_data_card(self))
 
         #Park tab button controller
         self.uic1.btnParkNew.clicked.connect(self.ParkNewButtonClick)
         self.uic1.btnParkOK.clicked.connect(self.ParkOkButtonClick)
         self.uic1.btnParkCancel.clicked.connect(self.ParkCancelButtonClick)
         self.uic1.btnParkDisable.clicked.connect(self.ParkDisableButtonClick)
-        self.uic1.btnLoadDataPark.clicked.connect(self.load_data_park)
+        self.uic1.btnLoadDataPark.clicked.connect(lambda: load_data_park(self))
 
         #Car Log
-        self.uic1.btnLoadDataCar.clicked.connect(self.load_data_car)
+        self.uic1.btnLoadDataCar.clicked.connect(lambda: load_data_carlog(self))
 
         #User tab button controller
         self.uic1.btnUserNew.clicked.connect(self.UserNewButtonClick)
         self.uic1.btnUserDisable.clicked.connect(self.UserDisableButtonClick)
         self.uic1.btnUserOK.clicked.connect(self.UserOkButtonClick)
         self.uic1.btnUserCancel.clicked.connect(self.UserCancelButtonClick)
-        self.uic1.btnLoadDataUser.clicked.connect(self.load_data_user)
+        self.uic1.btnLoadDataUser.clicked.connect(lambda: load_data_user(self))
         #Card Type tab button controller
         self.uic1.btnCardTypeNew.clicked.connect(self.CardTypeNewButtonClick)
         self.uic1.btnCardTypeOK.clicked.connect(self.CardTypeOkButtonClick)
         self.uic1.btnCardTypeCancel.clicked.connect(self.CardTypeCancelButtonClick)
         self.uic1.btnCardTypeDisable.clicked.connect(self.CardTypeDisableButtonClick)
-        self.uic1.btnLoadDataCardType.clicked.connect(self.load_data_cardType)
+        self.uic1.btnLoadDataCardType.clicked.connect(lambda: load_data_cardType(self))
 
         #Staff tab button controller
         self.uic1.btnStaffNew.clicked.connect(self.StaffNewButtonClick)
         self.uic1.btnStaffDisable.clicked.connect(self.StaffDisableButtonClick)
-        # self.uic1.btnStaffOK.clicked.connect(self.StaffOKButtonClick)
+        self.uic1.btnStaffOK.clicked.connect(self.StaffOKButtonClick)
         self.uic1.btnStaffCancel.clicked.connect(self.StaffCancelButtonClick)
-        self.uic1.btnLoadDataStaffs.clicked.connect(self.load_data_staffs)
-        self.uic1.btnStaffOK.clicked.connect(self.insert_data_staff)
+        self.uic1.btnLoadDataStaffs.clicked.connect(lambda: load_data_staffs(self))
         
         self.thread = {}
 
@@ -94,6 +93,7 @@ class MainWindow(QMainWindow):
 
     def CardOkButtonClick(self):
         #get data and add to db
+        insert_data_card(self)
         self.CardButtonEvent(False)
         self.uic1.txtCardCreator.setText("")
 
@@ -126,6 +126,7 @@ class MainWindow(QMainWindow):
 
     def ParkOkButtonClick(self):
         #get data and add to db
+        insert_data_park(self)
         self.ParkButtonEvent(False)
         self.uic1.txtParkAvailable.setText("")
         self.uic1.txtParkCreator.setText("")
@@ -161,25 +162,7 @@ class MainWindow(QMainWindow):
         self.uic1.txtUserPhoneNumber.setText("")
         self.uic1.txtUserPhoneNumber.setReadOnly(not _isEditing)
         # self.uic1.btnUserDisable.setEnabled(not _isEditing)
-    
-        #load data        
-    def load_data_staffs(self):
-        load_data_staffs(self)
 
-    def load_data_card(self):
-        load_data_card(self)
-
-    def load_data_car(self):
-        load_data_car(self)
-
-    def load_data_park(self):
-        load_data_park(self)
-
-    def load_data_user(self):
-        load_data_user(self)
-
-    def load_data_cardType(self):
-        load_data_cardType(self)
 
     def UserNewButtonClick(self):
         self.UserButtonEnvent(True)
@@ -188,24 +171,11 @@ class MainWindow(QMainWindow):
     def UserOkButtonClick(self):
          # Add new user function
          #get data from textfield
+        insert_data_user(self)
         self.UserButtonEnvent(False)
         self.uic1.txtUserCreator.setText("")
         
-    # Insert data
-    def insert_data_card(self):
-        insert_data_card(self)
-
-    def insert_data_park(self):
-        insert_data_park(self)
-
-    def insert_data_user(self):
-        insert_data_user(self)
-
-    def insert_data_cardtype(self):
-        insert_data_cardtype(self)
-        
-    def insert_data_staff(self):
-        insert_data_staff(self)
+    
 
     def UserCancelButtonClick(self):
         self.UserButtonEnvent(False)
@@ -235,6 +205,7 @@ class MainWindow(QMainWindow):
     def CardTypeOkButtonClick(self):
          # Add new card  function
          #get data from textfield
+        insert_data_cardtype
         self.CardTypeButtonEvent(False)
         self.uic1.txtCardTypeCreator.setText("")
         
@@ -274,32 +245,7 @@ class MainWindow(QMainWindow):
         self.uic1.txtStaffUserName.setFocus()
         
 
-    # def insert_data(self):
-    #     try:
-    #         db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='asp')
-
-    #         mycursor = db.cursor()
-
-    #         UserName = self.uic1.txtStaffUserName.text()
-    #         Password = self.uic1.txtStaffPassword.text()
-    #         FullName = self.uic1.txtStaffFullName.text()
-    #         PersonalId = self.uic1.txtStaffPersonalId.text()
-    #         Address = self.uic1.txtStaffAddress.text()
-
-    #         query = ("INSERT INTO staffs (UserName, Password, FullName, PersonalId, Address)" "VALUES (%s, %s, %s, %s, %s)")
-    #         val = (UserName, Password, FullName, PersonalId, Address)
-
-    #         result = mycursor.execute(query, val)
-
-    #         db.commit()
-    #         QMessageBox.about(self, 'Inserted', 'Data insert successfully')
-    #         db.close()
-    #         load_data_staffs(self)
-
-    #     except mysql.connector.Error as e:
-    #         print('abc',result)
-            
-            
+    
 
     def StaffDisableButtonClick(self):
         status = self.uic1.btnStaffDisable.text()
@@ -310,7 +256,9 @@ class MainWindow(QMainWindow):
 
     def StaffOKButtonClick(self):
         #get data from textfield
+        insert_data_staff(self)
         self.StaffButtonEvent(False)
+        load_data_staffs(self)
         print('stop')
 
     def StaffCancelButtonClick(self):

@@ -1,11 +1,11 @@
 import mysql.connector
 from PyQt5.QtWidgets import QMessageBox
 
-db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='asp')
+db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
 
 def insert_data_card(self):
     try:
-        db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='asp')
+        db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
 
         mycursor = db.cursor()
 
@@ -20,14 +20,15 @@ def insert_data_card(self):
 
         db.commit()
         QMessageBox.about(self, 'Inserted', 'Data insert successfully')
-        db.close()
 
     except mysql.connector.Error as e:
         QMessageBox.about(self, ' Fail', 'Insert Failed!!!')
+    finally:
+        db.close()
         
 def insert_data_park(self):
     try:
-        db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='asp')
+        db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
 
         mycursor = db.cursor()
 
@@ -42,14 +43,15 @@ def insert_data_park(self):
 
         db.commit()
         QMessageBox.about(self, 'Inserted', 'Data insert successfully')
-        db.close()
 
     except mysql.connector.Error as e:
         QMessageBox.about(self, ' Fail', 'Insert Failed!!!')
+    finally:
+        db.close()
 
 def insert_data_user(self):
     try:
-        db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='asp')
+        db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
 
         mycursor = db.cursor()
 
@@ -65,14 +67,15 @@ def insert_data_user(self):
 
         db.commit()
         QMessageBox.about(self, 'Inserted', 'Data insert successfully')
-        db.close()
 
     except mysql.connector.Error as e:
         QMessageBox.about(self, ' Fail', 'Insert Failed!!!')
+    finally:
+        db.close()
 
 def insert_data_cardtype(self):
     try:
-        db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='asp')
+        db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
 
         mycursor = db.cursor()
 
@@ -86,14 +89,15 @@ def insert_data_cardtype(self):
 
         db.commit()
         QMessageBox.about(self, 'Inserted', 'Data insert successfully')
-        db.close()
 
     except mysql.connector.Error as e:
         QMessageBox.about(self, ' Fail', 'Insert Failed!!!')
+    finally:
+        db.close()
 
 def insert_data_staff(self):
     try:
-        db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='asp')
+        db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
 
         mycursor = db.cursor()
 
@@ -110,9 +114,12 @@ def insert_data_staff(self):
 
         db.commit()
         QMessageBox.about(self, 'Inserted', 'Data insert successfully')
-        db.close()
+        
 
     except mysql.connector.Error as e:
         QMessageBox.about(self, ' Fail', 'Insert Failed!!!')
+    finally:
+        db.close()
+        
     
         
