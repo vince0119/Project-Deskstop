@@ -244,7 +244,7 @@
      <attribute name="title">
       <string>Parks</string>
      </attribute>
-     <widget class="QLineEdit" name="txtParkNoS">
+     <widget class="QLineEdit" name="txtParkNo">
       <property name="geometry">
        <rect>
         <x>150</x>
