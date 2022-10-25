@@ -10,6 +10,7 @@ from MainUI import Ui_MainWindow
 from TableUI import Ui_MainWindow1
 import mysql.connector
 from Crud import load_data_card, load_data_user, load_data_staffs, load_data_car, load_data_cardType, load_data_park
+from AddNew import insert_data_card, insert_data_cardtype, insert_data_park, insert_data_staff, insert_data_user
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -68,7 +69,7 @@ class MainWindow(QMainWindow):
         # self.uic1.btnStaffOK.clicked.connect(self.StaffOKButtonClick)
         self.uic1.btnStaffCancel.clicked.connect(self.StaffCancelButtonClick)
         self.uic1.btnLoadDataStaffs.clicked.connect(self.load_data_staffs)
-        self.uic1.btnStaffOK.clicked.connect(self.insert_data)
+        self.uic1.btnStaffOK.clicked.connect(self.insert_data_staff)
         
         self.thread = {}
 
@@ -190,6 +191,21 @@ class MainWindow(QMainWindow):
         self.UserButtonEnvent(False)
         self.uic1.txtUserCreator.setText("")
         
+    # Insert data
+    def insert_data_card(self):
+        insert_data_card(self)
+
+    def insert_data_park(self):
+        insert_data_park(self)
+
+    def insert_data_user(self):
+        insert_data_user(self)
+
+    def insert_data_cardtype(self):
+        insert_data_cardtype(self)
+        
+    def insert_data_staff(self):
+        insert_data_staff(self)
 
     def UserCancelButtonClick(self):
         self.UserButtonEnvent(False)
@@ -258,30 +274,30 @@ class MainWindow(QMainWindow):
         self.uic1.txtStaffUserName.setFocus()
         
 
-    def insert_data(self):
-        try:
-            db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='asp')
+    # def insert_data(self):
+    #     try:
+    #         db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='asp')
 
-            mycursor = db.cursor()
+    #         mycursor = db.cursor()
 
-            UserName = self.uic1.txtStaffUserName.text()
-            Password = self.uic1.txtStaffPassword.text()
-            FullName = self.uic1.txtStaffFullName.text()
-            PersonalId = self.uic1.txtStaffPersonalId.text()
-            Address = self.uic1.txtStaffAddress.text()
+    #         UserName = self.uic1.txtStaffUserName.text()
+    #         Password = self.uic1.txtStaffPassword.text()
+    #         FullName = self.uic1.txtStaffFullName.text()
+    #         PersonalId = self.uic1.txtStaffPersonalId.text()
+    #         Address = self.uic1.txtStaffAddress.text()
 
-            query = ("INSERT INTO staffs (UserName, Password, FullName, PersonalId, Address)" "VALUES (%s, %s, %s, %s, %s)")
-            val = (UserName, Password, FullName, PersonalId, Address)
+    #         query = ("INSERT INTO staffs (UserName, Password, FullName, PersonalId, Address)" "VALUES (%s, %s, %s, %s, %s)")
+    #         val = (UserName, Password, FullName, PersonalId, Address)
 
-            result = mycursor.execute(query, val)
+    #         result = mycursor.execute(query, val)
 
-            db.commit()
-            QMessageBox.about(self, 'Inserted', 'Data insert successfully')
-            db.close()
-            load_data_staffs(self)
+    #         db.commit()
+    #         QMessageBox.about(self, 'Inserted', 'Data insert successfully')
+    #         db.close()
+    #         load_data_staffs(self)
 
-        except mysql.connector.Error as e:
-            print('abc',result)
+    #     except mysql.connector.Error as e:
+    #         print('abc',result)
             
             
 
