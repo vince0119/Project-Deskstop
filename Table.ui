@@ -1261,7 +1261,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>210</y>
+        <y>220</y>
         <width>201</width>
         <height>41</height>
        </rect>
@@ -1347,6 +1347,38 @@
        <string>Load Data</string>
       </property>
      </widget>
+     <widget class="QLineEdit" name="txtStaffPhone">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>270</y>
+        <width>311</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblStaffPhone">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>270</y>
+        <width>201</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Phone number</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -1356,7 +1388,7 @@
      <x>0</x>
      <y>0</y>
      <width>932</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

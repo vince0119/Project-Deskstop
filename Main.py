@@ -27,8 +27,8 @@ class MainWindow(QMainWindow):
         self.uic1.setupUi(self)
         # self.sub_win.show()
 
-        self.uic1.cbCardType.addItem("User")
         self.uic1.cbCardType.addItem("Guest")
+        self.uic1.cbCardType.addItem("User")
         self.uic1.cbCardType.setCurrentIndex(-1)
         self.HideOkAndCancelButton()
         self.HideDisableButton()
@@ -95,6 +95,7 @@ class MainWindow(QMainWindow):
         #get data and add to db
         insert_data_card(self)
         self.CardButtonEvent(False)
+        load_data_card(self)
         self.uic1.txtCardCreator.setText("")
 
     def CardCancelButtonClick(self):
@@ -128,6 +129,7 @@ class MainWindow(QMainWindow):
         #get data and add to db
         insert_data_park(self)
         self.ParkButtonEvent(False)
+        load_data_park(self)
         self.uic1.txtParkAvailable.setText("")
         self.uic1.txtParkCreator.setText("")
 
@@ -173,6 +175,7 @@ class MainWindow(QMainWindow):
          #get data from textfield
         insert_data_user(self)
         self.UserButtonEnvent(False)
+        load_data_user(self)
         self.uic1.txtUserCreator.setText("")
         
     
@@ -205,8 +208,9 @@ class MainWindow(QMainWindow):
     def CardTypeOkButtonClick(self):
          # Add new card  function
          #get data from textfield
-        insert_data_cardtype
+        insert_data_cardtype(self)
         self.CardTypeButtonEvent(False)
+        load_data_cardType(self)
         self.uic1.txtCardTypeCreator.setText("")
         
 
@@ -233,11 +237,13 @@ class MainWindow(QMainWindow):
         self.uic1.txtStaffFullName.setReadOnly(not _isEditing)
         self.uic1.txtStaffAddress.setReadOnly(not _isEditing)
         self.uic1.txtStaffPersonalId.setReadOnly(not _isEditing)
+        self.uic1.txtStaffPhone.setReadOnly(not _isEditing)
         self.uic1.txtStaffUserName.setText("")
         self.uic1.txtStaffPassword.setText("")
         self.uic1.txtStaffFullName.setText("")
         self.uic1.txtStaffAddress.setText("")
         self.uic1.txtStaffPersonalId.setText("")
+        self.uic1.txtStaffPhone.setText("")
         print('step1')
 
     def StaffNewButtonClick(self):
@@ -256,10 +262,10 @@ class MainWindow(QMainWindow):
 
     def StaffOKButtonClick(self):
         #get data from textfield
-        insert_data_staff(self)
-        self.StaffButtonEvent(False)
-        load_data_staffs(self)
-        print('stop')
+        if insert_data_staff(self):
+            self.StaffButtonEvent(False)
+            load_data_staffs(self)
+            print('stop')
 
     def StaffCancelButtonClick(self):
         self.StaffButtonEvent(False)
