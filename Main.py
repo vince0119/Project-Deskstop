@@ -1,4 +1,5 @@
 from pickle import load
+from sqlite3.dbapi2 import connect
 import sys
 import cv2
 import numpy as np
@@ -8,8 +9,11 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from MainUI import Ui_MainWindow
 from TableUI import Ui_MainWindow1
+
 import mysql.connector
 from Crud import load_data_card, load_data_user, load_data_staffs, load_data_carlog, load_data_cardType, load_data_park
+
+
 from AddNew import insert_data_card, insert_data_cardtype, insert_data_park, insert_data_staff, insert_data_user
 
 class MainWindow(QMainWindow):
@@ -27,9 +31,11 @@ class MainWindow(QMainWindow):
         self.uic1.setupUi(self)
         # self.sub_win.show()
 
+
         self.uic1.cbCardType.addItem("Guest")
         self.uic1.cbCardType.addItem("User")
         self.uic1.cbCardType.setCurrentIndex(-1)
+
         self.HideOkAndCancelButton()
         self.HideDisableButton()
         
@@ -117,8 +123,8 @@ class MainWindow(QMainWindow):
         self.uic1.btnParkDisable.setEnabled(False)
         self.uic1.txtParkArea.setReadOnly(not _isEditing)
         self.uic1.txtParkArea.setText("")
-        self.uic1.txtParkNoS.setReadOnly(not _isEditing)
-        self.uic1.txtParkNoS.setText("")
+        self.uic1.txtParkNo.setReadOnly(not _isEditing)
+        self.uic1.txtParkNo.setText("")
 
     def ParkNewButtonClick(self):
         self.ParkButtonEvent(True)
@@ -178,7 +184,9 @@ class MainWindow(QMainWindow):
         load_data_user(self)
         self.uic1.txtUserCreator.setText("")
         
+
     
+
 
     def UserCancelButtonClick(self):
         self.UserButtonEnvent(False)
@@ -243,15 +251,19 @@ class MainWindow(QMainWindow):
         self.uic1.txtStaffFullName.setText("")
         self.uic1.txtStaffAddress.setText("")
         self.uic1.txtStaffPersonalId.setText("")
+
         self.uic1.txtStaffPhone.setText("")
         print('step1')
+
 
     def StaffNewButtonClick(self):
         self.StaffButtonEvent(True)
         self.uic1.txtStaffUserName.setFocus()
         
 
+
     
+
 
     def StaffDisableButtonClick(self):
         status = self.uic1.btnStaffDisable.text()
