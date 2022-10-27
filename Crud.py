@@ -3,12 +3,12 @@ from PyQt5.QtWidgets import QTableWidgetItem
 
 db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='asp')
 
-CardReDB = 'SELECT * FROM cardregistered LIMIT 0, 11'
-ParksDB = 'SELECT * FROM parking_area LIMIT 0, 11'
-CarLogDB = 'SELECT * FROM car_log LIMIT 0, 11'
-UserDB = 'SELECT * FROM users LIMIT 0, 11'
-CarTypeDB = 'SELECT * FROM cardtype LIMIT 0, 11'
-StaffDB = 'SELECT * FROM staffs LIMIT 0, 11'
+CardReDB = 'SELECT * FROM cardregistered'
+ParksDB = 'SELECT * FROM parking_area'
+CarLogDB = 'SELECT * FROM cardlog'
+UserDB = 'SELECT * FROM users'
+CarTypeDB = 'SELECT * FROM cardtype'
+StaffDB = 'SELECT * FROM staffs'
 
 
 #load data

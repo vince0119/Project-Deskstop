@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="wgCard">
      <attribute name="title">
@@ -131,6 +131,12 @@
         <width>891</width>
         <height>341</height>
        </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
       </property>
      </widget>
      <widget class="QPushButton" name="btnCardDisable">
@@ -297,6 +303,12 @@
         <width>891</width>
         <height>341</height>
        </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
       </property>
      </widget>
      <widget class="QPushButton" name="btnParkDisable">
@@ -522,6 +534,12 @@
         <height>341</height>
        </rect>
       </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
      </widget>
      <widget class="QLineEdit" name="txtCarLogDate">
       <property name="geometry">
@@ -725,6 +743,12 @@
         <width>891</width>
         <height>341</height>
        </rect>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
       </property>
      </widget>
      <widget class="QPushButton" name="btnUserDisable">
@@ -930,6 +954,12 @@
         <height>341</height>
        </rect>
       </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
      </widget>
      <widget class="QPushButton" name="btnCardTypeOK">
       <property name="geometry">
@@ -1052,6 +1082,21 @@
       <property name="editable">
        <bool>false</bool>
       </property>
+      <item>
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>User</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Guest</string>
+       </property>
+      </item>
      </widget>
      <widget class="QLabel" name="lblCardTypeCreator">
       <property name="geometry">
