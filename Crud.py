@@ -50,23 +50,23 @@ def load_data_park(self):
     except mysql.connector.Error as e:
         print('Fail')            
 
-def load_data_user(self):
+def load_data_customer(self):
     try:
         db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
         mycuror =db.cursor()
-        mycuror.execute(UserDB)
+        mycuror.execute(CustomerDB)
         
         result = mycuror.fetchall()
 
         num = 0
         for row in result:
             num = len(row)
-        self.uic1.tblUser.setRowCount(len(result))
-        self.uic1.tblUser.setColumnCount(num)
+        self.uic1.tblCustomer.setRowCount(len(result))
+        self.uic1.tblCustomer.setColumnCount(num)
 
         for row_number, row_data in enumerate(result):
             for column_number, data in enumerate(row_data):
-                self.uic1.tblUser.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+                self.uic1.tblCustomer.setItem(row_number, column_number, QTableWidgetItem(str(data)))
     except mysql.connector.Error as e:
         print('Fail')
 
