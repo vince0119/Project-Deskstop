@@ -7,16 +7,14 @@ drop database APS
 CREATE TABLE  Customers(
 	 Id int  NOT NULL auto_increment PRIMARY KEY, 
 	 FullName   nvarchar (150) ,
-	 PersonalId  nvarchar(50)  ,
-	 Email nvarchar (150) ,
+	 PersonalId  nvarchar(50) ,
      Room nvarchar (50),
-	 Phone   nvarchar(20),
 	 Active bit NOT NULL  default 1,
      CreatedDate datetime NOT NULL default now());
     
 CREATE TABLE  Parking_Area (
 	 Area   nvarchar (50) NOT NULL PRIMARY KEY,
-	 Quantity   int  NOT NULL,
+	 NumOfSlot   int  NOT NULL,
 	 Available   int  NOT NULL,
      Active bit NOT NULL  default 1,
      CreatedDate datetime NOT NULL default now());
@@ -44,7 +42,8 @@ CREATE TABLE  CardLog (
 	 Date   datetime  NOT NULL default now() ,
      Status  nvarchar(10)  NOT NULL, #in or out
 	 Area   nvarchar (50) NOT NULL,
-     FOREIGN KEY (CardRegisteredId) REFERENCES CardRegistered(Id));
+     FOREIGN KEY (CardRegisteredId) REFERENCES CardRegistered(Id), 
+     FOREIGN KEY (Area) REFERENCES Parking_Area(Area));
 
 
 insert into CardType values ('abcdef', 1, 1, 'admin');
