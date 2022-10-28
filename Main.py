@@ -11,10 +11,8 @@ from MainUI import Ui_MainWindow
 from TableUI import Ui_MainWindow1
 
 import mysql.connector
-from Crud import load_data_card, load_data_user, load_data_staffs, load_data_carlog, load_data_cardType, load_data_park
-
-
-from AddNew import insert_data_card, insert_data_cardtype, insert_data_park, insert_data_staff, insert_data_user
+from Crud import load_data_card, load_data_customer, load_data_carlog, load_data_cardType, load_data_park
+from AddNew import insert_data_card, insert_data_cardtype, insert_data_park, insert_data_customer
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -33,7 +31,7 @@ class MainWindow(QMainWindow):
 
 
         self.uic1.cbCardType.addItem("Guest")
-        self.uic1.cbCardType.addItem("User")
+        self.uic1.cbCardType.addItem("Customer")
         self.uic1.cbCardType.setCurrentIndex(-1)
 
         self.HideOkAndCancelButton()
@@ -56,12 +54,12 @@ class MainWindow(QMainWindow):
         #Car Log
         self.uic1.btnLoadDataCar.clicked.connect(lambda: load_data_carlog(self))
 
-        #User tab button controller
-        self.uic1.btnUserNew.clicked.connect(self.UserNewButtonClick)
-        self.uic1.btnUserDisable.clicked.connect(self.UserDisableButtonClick)
-        self.uic1.btnUserOK.clicked.connect(self.UserOkButtonClick)
-        self.uic1.btnUserCancel.clicked.connect(self.UserCancelButtonClick)
-        self.uic1.btnLoadDataUser.clicked.connect(lambda: load_data_user(self))
+        #Customer tab button controller
+        self.uic1.btnCustomerNew.clicked.connect(self.CustomerNewButtonClick)
+        self.uic1.btnCustomerDisable.clicked.connect(self.CustomerDisableButtonClick)
+        self.uic1.btnCustomerOK.clicked.connect(self.CustomerOkButtonClick)
+        self.uic1.btnCustomerCancel.clicked.connect(self.CustomerCancelButtonClick)
+        self.uic1.btnLoadDataCustomer.clicked.connect(lambda: load_data_customer(self))
         #Card Type tab button controller
         self.uic1.btnCardTypeNew.clicked.connect(self.CardTypeNewButtonClick)
         self.uic1.btnCardTypeOK.clicked.connect(self.CardTypeOkButtonClick)
@@ -69,12 +67,7 @@ class MainWindow(QMainWindow):
         self.uic1.btnCardTypeDisable.clicked.connect(self.CardTypeDisableButtonClick)
         self.uic1.btnLoadDataCardType.clicked.connect(lambda: load_data_cardType(self))
 
-        #Staff tab button controller
-        self.uic1.btnStaffNew.clicked.connect(self.StaffNewButtonClick)
-        self.uic1.btnStaffDisable.clicked.connect(self.StaffDisableButtonClick)
-        self.uic1.btnStaffOK.clicked.connect(self.StaffOKButtonClick)
-        self.uic1.btnStaffCancel.clicked.connect(self.StaffCancelButtonClick)
-        self.uic1.btnLoadDataStaffs.clicked.connect(lambda: load_data_staffs(self))
+        
         
         self.thread = {}
 
@@ -86,15 +79,14 @@ class MainWindow(QMainWindow):
         self.uic1.btnCardDisable.setEnabled(False)
         self.uic1.txtCardId.setReadOnly(not _isEditing)
         self.uic1.txtCardId.setText("")
-        self.uic1.txtCardUser.setReadOnly(not _isEditing)
+        self.uic1.txtCardCustomer.setReadOnly(not _isEditing)
         self.uic1.txtCardCarNumber.setReadOnly(not _isEditing)
-        self.uic1.txtCardUser.setText("")
+        self.uic1.txtCardCustomer.setText("")
         self.uic1.txtCardCarNumber.setText("")
 
     def CardNewButtonClick(self):
         self.CardButtonEvent(True)
         self.uic1.txtCardId.setFocus()
-        self.uic1.txtCardCreator.setText("admin")
     
 
     def CardOkButtonClick(self):
@@ -102,11 +94,9 @@ class MainWindow(QMainWindow):
         insert_data_card(self)
         self.CardButtonEvent(False)
         load_data_card(self)
-        self.uic1.txtCardCreator.setText("")
 
     def CardCancelButtonClick(self):
         self.CardButtonEvent(False)
-        self.uic1.txtCardCreator.setText("")
 
     def CardDisableButtonclick(self):
         status = self.uic1.btnCardDisable.text()
@@ -129,20 +119,17 @@ class MainWindow(QMainWindow):
     def ParkNewButtonClick(self):
         self.ParkButtonEvent(True)
         self.uic1.txtParkAvailable.setText("0")
-        self.uic1.txtParkCreator.setText("admin")
 
     def ParkOkButtonClick(self):
         #get data and add to db
-        insert_data_park(self)
-        self.ParkButtonEvent(False)
-        load_data_park(self)
-        self.uic1.txtParkAvailable.setText("")
-        self.uic1.txtParkCreator.setText("")
+        if insert_data_park(self):
+            self.ParkButtonEvent(False)
+            load_data_park(self)
+            self.uic1.txtParkAvailable.setText("")
 
     def ParkCancelButtonClick(self):
         self.ParkButtonEvent(False)
         self.uic1.txtParkAvailable.setText("")
-        self.uic1.txtParkCreator.setText("")
 
     def ParkDisableButtonClick(self):
         status = self.uic1.btnParkDisable.text()
@@ -156,49 +143,43 @@ class MainWindow(QMainWindow):
 
     #End of Card Log tab Event
 
-    #Start of User tab Event
-    def UserButtonEnvent(self,_isEditing):
-        self.uic1.btnUserOK.setVisible(_isEditing)
-        self.uic1.btnUserCancel.setVisible(_isEditing) 
-        self.uic1.btnUserDisable.setEnabled(False)
-        self.uic1.txtUserEmail.setText("")
-        self.uic1.txtUserEmail.setReadOnly(not _isEditing)   
-        self.uic1.txtUserFullName.setText("")
-        self.uic1.txtUserFullName.setReadOnly(not _isEditing) 
-        self.uic1.txtUserPersonalId.setText("")
-        self.uic1.txtUserPersonalId.setReadOnly(not _isEditing) 
-        self.uic1.txtUserPhoneNumber.setText("")
-        self.uic1.txtUserPhoneNumber.setReadOnly(not _isEditing)
-        # self.uic1.btnUserDisable.setEnabled(not _isEditing)
+    #Start of Customer tab Event
+    def CustomerButtonEnvent(self,_isEditing):
+        self.uic1.btnCustomerOK.setVisible(_isEditing)
+        self.uic1.btnCustomerCancel.setVisible(_isEditing) 
+        self.uic1.btnCustomerDisable.setEnabled(False)
+        self.uic1.txtCustomerFullName.setText("")
+        self.uic1.txtCustomerFullName.setReadOnly(not _isEditing) 
+        self.uic1.txtCustomerRoom.setText("")
+        self.uic1.txtCustomerRoom.setReadOnly(not _isEditing) 
+        self.uic1.txtCustomerPersonalId.setText("")
+        self.uic1.txtCustomerPersonalId.setReadOnly(not _isEditing) 
 
 
-    def UserNewButtonClick(self):
-        self.UserButtonEnvent(True)
-        self.uic1.txtUserCreator.setText("admin")
+    def CustomerNewButtonClick(self):
+        self.CustomerButtonEnvent(True)
         
-    def UserOkButtonClick(self):
-         # Add new user function
+    def CustomerOkButtonClick(self):
+         # Add new Customer function
          #get data from textfield
-        insert_data_user(self)
-        self.UserButtonEnvent(False)
-        load_data_user(self)
-        self.uic1.txtUserCreator.setText("")
+        if insert_data_customer(self):
+            self.CustomerButtonEnvent(False)
+            load_data_customer(self)
         
 
     
 
 
-    def UserCancelButtonClick(self):
-        self.UserButtonEnvent(False)
-        self.uic1.txtUserCreator.setText("")
+    def CustomerCancelButtonClick(self):
+        self.CustomerButtonEnvent(False)
 
-    def UserDisableButtonClick(self):
-        status = self.uic1.btnUserDisable.text()
+    def CustomerDisableButtonClick(self):
+        status = self.uic1.btnCustomerDisable.text()
         if status == "Disable" :
-            self.uic1.btnUserDisable.setText("Enable")
+            self.uic1.btnCustomerDisable.setText("Enable")
         else:
-            self.uic1.btnUserDisable.setText("Disable")
-    #End of User tab Event
+            self.uic1.btnCustomerDisable.setText("Disable")
+    #End of Customer tab Event
 
     #Start of Card Type tab Event 
     def CardTypeButtonEvent(self, _isEditing):
@@ -211,7 +192,6 @@ class MainWindow(QMainWindow):
 
     def CardTypeNewButtonClick(self):
         self.CardTypeButtonEvent(True)
-        self.uic1.txtCardTypeCreator.setText("admin")
 
     def CardTypeOkButtonClick(self):
          # Add new card  function
@@ -219,12 +199,10 @@ class MainWindow(QMainWindow):
         insert_data_cardtype(self)
         self.CardTypeButtonEvent(False)
         load_data_cardType(self)
-        self.uic1.txtCardTypeCreator.setText("")
         
 
     def CardTypeCancelButtonClick(self):
         self.CardTypeButtonEvent(False)
-        self.uic1.txtCardTypeCreator.setText("")
 
     def CardTypeDisableButtonClick(self):
         status = self.uic1.btnCardTypeDisable.text()
@@ -235,72 +213,23 @@ class MainWindow(QMainWindow):
 
     #End of Card type tab event
 
-    #Start of Staff tab Event
-    def StaffButtonEvent(self, _isEditing):
-        self.uic1.btnStaffOK.setVisible(_isEditing)
-        self.uic1.btnStaffCancel.setVisible(_isEditing)
-        self.uic1.btnStaffDisable.setEnabled(False)
-        self.uic1.txtStaffUserName.setReadOnly(not _isEditing)
-        self.uic1.txtStaffPassword.setReadOnly(not _isEditing)
-        self.uic1.txtStaffFullName.setReadOnly(not _isEditing)
-        self.uic1.txtStaffAddress.setReadOnly(not _isEditing)
-        self.uic1.txtStaffPersonalId.setReadOnly(not _isEditing)
-        self.uic1.txtStaffPhone.setReadOnly(not _isEditing)
-        self.uic1.txtStaffUserName.setText("")
-        self.uic1.txtStaffPassword.setText("")
-        self.uic1.txtStaffFullName.setText("")
-        self.uic1.txtStaffAddress.setText("")
-        self.uic1.txtStaffPersonalId.setText("")
-
-        self.uic1.txtStaffPhone.setText("")
-        print('step1')
-
-
-    def StaffNewButtonClick(self):
-        self.StaffButtonEvent(True)
-        self.uic1.txtStaffUserName.setFocus()
-        
-
-
-    
-
-
-    def StaffDisableButtonClick(self):
-        status = self.uic1.btnStaffDisable.text()
-        if status == "Disable" :
-            self.uic1.btnStaffDisable.setText("Enable")
-        else:
-            self.uic1.btnStaffDisable.setText("Disable")
-
-    def StaffOKButtonClick(self):
-        #get data from textfield
-        if insert_data_staff(self):
-            self.StaffButtonEvent(False)
-            load_data_staffs(self)
-            print('stop')
-
-    def StaffCancelButtonClick(self):
-        self.StaffButtonEvent(False)
-    #End of Staff tab Event
+   
         
     #Hide OK and Cancel button  
     def HideOkAndCancelButton(self):
         self.uic1.btnParkOK.setVisible(False)
-        self.uic1.btnUserOK.setVisible(False)
+        self.uic1.btnCustomerOK.setVisible(False)
         self.uic1.btnCardOk.setVisible(False)
-        self.uic1.btnStaffOK.setVisible(False)
         self.uic1.btnCardTypeOK.setVisible(False)
         self.uic1.btnCardCancel.setVisible(False)
         self.uic1.btnParkCancel.setVisible(False)
-        self.uic1.btnUserCancel.setVisible(False)
-        self.uic1.btnStaffCancel.setVisible(False)
+        self.uic1.btnCustomerCancel.setVisible(False)
         self.uic1.btnCardTypeCancel.setVisible(False)
 
     def HideDisableButton(self):
         self.uic1.btnCardDisable.setEnabled(False)
         self.uic1.btnParkDisable.setEnabled(False)
-        self.uic1.btnUserDisable.setEnabled(False)
-        self.uic1.btnStaffDisable.setEnabled(False)
+        self.uic1.btnCustomerDisable.setEnabled(False)
         self.uic1.btnCardTypeDisable.setEnabled(False)
     
 
