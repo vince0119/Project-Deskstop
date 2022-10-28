@@ -1,4 +1,5 @@
 from pickle import load
+from sqlite3.dbapi2 import connect
 import sys
 import cv2
 import numpy as np
@@ -8,6 +9,7 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from MainUI import Ui_MainWindow
 from TableUI import Ui_MainWindow1
+
 import mysql.connector
 from Crud import load_data_card, load_data_customer, load_data_carlog, load_data_cardType, load_data_park
 from AddNew import insert_data_card, insert_data_cardtype, insert_data_park, insert_data_customer
@@ -27,9 +29,11 @@ class MainWindow(QMainWindow):
         self.uic1.setupUi(self)
         # self.sub_win.show()
 
+
         self.uic1.cbCardType.addItem("Guest")
         self.uic1.cbCardType.addItem("Customer")
         self.uic1.cbCardType.setCurrentIndex(-1)
+
         self.HideOkAndCancelButton()
         self.HideDisableButton()
         
@@ -162,7 +166,9 @@ class MainWindow(QMainWindow):
             self.CustomerButtonEnvent(False)
             load_data_customer(self)
         
+
     
+
 
     def CustomerCancelButtonClick(self):
         self.CustomerButtonEnvent(False)
