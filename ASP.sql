@@ -1,8 +1,3 @@
-
-Create database APS
-use APS 
-drop database APS
-
 CREATE TABLE Staffs (
 	 Username nvarchar(50) NOT NULL PRIMARY KEY,
      Password nvarchar(50) NOT NULL,

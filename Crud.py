@@ -1,8 +1,6 @@
 import mysql.connector
 from PyQt5.QtWidgets import QTableWidgetItem
 
-
-
 CardReDB = 'SELECT * FROM cardregistered'
 ParksDB = 'SELECT * FROM parking_area'
 CarLogDB = 'SELECT * FROM cardlog'
@@ -111,7 +109,7 @@ def load_data_staffs(self):
             for column_number, data in enumerate(row_data):
                 self.uic1.tblStaff.setItem(row_number, column_number, QTableWidgetItem(str(data)))
     except mysql.connector.Error as e:
-        print('Fail')             
+        print('Fail')
 
 def load_data_carlog(self):
     try:

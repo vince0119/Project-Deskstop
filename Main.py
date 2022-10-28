@@ -31,11 +31,6 @@ class MainWindow(QMainWindow):
         self.uic1.setupUi(self)
         # self.sub_win.show()
 
-
-        self.uic1.cbCardType.addItem("Guest")
-        self.uic1.cbCardType.addItem("User")
-        self.uic1.cbCardType.setCurrentIndex(-1)
-
         self.HideOkAndCancelButton()
         self.HideDisableButton()
         
@@ -251,9 +246,7 @@ class MainWindow(QMainWindow):
         self.uic1.txtStaffFullName.setText("")
         self.uic1.txtStaffAddress.setText("")
         self.uic1.txtStaffPersonalId.setText("")
-
         self.uic1.txtStaffPhone.setText("")
-        print('step1')
 
 
     def StaffNewButtonClick(self):
@@ -261,14 +254,10 @@ class MainWindow(QMainWindow):
         self.uic1.txtStaffUserName.setFocus()
         
 
-
-    
-
-
     def StaffDisableButtonClick(self):
         status = self.uic1.btnStaffDisable.text()
         if status == "Disable" :
-            self.uic1.btnStaffDisable.setText("Enable")
+            self.uic1.btnStaffDisable.setText("Enable") 
         else:
             self.uic1.btnStaffDisable.setText("Disable")
 
@@ -277,7 +266,6 @@ class MainWindow(QMainWindow):
         if insert_data_staff(self):
             self.StaffButtonEvent(False)
             load_data_staffs(self)
-            print('stop')
 
     def StaffCancelButtonClick(self):
         self.StaffButtonEvent(False)
