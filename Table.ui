@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="wgCard">
      <attribute name="title">
@@ -577,32 +577,6 @@
       </property>
       <property name="readOnly">
        <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnUserOK">
-      <property name="geometry">
-       <rect>
-        <x>560</x>
-        <y>117</y>
-        <width>93</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>OK</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnUserCancel">
-      <property name="geometry">
-       <rect>
-        <x>680</x>
-        <y>120</y>
-        <width>93</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Cancel</string>
       </property>
      </widget>
      <widget class="QLabel" name="lblCustomerPersonalId_2">
