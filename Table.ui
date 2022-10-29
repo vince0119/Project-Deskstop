@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="wgCard">
      <attribute name="title">
@@ -198,188 +198,6 @@
       </property>
      </widget>
      <widget class="QPushButton" name="btnLoadDataCard">
-      <property name="geometry">
-       <rect>
-        <x>620</x>
-        <y>170</y>
-        <width>93</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Load Data</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="wgPark">
-     <attribute name="title">
-      <string>Parks</string>
-     </attribute>
-     <widget class="QLineEdit" name="txtParkNo">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>70</y>
-        <width>311</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lblParkArea">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>201</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Area</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lblParkAvailable">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>110</y>
-        <width>201</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Available</string>
-      </property>
-     </widget>
-     <widget class="QTableWidget" name="tblPark">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>320</y>
-        <width>891</width>
-        <height>341</height>
-       </rect>
-      </property>
-      <property name="editTriggers">
-       <set>QAbstractItemView::NoEditTriggers</set>
-      </property>
-      <property name="selectionBehavior">
-       <enum>QAbstractItemView::SelectRows</enum>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnParkDisable">
-      <property name="geometry">
-       <rect>
-        <x>560</x>
-        <y>60</y>
-        <width>211</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Disable</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="txtParkAvailable">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>120</y>
-        <width>311</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lblParkNoS">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>60</y>
-        <width>201</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Number Of Slot</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnParkNew">
-      <property name="geometry">
-       <rect>
-        <x>560</x>
-        <y>10</y>
-        <width>211</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>New</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="txtParkArea">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>20</y>
-        <width>311</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnParkOK">
-      <property name="geometry">
-       <rect>
-        <x>560</x>
-        <y>117</y>
-        <width>93</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>OK</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnParkCancel">
-      <property name="geometry">
-       <rect>
-        <x>680</x>
-        <y>120</y>
-        <width>93</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Cancel</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnLoadDataPark">
       <property name="geometry">
        <rect>
         <x>620</x>
@@ -592,7 +410,7 @@
     </widget>
     <widget class="QWidget" name="wgCustomer">
      <attribute name="title">
-      <string>Users</string>
+      <string>Customer</string>
      </attribute>
      <widget class="QLabel" name="lblCustomerFullName">
       <property name="geometry">
@@ -761,33 +579,7 @@
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="btnUserOK">
-      <property name="geometry">
-       <rect>
-        <x>560</x>
-        <y>117</y>
-        <width>93</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>OK</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnUserCancel">
-      <property name="geometry">
-       <rect>
-        <x>680</x>
-        <y>120</y>
-        <width>93</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Cancel</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnLoadDataUser">
+     <widget class="QLabel" name="lblCustomerPersonalId_2">
       <property name="geometry">
        <rect>
         <x>10</x>

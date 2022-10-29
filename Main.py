@@ -11,8 +11,8 @@ from MainUI import Ui_MainWindow
 from TableUI import Ui_MainWindow1
 
 import mysql.connector
-from Crud import load_data_card, load_data_customer, load_data_carlog, load_data_cardType, load_data_park
-from AddNew import insert_data_card, insert_data_cardtype, insert_data_park, insert_data_customer
+from Crud import load_data_card, load_data_customer, load_data_carlog, load_data_cardType
+from AddNew import insert_data_card, insert_data_cardtype, insert_data_customer
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -44,12 +44,7 @@ class MainWindow(QMainWindow):
         self.uic1.btnCardDisable.clicked.connect(self.CardDisableButtonclick)
         self.uic1.btnLoadDataCard.clicked.connect(lambda: load_data_card(self))
 
-        #Park tab button controller
-        self.uic1.btnParkNew.clicked.connect(self.ParkNewButtonClick)
-        self.uic1.btnParkOK.clicked.connect(self.ParkOkButtonClick)
-        self.uic1.btnParkCancel.clicked.connect(self.ParkCancelButtonClick)
-        self.uic1.btnParkDisable.clicked.connect(self.ParkDisableButtonClick)
-        self.uic1.btnLoadDataPark.clicked.connect(lambda: load_data_park(self))
+       
 
         #Car Log
         self.uic1.btnLoadDataCar.clicked.connect(lambda: load_data_carlog(self))
@@ -79,9 +74,9 @@ class MainWindow(QMainWindow):
         self.uic1.btnCardDisable.setEnabled(False)
         self.uic1.txtCardId.setReadOnly(not _isEditing)
         self.uic1.txtCardId.setText("")
-        self.uic1.txtCardCustomer.setReadOnly(not _isEditing)
+        self.uic1.txtCardCustomerId.setReadOnly(not _isEditing)
         self.uic1.txtCardCarNumber.setReadOnly(not _isEditing)
-        self.uic1.txtCardCustomer.setText("")
+        self.uic1.txtCardCustomerId.setText("")
         self.uic1.txtCardCarNumber.setText("")
 
     def CardNewButtonClick(self):
@@ -106,38 +101,7 @@ class MainWindow(QMainWindow):
             self.uic1.btnCardDisable.setText("Disable")
     #End of Card tab Event
 
-    #Start of Park tab Event
-    def ParkButtonEvent(self,_isEditing):
-        self.uic1.btnParkOK.setVisible(_isEditing)
-        self.uic1.btnParkCancel.setVisible(_isEditing)
-        self.uic1.btnParkDisable.setEnabled(False)
-        self.uic1.txtParkArea.setReadOnly(not _isEditing)
-        self.uic1.txtParkArea.setText("")
-        self.uic1.txtParkNo.setReadOnly(not _isEditing)
-        self.uic1.txtParkNo.setText("")
-
-    def ParkNewButtonClick(self):
-        self.ParkButtonEvent(True)
-        self.uic1.txtParkAvailable.setText("0")
-
-    def ParkOkButtonClick(self):
-        #get data and add to db
-        if insert_data_park(self):
-            self.ParkButtonEvent(False)
-            load_data_park(self)
-            self.uic1.txtParkAvailable.setText("")
-
-    def ParkCancelButtonClick(self):
-        self.ParkButtonEvent(False)
-        self.uic1.txtParkAvailable.setText("")
-
-    def ParkDisableButtonClick(self):
-        status = self.uic1.btnParkDisable.text()
-        if status == "Disable" :
-            self.uic1.btnParkDisable.setText("Enable")
-        else:
-            self.uic1.btnParkDisable.setText("Disable")
-    #End of Park tab Event
+    
 
     #Start of Car Log tab Event
 
@@ -217,18 +181,15 @@ class MainWindow(QMainWindow):
         
     #Hide OK and Cancel button  
     def HideOkAndCancelButton(self):
-        self.uic1.btnParkOK.setVisible(False)
         self.uic1.btnCustomerOK.setVisible(False)
         self.uic1.btnCardOk.setVisible(False)
         self.uic1.btnCardTypeOK.setVisible(False)
         self.uic1.btnCardCancel.setVisible(False)
-        self.uic1.btnParkCancel.setVisible(False)
         self.uic1.btnCustomerCancel.setVisible(False)
         self.uic1.btnCardTypeCancel.setVisible(False)
 
     def HideDisableButton(self):
         self.uic1.btnCardDisable.setEnabled(False)
-        self.uic1.btnParkDisable.setEnabled(False)
         self.uic1.btnCustomerDisable.setEnabled(False)
         self.uic1.btnCardTypeDisable.setEnabled(False)
     

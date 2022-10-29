@@ -12,13 +12,6 @@ CREATE TABLE  Customers(
 	 Active bit NOT NULL  default 1,
      CreatedDate datetime NOT NULL default now());
     
-CREATE TABLE  Parking_Area (
-	 Area   nvarchar (50) NOT NULL PRIMARY KEY,
-	 NumOfSlot   int  NOT NULL,
-	 Available   int  NOT NULL,
-     Active bit NOT NULL  default 1,
-     CreatedDate datetime NOT NULL default now());
-    
     
 CREATE TABLE CardType(
 	CardId nvarchar(50) NOT NULL PRIMARY KEY,
@@ -41,9 +34,7 @@ CREATE TABLE  CardLog (
 	 CardRegisteredId   int NOT NULL ,
 	 Date   datetime  NOT NULL default now() ,
      Status  nvarchar(10)  NOT NULL, #in or out
-	 Area   nvarchar (50) NOT NULL,
-     FOREIGN KEY (CardRegisteredId) REFERENCES CardRegistered(Id), 
-     FOREIGN KEY (Area) REFERENCES Parking_Area(Area));
+     FOREIGN KEY (CardRegisteredId) REFERENCES CardRegistered(Id));
 
 
 insert into CardType values ('abcdef', 1, 1, 'admin');

@@ -28,21 +28,4 @@ def CustomerCheckValidation(self,FullName,PersonalId,Room):
                                 return True
 
     return False
-def ParkCheckValidation(self,Area,NumberofSlot):
-    if not (Area and Area.strip()) :
-        QMessageBox.about(self, 'Warning', 'Full name is empty')
-    else:
-        if not (NumberofSlot and NumberofSlot.strip()) :
-            QMessageBox.about(self, 'Warning', 'Number of slot is empty')
-        else:
-            if len(Area) >50 :
-                QMessageBox.about(self, 'Warning', 'Area must be less than 50 character')
-            else:
-                if not NumberofSlot.isnumeric():
-                    QMessageBox.about(self, 'Warning', 'Number of slot must be number')
-                else:
-                    if len(NumberofSlot)>10:
-                        QMessageBox.about(self, 'Warning', 'Number of slot must be less than 10 character')
-                    else:
-                        return True 
-    return False
+
