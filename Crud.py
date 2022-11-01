@@ -4,9 +4,8 @@ from PyQt5.QtWidgets import QTableWidgetItem
 CardReDB = 'SELECT * FROM cardregistered'
 ParksDB = 'SELECT * FROM parking_area'
 CarLogDB = 'SELECT * FROM cardlog'
-UserDB = 'SELECT * FROM users'
+CustomerDB = 'SELECT * FROM customers'
 CarTypeDB = 'SELECT * FROM cardtype'
-StaffDB = 'SELECT * FROM staffs'
 
 
 #load data
@@ -90,26 +89,6 @@ def load_data_cardType(self):
 
     except mysql.connector.Error as e:
         print('Fail')             
-
-def load_data_staffs(self):
-    try:
-        db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
-        mycuror =db.cursor()
-        mycuror.execute(StaffDB)
-        
-        result = mycuror.fetchall()
-
-        num = 0
-        for row in result:
-            num = len(row)
-        self.uic1.tblStaff.setRowCount(len(result))
-        self.uic1.tblStaff.setColumnCount(num)
-
-        for row_number, row_data in enumerate(result):
-            for column_number, data in enumerate(row_data):
-                self.uic1.tblStaff.setItem(row_number, column_number, QTableWidgetItem(str(data)))
-    except mysql.connector.Error as e:
-        print('Fail')
 
 def load_data_carlog(self):
     try:

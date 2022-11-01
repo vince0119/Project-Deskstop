@@ -40,7 +40,6 @@ CREATE TABLE  CardLog (
      FOREIGN KEY (Area) REFERENCES Parking_Area(Area));
 
 
-insert into CardType values ('abcdef', 1, 1, 'admin');
 
 
     
