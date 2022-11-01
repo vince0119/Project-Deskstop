@@ -1,9 +1,3 @@
-
-Create database APS
-use APS 
-drop database APS
-
-
 CREATE TABLE  Customers(
 	 Id int  NOT NULL auto_increment PRIMARY KEY, 
 	 FullName   nvarchar (150) ,
@@ -37,7 +31,6 @@ CREATE TABLE  CardLog (
      FOREIGN KEY (CardRegisteredId) REFERENCES CardRegistered(Id));
 
 
-insert into CardType values ('abcdef', 1, 1, 'admin');
 
 
     

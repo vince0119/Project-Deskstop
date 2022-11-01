@@ -125,6 +125,41 @@
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
+      <column>
+       <property name="text">
+        <string>ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Card ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>User ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Car License</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Active</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Create By</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Create Date</string>
+       </property>
+      </column>
      </widget>
      <widget class="QPushButton" name="btnCardDisable">
       <property name="geometry">
@@ -288,6 +323,36 @@
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
+      <column>
+       <property name="text">
+        <string>ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Card Registered ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Date</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Status</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Area</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Created By</string>
+       </property>
+      </column>
      </widget>
      <widget class="QLineEdit" name="txtCarLogDate">
       <property name="geometry">
@@ -453,6 +518,46 @@
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
+      <column>
+       <property name="text">
+        <string>Id</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>FullName</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Personal ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Email</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Phone</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Active</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Create By</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Create Date</string>
+       </property>
+      </column>
      </widget>
      <widget class="QPushButton" name="btnCustomerDisable">
       <property name="geometry">
@@ -612,6 +717,31 @@
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
+      <column>
+       <property name="text">
+        <string>Card ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Card Type</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Active</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Create By</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Create Date</string>
+       </property>
+      </column>
      </widget>
      <widget class="QPushButton" name="btnCardTypeOK">
       <property name="geometry">
@@ -757,7 +887,7 @@
      <x>0</x>
      <y>0</y>
      <width>932</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

@@ -1,14 +1,11 @@
 import mysql.connector
 from PyQt5.QtWidgets import QTableWidgetItem
 
-
-
-CardReDB = 'SELECT * FROM cardregistered LIMIT 0, 11'
-ParksDB = 'SELECT * FROM parking_area LIMIT 0, 11'
-CarLogDB = 'SELECT * FROM car_log LIMIT 0, 11'
-CustomerDB = 'SELECT * FROM customers LIMIT 0, 11'
-CarTypeDB = 'SELECT * FROM cardtype LIMIT 0, 11'
-StaffDB = 'SELECT * FROM staffs LIMIT 0, 11'
+CardReDB = 'SELECT * FROM cardregistered'
+ParksDB = 'SELECT * FROM parking_area'
+CarLogDB = 'SELECT * FROM cardlog'
+CustomerDB = 'SELECT * FROM customers'
+CarTypeDB = 'SELECT * FROM cardtype'
 
 
 #load data
@@ -74,8 +71,6 @@ def load_data_cardType(self):
 
     except mysql.connector.Error as e:
         print('Fail')             
-
-           
 
 def load_data_carlog(self):
     try:

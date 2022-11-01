@@ -28,12 +28,7 @@ class MainWindow(QMainWindow):
         self.uic1 = Ui_MainWindow1()
         self.uic1.setupUi(self)
         # self.sub_win.show()
-
-
-        self.uic1.cbCardType.addItem("Guest")
-        self.uic1.cbCardType.addItem("Customer")
-        self.uic1.cbCardType.setCurrentIndex(-1)
-
+        
         self.HideOkAndCancelButton()
         self.HideDisableButton()
         
@@ -177,7 +172,6 @@ class MainWindow(QMainWindow):
 
     #End of Card type tab event
 
-   
         
     #Hide OK and Cancel button  
     def HideOkAndCancelButton(self):
