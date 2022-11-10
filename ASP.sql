@@ -13,31 +13,35 @@ CREATE TABLE  Customers(
      CreatedDate datetime NOT NULL default now());
     
     
-CREATE TABLE CardType(
-	CardId nvarchar(50) NOT NULL PRIMARY KEY,
-    CardType bit NOT NULL, #1: customer or 0:guest
+CREATE TABLE GuestRegistered(
+	Id int auto_increment Not null primary key,
+    CardId nvarchar(50) NOT NUll,
+    CarLicense nvarchar(50) NOT NULL,
     Active bit NOT NULL default 1,
 	CreatedDate datetime NOT NULL default now());
     
-CREATE TABLE CardRegistered(
+CREATE TABLE CustomerRegistered(
 	Id int auto_increment NOT NULL PRIMARY KEY, #khi guest vào sẽ ghi thông tin ở đây, khi ra sẽ disable nó, cả 2 quá trình đều lưu vào log
     CardId nvarchar(50) NOT NULL, #mã số xuất ra khi quét thẻ
 	CustomerId int , #guest ko cần userid
     CarLicense nvarchar(50) NOT NULL,
+    CarColor nvarchar (50) NOT NULL,
+    CarModel nvarchar (50) NOT NULL,
     Active bit NOT NULL  default 1,
 	CreatedDate datetime NOT NULL default now(),
-    FOREIGN KEY (CardId) REFERENCES CardType(CardId),
     FOREIGN KEY (CustomerId) REFERENCES Customers(Id));
     
-CREATE TABLE  CardLog (
+CREATE TABLE  CarLog (
 	 Id int auto_increment NOT NULL PRIMARY KEY,
-	 CardRegisteredId   int NOT NULL ,
+	 RegisteredId   int NOT NULL ,
 	 Date   datetime  NOT NULL default now() ,
-     Status  nvarchar(10)  NOT NULL, #in or out
-     FOREIGN KEY (CardRegisteredId) REFERENCES CardRegistered(Id));
+     Status  nvarchar(10)  NOT NULL #in or out
+     );
+	
 
 
-insert into CardType values ('abcdef', 1, 1, 'admin');
+
+
 
 
     
