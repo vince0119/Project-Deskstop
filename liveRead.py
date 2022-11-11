@@ -44,31 +44,31 @@ def plate_Detection(img):
             return result
             
 
+def OpenCamera():
+    cap  = cv.VideoCapture(0)
 
-cap  = cv.VideoCapture(0)
+    while True:
+        _, img = cap.read()
+        
+        gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+        # if (keyboard.is_pressed("c")):
+        #     file =open("report.txt","w")
+        #     for x in range(100) :
+        #         string = plate_Detection(img)
+        #         if (string == None):
+        #             string = ""
+        #         file.write(string)
+        #         file.write('\n')
+        #     file.close()
+        cv.imshow('img',img)
+        string = plate_Detection(img)
+        print(string)
+        
+        if(keyboard.is_pressed("x")):
+            cv.imwrite("./1.jpg",img)
+        k=cv.waitKey(30) & 0xff
+        if k==27:
+            break
 
-while True:
-    _, img = cap.read()
-    
-    gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-    # if (keyboard.is_pressed("c")):
-    #     file =open("report.txt","w")
-    #     for x in range(100) :
-    #         string = plate_Detection(img)
-    #         if (string == None):
-    #             string = ""
-    #         file.write(string)
-    #         file.write('\n')
-    #     file.close()
-    cv.imshow('img',img)
-    string = plate_Detection(img)
-    print(string)
-    
-    if(keyboard.is_pressed("x")):
-        cv.imwrite("./1.jpg",img)
-    k=cv.waitKey(30) & 0xff
-    if k==27:
-        break
-
-cap.release()
+    cap.release()
 
