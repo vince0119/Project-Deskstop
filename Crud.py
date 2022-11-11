@@ -42,7 +42,7 @@ def load_data_customer_regis(self):
         if (result == []):
             QMessageBox.about(self, 'Error', 'No data in table')
             return
-        else:    
+        else:
             num = 0
         for row in result:
             num = len(row)
@@ -52,7 +52,6 @@ def load_data_customer_regis(self):
         for row_number, row_data in enumerate(result):
             for column_number, data in enumerate(row_data):
                 self.uic1.tblCustomerRegis.setItem(row_number, column_number, QTableWidgetItem(str(data)))
-        
     except mysql.connector.Error as e:
         print('Fail')
 
@@ -76,7 +75,7 @@ def load_data_customers(self):
         for row_number, row_data in enumerate(result):
             for column_number, data in enumerate(row_data):
                 self.uic1.tblCustomer.setItem(row_number, column_number, QTableWidgetItem(str(data)))
-        
+
     except mysql.connector.Error as e:
         print('Fail')             
 

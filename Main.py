@@ -10,7 +10,6 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from MainUI import Ui_MainWindow
 from TableUI import Ui_MainWindow1
 # from liveRead import plate_Detection
-
 from Crud import load_data_car_log, load_data_customer_regis, load_data_customers, load_data_guest_regis
 from AddNew import insert_data_customer_regis, insert_data_guest_regis, insert_data_customers
 
@@ -29,8 +28,8 @@ class MainWindow(QMainWindow):
         self.uic1.setupUi(self)
         # self.sub_win.show()
         
-        self.HideOkAndCancelButton()
-        self.HideDisableButton()
+        # self.HideOkAndCancelButton()
+        # self.HideDisableButton()
         
         #Car log tab button controller
         self.uic1.btnLoadDataCar.clicked.connect(lambda: load_data_car_log(self))
