@@ -4,18 +4,21 @@ import Validation
 
 db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
 
-def insert_data_card(self):
+def insert_data_customer_regis(self):
     try:
         db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
 
         mycursor = db.cursor()
 
-        CardID = self.uic1.txtCardId.text()
-        CustomerID = self.uic1.txtCardCustomerId.text()
-        CarLicense = self.uic1.txtCardCarNumber.text()
+        CardID = self.uic1.txtCardIDCustomer.text()
+        CustomerID = self.uic1.txtCustomerId.text()
+        CarLicense = self.uic1.txtCarLicenseCustomer.text()
+        CarColor = self.uic1.txtCarColor.text()
+        CarModel = self.uic1.txtCarModel.text()
+        Active = self.uic1.cbActiveCustomerRegis.currentIndex()
         
-        query = ("INSERT INTO cardregistered (CardID, CustomerId, CarLicense)" "VALUES (%s, %s, %s)")
-        val = (CardID, CustomerID, CarLicense)
+        query = ("INSERT INTO customerregistered (CardID, CustomerID, CarLicense, CarColor, CarModel, Active)" "VALUES (%s, %s, %s, %s, %s, %s)")
+        val = (CardID, CustomerID, CarLicense, CarColor, CarModel, Active)
 
         result = mycursor.execute(query, val)
 
@@ -28,19 +31,20 @@ def insert_data_card(self):
         db.close()
         
 
-def insert_data_customer(self):
+def insert_data_customers(self):
     try:
         db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
 
         mycursor = db.cursor()
 
-        FullName = self.uic1.txtCustomerFullName.text()
-        PersonalId = self.uic1.txtCustomerPersonalId.text()
-        Room =self.uic1.txtCustomerRoom.text()
+        FullName = self.uic1.txtFullName.text()
+        PersonalId = self.uic1.txtPersonalID.text()
+        Room = self.uic1.txtRoom.text()
+        Active = self.uic1.cbActiveCustomer.currentIndex()
        
         if Validation.CustomerCheckValidation(self,FullName,PersonalId,Room):
-            query = ("INSERT INTO customers (FullName, PersonalId, Room)" "VALUES (%s, %s, %s)")
-            val = (FullName, PersonalId,Room)
+            query = ("INSERT INTO customers (FullName, PersonalId, Room, Active)" "VALUES (%s, %s, %s, %s)")
+            val = (FullName, PersonalId, Room, Active)
 
             result = mycursor.execute(query, val)
 
@@ -53,17 +57,18 @@ def insert_data_customer(self):
     finally:
         db.close()
 
-def insert_data_cardtype(self):
+def insert_data_guest_regis(self):
     try:
         db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
 
         mycursor = db.cursor()
 
-        CardID = self.uic1.txtCardTypeCardId.text()
-        CardType = self.uic1.cbCardType.currentIndex()
+        CardID = self.uic1.txtCardIdGuest.text()
+        CarLicense = self.uic1.txtCarLicenseGuest.text()
+        Active = self.uic1.cbActiveGuest.currentIndex()
 
-        query = ("INSERT INTO cardtype (CardID, CardType)" "VALUES (%s, %s)")
-        val = (CardID, CardType)
+        query = ("INSERT INTO cardtype (CardID, CarLicense, Active)" "VALUES (%s, %s, %s)")
+        val = (CardID, CarLicense, Active)
 
         result = mycursor.execute(query, val)
 

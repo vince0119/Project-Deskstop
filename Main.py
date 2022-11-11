@@ -11,8 +11,8 @@ from MainUI import Ui_MainWindow
 from TableUI import Ui_MainWindow1
 
 import mysql.connector
-from Crud import load_data_card, load_data_customer, load_data_carlog, load_data_cardType
-from AddNew import insert_data_card, insert_data_cardtype, insert_data_customer
+from Crud import load_data_car_log, load_data_customer_regis, load_data_customers, load_data_guest_regis
+from AddNew import insert_data_customer_regis, insert_data_guest_regis, insert_data_customers
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -29,163 +29,148 @@ class MainWindow(QMainWindow):
         self.uic1.setupUi(self)
         # self.sub_win.show()
         
-        self.HideOkAndCancelButton()
-        self.HideDisableButton()
+        # self.HideOkAndCancelButton()
+        # self.HideDisableButton()
         
-        #Card tab button controller
-        self.uic1.btnCardNew.clicked.connect(self.CardNewButtonClick)
-        self.uic1.btnCardOk.clicked.connect(self.CardOkButtonClick)
-        self.uic1.btnCardCancel.clicked.connect(self.CardCancelButtonClick)
-        self.uic1.btnCardDisable.clicked.connect(self.CardDisableButtonclick)
-        self.uic1.btnLoadDataCard.clicked.connect(lambda: load_data_card(self))
+        #Car log tab button controller
+        self.uic1.btnLoadDataCar.clicked.connect(lambda: load_data_car_log(self))
 
        
 
-        #Car Log
-        self.uic1.btnLoadDataCar.clicked.connect(lambda: load_data_carlog(self))
+        #Guest Registered tab button controller
+        self.uic1.btnGuestNew.clicked.connect(self.GuestNewButtonClick)
+        self.uic1.btnGuestDisable.clicked.connect(self.GuestDisableButtonclick)
+        self.uic1.btnGuestOk.clicked.connect(self.GuestOkButtonClick)
+        self.uic1.btnGuestCancel.clicked.connect(self.GuestCancelButtonClick)
+        self.uic1.btnLoadDataGuest.clicked.connect(lambda: load_data_guest_regis(self))
+ 
+        #Customer Registered button controller
+        self.uic1.btnCustomerRegisNew.clicked.connect(self.CustomerRegisNewButtonClick)
+        self.uic1.btnCustomerRegisDisable.clicked.connect(self.CustomerRegisDisableButtonClick)
+        self.uic1.btnCustomerRegisOK.clicked.connect(self.CustomerRegisOkButtonClick)
+        self.uic1.btnCustomerRegisCancel.clicked.connect(self.CustomerCancelButtonClick)
+        self.uic1.btnLoadDataCustomerRegis.clicked.connect(lambda: load_data_customer_regis(self))
 
-        #Customer tab button controller
-        self.uic1.btnCustomerNew.clicked.connect(self.CustomerNewButtonClick)
-        self.uic1.btnCustomerDisable.clicked.connect(self.CustomerDisableButtonClick)
-        self.uic1.btnCustomerOK.clicked.connect(self.CustomerOkButtonClick)
-        self.uic1.btnCustomerCancel.clicked.connect(self.CustomerCancelButtonClick)
-        self.uic1.btnLoadDataCustomer.clicked.connect(lambda: load_data_customer(self))
-        #Card Type tab button controller
-        self.uic1.btnCardTypeNew.clicked.connect(self.CardTypeNewButtonClick)
-        self.uic1.btnCardTypeOK.clicked.connect(self.CardTypeOkButtonClick)
-        self.uic1.btnCardTypeCancel.clicked.connect(self.CardTypeCancelButtonClick)
-        self.uic1.btnCardTypeDisable.clicked.connect(self.CardTypeDisableButtonClick)
-        self.uic1.btnLoadDataCardType.clicked.connect(lambda: load_data_cardType(self))
-
-        
-        
-        self.thread = {}
+        #Customers tab button controller
+        self.uic1.btnCustomerNew.clicked.connect(self.CustomersNewButtonClick)
+        self.uic1.btnCustomerOK.clicked.connect(self.CustomersOkButtonClick)
+        self.uic1.btnCustomerCancel.clicked.connect(self.CustomersCancelButtonClick)
+        self.uic1.btnCustomerDisable.clicked.connect(self.CustomersDisableButtonClick)
+        self.uic1.btnLoadDataCustomer.clicked.connect(lambda: load_data_customers(self))
 
 
-    #Start of Card tab Event
-    def CardButtonEvent(self, _isEditing):
-        self.uic1.btnCardOk.setVisible(_isEditing)
-        self.uic1.btnCardCancel.setVisible(_isEditing)
-        self.uic1.btnCardDisable.setEnabled(False)
-        self.uic1.txtCardId.setReadOnly(not _isEditing)
-        self.uic1.txtCardId.setText("")
-        self.uic1.txtCardCustomerId.setReadOnly(not _isEditing)
-        self.uic1.txtCardCarNumber.setReadOnly(not _isEditing)
-        self.uic1.txtCardCustomerId.setText("")
-        self.uic1.txtCardCarNumber.setText("")
+    #Start of Guest tab Event
+    def GuestButtonEvent(self, _isEditing):
+        self.uic1.btnGuestOk.setVisible(_isEditing)
+        self.uic1.btnGuestCancel.setVisible(_isEditing)
+        self.uic1.btnGuestDisable.setEnabled(False)
+        self.uic1.txtCardIdGuest.setReadOnly(not _isEditing)
+        self.uic1.txtCarLicenseGuest.setReadOnly(not _isEditing)
 
-    def CardNewButtonClick(self):
-        self.CardButtonEvent(True)
-        self.uic1.txtCardId.setFocus()
+    def GuestNewButtonClick(self):
+        self.GuestButtonEvent(True)
+        self.uic1.txtCardIdGuest.setFocus()
     
 
-    def CardOkButtonClick(self):
+    def GuestOkButtonClick(self):
         #get data and add to db
-        insert_data_card(self)
-        self.CardButtonEvent(False)
-        load_data_card(self)
+        if insert_data_guest_regis(self):
+            self.GuestButtonEvent(False)
+            load_data_guest_regis(self)
 
-    def CardCancelButtonClick(self):
-        self.CardButtonEvent(False)
+    def GuestCancelButtonClick(self):
+        self.GuestButtonEvent(False)
 
-    def CardDisableButtonclick(self):
-        status = self.uic1.btnCardDisable.text()
+    def GuestDisableButtonclick(self):
+        status = self.uic1.btnGuestDisable.text()
         if status == "Disable" :
-            self.uic1.btnCardDisable.setText("Enable")
+            self.uic1.btnGuestDisable.setText("Enable")
         else:
-            self.uic1.btnCardDisable.setText("Disable")
-    #End of Card tab Event
-
-    
-
-    #Start of Car Log tab Event
-
-    #End of Card Log tab Event
-
-    #Start of Customer tab Event
-    def CustomerButtonEnvent(self,_isEditing):
-        self.uic1.btnCustomerOK.setVisible(_isEditing)
-        self.uic1.btnCustomerCancel.setVisible(_isEditing) 
-        self.uic1.btnCustomerDisable.setEnabled(False)
-        self.uic1.txtCustomerFullName.setText("")
-        self.uic1.txtCustomerFullName.setReadOnly(not _isEditing) 
-        self.uic1.txtCustomerRoom.setText("")
-        self.uic1.txtCustomerRoom.setReadOnly(not _isEditing) 
-        self.uic1.txtCustomerPersonalId.setText("")
-        self.uic1.txtCustomerPersonalId.setReadOnly(not _isEditing) 
+            self.uic1.btnGuestDisable.setText("Disable")
 
 
-    def CustomerNewButtonClick(self):
-        self.CustomerButtonEnvent(True)
+    #Start of Customer Registered tab Event
+    def CustomerRegisButtonEnvent(self,_isEditing):
+        self.uic1.btnCustomerRegisOK.setVisible(_isEditing)
+        self.uic1.btnCustomerRegisCancel.setVisible(_isEditing) 
+        self.uic1.btnCustomerRegisDisable.setEnabled(False)
+        self.uic1.txtCardIDCustomer.setReadOnly(not _isEditing) 
+        self.uic1.txtCustomerId.setReadOnly(not _isEditing)
+        self.uic1.txtCarLicenseCustomer.setReadOnly(not _isEditing)
+        self.uic1.txtCarColor.setReadOnly(not _isEditing)
+        self.uic1.txtCarModel.setReadOnly(not _isEditing)
+        self.uic1.cbActiveCustomerRegis.setDisabled(not _isEditing)
+
+
+    def CustomerRegisNewButtonClick(self):
+        self.CustomerRegisButtonEnvent(True)
         
-    def CustomerOkButtonClick(self):
+    def CustomerRegisOkButtonClick(self):
          # Add new Customer function
          #get data from textfield
-        if insert_data_customer(self):
-            self.CustomerButtonEnvent(False)
-            load_data_customer(self)
+        if insert_data_customer_regis(self):
+            self.CustomerRegisButtonEnvent(False)
+            load_data_customer_regis(self)
         
 
-    
-
-
     def CustomerCancelButtonClick(self):
-        self.CustomerButtonEnvent(False)
+        self.CustomerRegisButtonEnvent(False)
 
-    def CustomerDisableButtonClick(self):
+    def CustomerRegisDisableButtonClick(self):
+        status = self.uic1.btnCustomerRegisDisable.text()
+        if status == "Disable" :
+            self.uic1.btnCustomerRegisDisable.setText("Enable")
+        else:
+            self.uic1.btnCustomerRegisDisable.setText("Disable")
+    #End of Customer tab Event
+
+    #Start of Customers tab Event 
+    def CustomersButtonEvent(self, _isEditing):
+        self.uic1.btnCustomerOK.setVisible(_isEditing)
+        self.uic1.btnCustomerDisable.setEnabled(False)
+        self.uic1.btnCustomerCancel.setVisible(_isEditing)
+        self.uic1.txtFullName.setReadOnly(not _isEditing)
+        self.uic1.txtPersonalID.setReadOnly(not _isEditing)
+        self.uic1.txtRoom.setReadOnly(not _isEditing)
+        self.uic1.cbActiveCustomer.setDisabled(not _isEditing)
+
+    def CustomersNewButtonClick(self):
+        self.CustomersButtonEvent(True)
+
+    def CustomersOkButtonClick(self):
+         # Add new card  function
+         #get data from textfield
+        if insert_data_customers(self):
+            self.CustomersButtonEvent(False)
+            load_data_customers(self)
+        
+
+    def CustomersCancelButtonClick(self):
+        self.CustomersButtonEvent(False)
+
+    def CustomersDisableButtonClick(self):
         status = self.uic1.btnCustomerDisable.text()
         if status == "Disable" :
             self.uic1.btnCustomerDisable.setText("Enable")
         else:
             self.uic1.btnCustomerDisable.setText("Disable")
-    #End of Customer tab Event
-
-    #Start of Card Type tab Event 
-    def CardTypeButtonEvent(self, _isEditing):
-        self.uic1.btnCardTypeOK.setVisible(_isEditing)
-        self.uic1.btnCardTypeDisable.setEnabled(False)
-        self.uic1.btnCardTypeCancel.setVisible(_isEditing)
-        self.uic1.txtCardTypeCardId.setReadOnly(not _isEditing)
-        self.uic1.txtCardTypeCardId.setText("")
-        self.uic1.cbCardType.setCurrentIndex(-1)
-
-    def CardTypeNewButtonClick(self):
-        self.CardTypeButtonEvent(True)
-
-    def CardTypeOkButtonClick(self):
-         # Add new card  function
-         #get data from textfield
-        insert_data_cardtype(self)
-        self.CardTypeButtonEvent(False)
-        load_data_cardType(self)
-        
-
-    def CardTypeCancelButtonClick(self):
-        self.CardTypeButtonEvent(False)
-
-    def CardTypeDisableButtonClick(self):
-        status = self.uic1.btnCardTypeDisable.text()
-        if status == "Disable" :
-            self.uic1.btnCardTypeDisable.setText("Enable")
-        else:
-            self.uic1.btnCardTypeDisable.setText("Disable")
 
     #End of Card type tab event
 
         
     #Hide OK and Cancel button  
     def HideOkAndCancelButton(self):
+        self.uic1.btnGuestOk.setVisible(False)
+        self.uic1.btnCustomerRegisOK.setVisible(False)
         self.uic1.btnCustomerOK.setVisible(False)
-        self.uic1.btnCardOk.setVisible(False)
-        self.uic1.btnCardTypeOK.setVisible(False)
-        self.uic1.btnCardCancel.setVisible(False)
+        self.uic1.btnGuestCancel.setVisible(False)
+        self.uic1.btnCustomerRegisCancel.setVisible(False)
         self.uic1.btnCustomerCancel.setVisible(False)
-        self.uic1.btnCardTypeCancel.setVisible(False)
 
     def HideDisableButton(self):
-        self.uic1.btnCardDisable.setEnabled(False)
+        self.uic1.btnGuestDisable.setEnabled(False)
+        self.uic1.btnCustomerRegisDisable.setEnabled(False)
         self.uic1.btnCustomerDisable.setEnabled(False)
-        self.uic1.btnCardTypeDisable.setEnabled(False)
     
 
 if __name__ == "__main__":
