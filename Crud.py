@@ -1,5 +1,5 @@
 import mysql.connector
-from PyQt5.QtWidgets import QTableWidgetItem
+from PyQt5.QtWidgets import QTableWidgetItem, QMessageBox
 
 CarLogDB = 'SELECT * FROM carlog'
 CustomerReDB = 'SELECT * FROM customerregistered'
@@ -15,8 +15,11 @@ def load_data_car_log(self):
         mycuror.execute(CarLogDB)
         
         result = mycuror.fetchall()
-
-        num = 0
+        if(result == []):
+            QMessageBox.about(self, 'Error', 'No data in table')
+            return
+        else:
+            num = 0
         for row in result:
             num = len(row)
         self.uic1.tblCarLog.setRowCount(len(result))
@@ -25,6 +28,7 @@ def load_data_car_log(self):
         for row_number, row_data in enumerate(result):
             for column_number, data in enumerate(row_data):
                 self.uic1.tblCarLog.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+
     except mysql.connector.Error as e:  
         print('Fail')
 
@@ -35,8 +39,11 @@ def load_data_customer_regis(self):
         mycuror.execute(CustomerReDB)
         
         result = mycuror.fetchall()
-
-        num = 0
+        if (result == []):
+            QMessageBox.about(self, 'Error', 'No data in table')
+            return
+        else:
+            num = 0
         for row in result:
             num = len(row)
         self.uic1.tblCustomerRegis.setRowCount(len(result))
@@ -55,8 +62,11 @@ def load_data_customers(self):
         mycuror.execute(CustomerDB)
         
         result = mycuror.fetchall()
-
-        num = 0
+        if(result == []):
+            QMessageBox.about(self, 'Error', 'No data in table')
+            return
+        else:
+            num = 0
         for row in result:
             num = len(row)
         self.uic1.tblCustomer.setRowCount(len(result))
@@ -76,8 +86,10 @@ def load_data_guest_regis(self):
         mycuror.execute(GuestReDB)
         
         result = mycuror.fetchall()
-
-        num = 0
+        if(result == []):
+            QMessageBox.about(self, 'Error', 'No data in table')
+        else:
+            num = 0
         for row in result:
             num = len(row)
         self.uic1.tblGuest.setRowCount(len(result))
@@ -86,5 +98,6 @@ def load_data_guest_regis(self):
         for row_number, row_data in enumerate(result):
             for column_number, data in enumerate(row_data):
                 self.uic1.tblGuest.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+
     except mysql.connector.Error as e:
         print('Fail')             
