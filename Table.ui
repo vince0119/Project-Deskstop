@@ -258,6 +258,12 @@
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>150</number>
+      </attribute>
       <column>
        <property name="text">
         <string>ID</string>
@@ -367,14 +373,6 @@
       <property name="editable">
        <bool>false</bool>
       </property>
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <item>
-       <property name="text">
-        <string/>
-       </property>
-      </item>
       <item>
        <property name="text">
         <string>YES</string>
@@ -691,14 +689,6 @@
         <pointsize>14</pointsize>
        </font>
       </property>
-      <property name="editable">
-       <bool>false</bool>
-      </property>
-      <item>
-       <property name="text">
-        <string/>
-       </property>
-      </item>
       <item>
        <property name="text">
         <string>YES</string>
@@ -951,11 +941,6 @@
       <property name="editable">
        <bool>false</bool>
       </property>
-      <item>
-       <property name="text">
-        <string/>
-       </property>
-      </item>
       <item>
        <property name="text">
         <string>YES</string>

@@ -1,15 +1,13 @@
-from pickle import load
-from sqlite3.dbapi2 import connect
 import sys
 import cv2
 import numpy as np
 from PyQt5 import QtGui
 from PyQt5.QtCore import QThread,pyqtSignal,Qt
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
 from MainUI import Ui_MainWindow
 from TableUI import Ui_MainWindow1
-# from liveRead import plate_Detection
+# from liveRead import plate_Detection, OpenCamera
 from Crud import load_data_car_log, load_data_customer_regis, load_data_customers, load_data_guest_regis
 from AddNew import insert_data_customer_regis, insert_data_guest_regis, insert_data_customers
 
@@ -28,8 +26,8 @@ class MainWindow(QMainWindow):
         self.uic1.setupUi(self)
         # self.sub_win.show()
         
-        # self.HideOkAndCancelButton()
-        # self.HideDisableButton()
+        self.HideOkAndCancelButton()
+        self.HideDisableButton()
         
         #Car log tab button controller
         self.uic1.btnLoadDataCar.clicked.connect(lambda: load_data_car_log(self))
@@ -41,6 +39,8 @@ class MainWindow(QMainWindow):
         self.uic1.btnGuestDisable.clicked.connect(self.GuestDisableButtonclick)
         self.uic1.btnGuestOk.clicked.connect(self.GuestOkButtonClick)
         self.uic1.btnGuestCancel.clicked.connect(self.GuestCancelButtonClick)
+        self.uic1.cbActiveGuest.setEnabled(False)
+        self.uic1.tblGuest.clicked.connect(self.onCell)
         self.uic1.btnLoadDataGuest.clicked.connect(lambda: load_data_guest_regis(self))
  
         #Customer Registered button controller
@@ -48,6 +48,7 @@ class MainWindow(QMainWindow):
         self.uic1.btnCustomerRegisDisable.clicked.connect(self.CustomerRegisDisableButtonClick)
         self.uic1.btnCustomerRegisOK.clicked.connect(self.CustomerRegisOkButtonClick)
         self.uic1.btnCustomerRegisCancel.clicked.connect(self.CustomerCancelButtonClick)
+        self.uic1.cbActiveCustomerRegis.setEnabled(False)
         self.uic1.btnLoadDataCustomerRegis.clicked.connect(lambda: load_data_customer_regis(self))
 
         #Customers tab button controller
@@ -55,6 +56,7 @@ class MainWindow(QMainWindow):
         self.uic1.btnCustomerOK.clicked.connect(self.CustomersOkButtonClick)
         self.uic1.btnCustomerCancel.clicked.connect(self.CustomersCancelButtonClick)
         self.uic1.btnCustomerDisable.clicked.connect(self.CustomersDisableButtonClick)
+        self.uic1.cbActiveCustomer.setEnabled(False)
         self.uic1.btnLoadDataCustomer.clicked.connect(lambda: load_data_customers(self))
 
 
@@ -64,21 +66,25 @@ class MainWindow(QMainWindow):
         self.uic1.btnGuestCancel.setVisible(_isEditing)
         self.uic1.btnGuestDisable.setEnabled(False)
         self.uic1.txtCardIdGuest.setReadOnly(not _isEditing)
+        self.uic1.txtCardIdGuest.setText("")
         self.uic1.txtCarLicenseGuest.setReadOnly(not _isEditing)
+        self.uic1.txtCarLicenseGuest.setText("")
 
     def GuestNewButtonClick(self):
         self.GuestButtonEvent(True)
         self.uic1.txtCardIdGuest.setFocus()
+        self.uic1.cbActiveGuest.setEnabled(True)
     
 
     def GuestOkButtonClick(self):
         #get data and add to db
-        if insert_data_guest_regis(self):
-            self.GuestButtonEvent(False)
-            load_data_guest_regis(self)
+        insert_data_guest_regis(self)
+        self.GuestButtonEvent(False)
+        load_data_guest_regis(self)
 
     def GuestCancelButtonClick(self):
         self.GuestButtonEvent(False)
+        self.uic1.cbActiveGuest.setEnabled(False)
 
     def GuestDisableButtonclick(self):
         status = self.uic1.btnGuestDisable.text()
@@ -98,18 +104,19 @@ class MainWindow(QMainWindow):
         self.uic1.txtCarLicenseCustomer.setReadOnly(not _isEditing)
         self.uic1.txtCarColor.setReadOnly(not _isEditing)
         self.uic1.txtCarModel.setReadOnly(not _isEditing)
-        self.uic1.cbActiveCustomerRegis.setDisabled(not _isEditing)
 
 
     def CustomerRegisNewButtonClick(self):
+        self.uic1.cbActiveCustomerRegis.setEnabled(True)
         self.CustomerRegisButtonEnvent(True)
+        self.uic1.txtCardIDCustomer.setFocus()
         
     def CustomerRegisOkButtonClick(self):
          # Add new Customer function
          #get data from textfield
-        if insert_data_customer_regis(self):
-            self.CustomerRegisButtonEnvent(False)
-            load_data_customer_regis(self)
+        insert_data_customer_regis(self)
+        self.CustomerRegisButtonEnvent(False)
+        load_data_customer_regis(self)
         
 
     def CustomerCancelButtonClick(self):
@@ -134,14 +141,16 @@ class MainWindow(QMainWindow):
         self.uic1.cbActiveCustomer.setDisabled(not _isEditing)
 
     def CustomersNewButtonClick(self):
+        self.uic1.cbActiveCustomer.setEnabled(True)
         self.CustomersButtonEvent(True)
+        self.uic1.txtFullName.setFocus()
 
     def CustomersOkButtonClick(self):
          # Add new card  function
          #get data from textfield
-        if insert_data_customers(self):
-            self.CustomersButtonEvent(False)
-            load_data_customers(self)
+        insert_data_customers(self)
+        self.CustomersButtonEvent(False)
+        load_data_customers(self)
         
 
     def CustomersCancelButtonClick(self):
@@ -156,7 +165,28 @@ class MainWindow(QMainWindow):
 
     #End of Card type tab event
 
-        
+    # show text
+    def onCell(self):
+        row = self.uic1.tblGuest.currentRow()
+        list = []
+        for i in range(self.uic1.tblGuest.columnCount()):
+            out = self.uic1.tblGuest.item(row,i).text()
+            list.append(out)
+        data = list
+        self.show_data(data)
+        self.comboBoxChanged
+
+    def show_data(self, data):
+        self.uic1.txtCardIdGuest.setText(data[1])
+        self.uic1.txtCarLicenseGuest.setText(data[2])
+        print('123', self.uic1.tblGuest.selectionModel())
+        # if (str(data[3]) == '0'):
+        #     yes = str(data[3]).replace('0','YES')
+        #     print('true',self.uic1.cbActiveGuest.setEditText(yes))
+        # else:
+        #     no = str(data[3]).replace('1','NO')
+        #     print('fail')
+
     #Hide OK and Cancel button  
     def HideOkAndCancelButton(self):
         self.uic1.btnGuestOk.setVisible(False)
