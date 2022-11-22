@@ -42,10 +42,9 @@ def insert_data_customers(self):
         Room = self.uic1.txtRoom.text()
         Active = self.uic1.cbActiveCustomer.currentIndex()
        
-        if Validation.CustomerCheckValidation(self,FullName,PersonalId,Room):
+        if Validation.CustomerCheckValidation(self, FullName, PersonalId, Room):
             query = ("INSERT INTO customers (FullName, PersonalId, Room, Active)" "VALUES (%s, %s, %s, %s)")
             val = (FullName, PersonalId, Room, Active)
-
             result = mycursor.execute(query, val)
 
             db.commit()
@@ -67,14 +66,14 @@ def insert_data_guest_regis(self):
         CarLicense = self.uic1.txtCarLicenseGuest.text()
         Active = self.uic1.cbActiveGuest.currentIndex()
 
-        query = ("INSERT INTO cardtype (CardID, CarLicense, Active)" "VALUES (%s, %s, %s)")
+        query = ("INSERT INTO guestregistered (CardID, CarLicense, Active)" "VALUES (%s, %s, %s)")
         val = (CardID, CarLicense, Active)
 
         result = mycursor.execute(query, val)
 
         db.commit()
         QMessageBox.about(self, 'Inserted', 'Data insert successfully')
-        return True
+        
     except mysql.connector.Error as e:
         QMessageBox.about(self, ' Fail', 'Insert Failed!!!')
         return False
