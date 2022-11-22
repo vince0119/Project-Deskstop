@@ -4,12 +4,13 @@ import numpy as np
 from PyQt5 import QtGui
 from PyQt5.QtCore import QThread,pyqtSignal,Qt
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from MainUI import Ui_MainWindow
 from TableUI import Ui_MainWindow1
 # from liveRead import plate_Detection, OpenCamera
 from Crud import load_data_car_log, load_data_customer_regis, load_data_customers, load_data_guest_regis
 from AddNew import insert_data_customer_regis, insert_data_guest_regis, insert_data_customers
+from CheckExist import _car_log
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -27,10 +28,12 @@ class MainWindow(QMainWindow):
         # self.sub_win.show()
         
         self.HideOkAndCancelButton()
-        self.HideDisableButton()
+        # self.HideDisableButton()
         
         #Car log tab button controller
+        # self.uic1.btnLoadDataCar.clicked.connect(_car_log)
         self.uic1.btnLoadDataCar.clicked.connect(lambda: load_data_car_log(self))
+        self.uic1.tblCarLog.clicked.connect(self.onCellCarLog)
 
        
 
@@ -39,7 +42,6 @@ class MainWindow(QMainWindow):
         self.uic1.btnGuestDisable.clicked.connect(self.GuestDisableButtonclick)
         self.uic1.btnGuestOk.clicked.connect(self.GuestOkButtonClick)
         self.uic1.btnGuestCancel.clicked.connect(self.GuestCancelButtonClick)
-        self.uic1.cbActiveGuest.setEnabled(False)
         self.uic1.tblGuest.clicked.connect(self.onCell)
         self.uic1.btnLoadDataGuest.clicked.connect(lambda: load_data_guest_regis(self))
  
@@ -48,7 +50,6 @@ class MainWindow(QMainWindow):
         self.uic1.btnCustomerRegisDisable.clicked.connect(self.CustomerRegisDisableButtonClick)
         self.uic1.btnCustomerRegisOK.clicked.connect(self.CustomerRegisOkButtonClick)
         self.uic1.btnCustomerRegisCancel.clicked.connect(self.CustomerCancelButtonClick)
-        self.uic1.cbActiveCustomerRegis.setEnabled(False)
         self.uic1.btnLoadDataCustomerRegis.clicked.connect(lambda: load_data_customer_regis(self))
 
         #Customers tab button controller
@@ -56,8 +57,22 @@ class MainWindow(QMainWindow):
         self.uic1.btnCustomerOK.clicked.connect(self.CustomersOkButtonClick)
         self.uic1.btnCustomerCancel.clicked.connect(self.CustomersCancelButtonClick)
         self.uic1.btnCustomerDisable.clicked.connect(self.CustomersDisableButtonClick)
-        self.uic1.cbActiveCustomer.setEnabled(False)
         self.uic1.btnLoadDataCustomer.clicked.connect(lambda: load_data_customers(self))
+
+
+    #CarLog table click
+    def onCellCarLog(self):
+        row = self.uic1.tblCarLog.currentRow()
+        list = []
+        for i in range(self.uic1.tblCarLog.columnCount()):
+            out = self.uic1.tblCarLog.item(row,i).text()
+            list.append(out)
+        data = list
+        self.show_data_Car(data)
+
+    def show_data_Car(self, data):
+        self.uic1.cbCarLogStatus.setCurrentIndex(int(data[3]))
+        self.uic1.txtRegisteredId.setText(data[1])
 
 
     #Start of Guest tab Event
@@ -73,7 +88,6 @@ class MainWindow(QMainWindow):
     def GuestNewButtonClick(self):
         self.GuestButtonEvent(True)
         self.uic1.txtCardIdGuest.setFocus()
-        self.uic1.cbActiveGuest.setEnabled(True)
     
 
     def GuestOkButtonClick(self):
@@ -84,7 +98,6 @@ class MainWindow(QMainWindow):
 
     def GuestCancelButtonClick(self):
         self.GuestButtonEvent(False)
-        self.uic1.cbActiveGuest.setEnabled(False)
 
     def GuestDisableButtonclick(self):
         status = self.uic1.btnGuestDisable.text()
@@ -107,7 +120,6 @@ class MainWindow(QMainWindow):
 
 
     def CustomerRegisNewButtonClick(self):
-        self.uic1.cbActiveCustomerRegis.setEnabled(True)
         self.CustomerRegisButtonEnvent(True)
         self.uic1.txtCardIDCustomer.setFocus()
         
@@ -123,6 +135,7 @@ class MainWindow(QMainWindow):
         self.CustomerRegisButtonEnvent(False)
 
     def CustomerRegisDisableButtonClick(self):
+        QMessageBox.about(self, 'asdfsdfsadf','asdfasdfsa')
         status = self.uic1.btnCustomerRegisDisable.text()
         if status == "Disable" :
             self.uic1.btnCustomerRegisDisable.setText("Enable")
@@ -138,10 +151,8 @@ class MainWindow(QMainWindow):
         self.uic1.txtFullName.setReadOnly(not _isEditing)
         self.uic1.txtPersonalID.setReadOnly(not _isEditing)
         self.uic1.txtRoom.setReadOnly(not _isEditing)
-        self.uic1.cbActiveCustomer.setDisabled(not _isEditing)
 
     def CustomersNewButtonClick(self):
-        self.uic1.cbActiveCustomer.setEnabled(True)
         self.CustomersButtonEvent(True)
         self.uic1.txtFullName.setFocus()
 
@@ -174,18 +185,10 @@ class MainWindow(QMainWindow):
             list.append(out)
         data = list
         self.show_data(data)
-        self.comboBoxChanged
 
     def show_data(self, data):
         self.uic1.txtCardIdGuest.setText(data[1])
         self.uic1.txtCarLicenseGuest.setText(data[2])
-        print('123', self.uic1.tblGuest.selectionModel())
-        # if (str(data[3]) == '0'):
-        #     yes = str(data[3]).replace('0','YES')
-        #     print('true',self.uic1.cbActiveGuest.setEditText(yes))
-        # else:
-        #     no = str(data[3]).replace('1','NO')
-        #     print('fail')
 
     #Hide OK and Cancel button  
     def HideOkAndCancelButton(self):
