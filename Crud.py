@@ -88,6 +88,7 @@ def load_data_guest_regis(self):
         result = mycuror.fetchall()
         if(result == []):
             QMessageBox.about(self, 'Error', 'No data in table')
+            return
         else:
             num = 0
         for row in result:

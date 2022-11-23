@@ -15,10 +15,9 @@ def insert_data_customer_regis(self):
         CarLicense = self.uic1.txtCarLicenseCustomer.text()
         CarColor = self.uic1.txtCarColor.text()
         CarModel = self.uic1.txtCarModel.text()
-        Active = self.uic1.cbActiveCustomerRegis.currentIndex()
         
-        query = ("INSERT INTO customerregistered (CardID, CustomerID, CarLicense, CarColor, CarModel, Active)" "VALUES (%s, %s, %s, %s, %s, %s)")
-        val = (CardID, CustomerID, CarLicense, CarColor, CarModel, Active)
+        query = ("INSERT INTO customerregistered (CardID, CustomerID, CarLicense, CarColor, CarModel)" "VALUES (%s, %s, %s, %s, %s)")
+        val = (CardID, CustomerID, CarLicense, CarColor, CarModel)
 
         result = mycursor.execute(query, val)
 
@@ -40,11 +39,10 @@ def insert_data_customers(self):
         FullName = self.uic1.txtFullName.text()
         PersonalId = self.uic1.txtPersonalID.text()
         Room = self.uic1.txtRoom.text()
-        Active = self.uic1.cbActiveCustomer.currentIndex()
        
         if Validation.CustomerCheckValidation(self, FullName, PersonalId, Room):
-            query = ("INSERT INTO customers (FullName, PersonalId, Room, Active)" "VALUES (%s, %s, %s, %s)")
-            val = (FullName, PersonalId, Room, Active)
+            query = ("INSERT INTO customers (FullName, PersonalId, Room)" "VALUES (%s, %s, %s)")
+            val = (FullName, PersonalId, Room)
             result = mycursor.execute(query, val)
 
             db.commit()
@@ -64,10 +62,9 @@ def insert_data_guest_regis(self):
 
         CardID = self.uic1.txtCardIdGuest.text()
         CarLicense = self.uic1.txtCarLicenseGuest.text()
-        Active = self.uic1.cbActiveGuest.currentIndex()
 
-        query = ("INSERT INTO guestregistered (CardID, CarLicense, Active)" "VALUES (%s, %s, %s)")
-        val = (CardID, CarLicense, Active)
+        query = ("INSERT INTO guestregistered (CardID, CarLicense)" "VALUES (%s, %s)")
+        val = (CardID, CarLicense )
 
         result = mycursor.execute(query, val)
 

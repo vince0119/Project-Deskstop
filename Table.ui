@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>932</width>
+    <width>935</width>
     <height>755</height>
    </rect>
   </property>
@@ -24,13 +24,13 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="wgCarLog">
      <attribute name="title">
       <string>Car Log</string>
      </attribute>
-     <widget class="QLineEdit" name="txtCarRegis">
+     <widget class="QLineEdit" name="txtRegisteredId">
       <property name="geometry">
        <rect>
         <x>220</x>
@@ -53,7 +53,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>160</y>
+        <y>120</y>
         <width>201</width>
         <height>41</height>
        </rect>
@@ -75,8 +75,14 @@
        <set>QAbstractItemView::NoEditTriggers</set>
       </property>
       <property name="selectionBehavior">
-       <enum>QAbstractItemView::SelectColumns</enum>
+       <enum>QAbstractItemView::SelectRows</enum>
       </property>
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>150</number>
+      </attribute>
       <column>
        <property name="text">
         <string>ID</string>
@@ -84,7 +90,7 @@
       </column>
       <column>
        <property name="text">
-        <string>Card Registered ID</string>
+        <string>Registered ID</string>
        </property>
       </column>
       <column>
@@ -124,11 +130,14 @@
        <string>Load Data</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="cbCarStatus">
+     <widget class="QComboBox" name="cbCarLogStatus">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>220</x>
-        <y>160</y>
+        <y>120</y>
         <width>161</width>
         <height>41</height>
        </rect>
@@ -140,13 +149,8 @@
        </font>
       </property>
       <property name="editable">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
-      <item>
-       <property name="text">
-        <string/>
-       </property>
-      </item>
       <item>
        <property name="text">
         <string>IN</string>
@@ -157,6 +161,38 @@
         <string>OUT</string>
        </property>
       </item>
+     </widget>
+     <widget class="QLabel" name="lblCarLogCarNumber_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>180</y>
+        <width>201</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Car License</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtCarLicense">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>180</y>
+        <width>311</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="wgCard">
@@ -202,19 +238,6 @@
       </property>
       <property name="readOnly">
        <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lblCardCarLicense">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>110</y>
-        <width>201</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Active</string>
       </property>
      </widget>
      <widget class="QLabel" name="lblCardCustomerId">
@@ -355,35 +378,6 @@
        <string>Load Data</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="cbActiveGuest">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>110</y>
-        <width>161</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="editable">
-       <bool>false</bool>
-      </property>
-      <item>
-       <property name="text">
-        <string>YES</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>NO</string>
-       </property>
-      </item>
-     </widget>
     </widget>
     <widget class="QWidget" name="wgCustomer">
      <attribute name="title">
@@ -430,6 +424,9 @@
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>120</number>
+      </attribute>
       <column>
        <property name="text">
         <string>Id</string>
@@ -463,6 +460,11 @@
       <column>
        <property name="text">
         <string>Active</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Created Date</string>
        </property>
       </column>
      </widget>
@@ -674,12 +676,12 @@
        <string>Car Model</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="cbActiveCustomerRegis">
+     <widget class="QLineEdit" name="txtSearchCustomer">
       <property name="geometry">
        <rect>
-        <x>160</x>
-        <y>260</y>
-        <width>161</width>
+        <x>480</x>
+        <y>270</y>
+        <width>181</width>
         <height>41</height>
        </rect>
       </property>
@@ -689,28 +691,27 @@
         <pointsize>14</pointsize>
        </font>
       </property>
-      <item>
-       <property name="text">
-        <string>YES</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>NO</string>
-       </property>
-      </item>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
      </widget>
-     <widget class="QLabel" name="lblCardType_2">
+     <widget class="QLineEdit" name="txtSearchCardID">
       <property name="geometry">
        <rect>
-        <x>10</x>
-        <y>260</y>
-        <width>201</width>
+        <x>700</x>
+        <y>270</y>
+        <width>181</width>
         <height>41</height>
        </rect>
       </property>
-      <property name="text">
-       <string>Active</string>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
@@ -923,48 +924,6 @@
        <string>Room</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="cbActiveCustomer">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>160</y>
-        <width>161</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="editable">
-       <bool>false</bool>
-      </property>
-      <item>
-       <property name="text">
-        <string>YES</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>NO</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QLabel" name="lblCardType_4">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>160</y>
-        <width>201</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Active</string>
-      </property>
-     </widget>
     </widget>
    </widget>
   </widget>
@@ -973,8 +932,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>932</width>
-     <height>21</height>
+     <width>935</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>
