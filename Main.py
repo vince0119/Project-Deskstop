@@ -50,7 +50,6 @@ class MainWindow(QMainWindow):
         self.uic1.btnCustomerRegisDisable.clicked.connect(self.CustomerRegisDisableButtonClick)
         self.uic1.btnCustomerRegisOK.clicked.connect(self.CustomerRegisOkButtonClick)
         self.uic1.btnCustomerRegisCancel.clicked.connect(self.CustomerCancelButtonClick)
-        self.uic1.cbActiveCustomerRegis.setEnabled(False)
         self.uic1.btnLoadDataCustomerRegis.clicked.connect(lambda: load_data_customer_regis(self))
 
         #Customers tab button controller
@@ -58,7 +57,6 @@ class MainWindow(QMainWindow):
         self.uic1.btnCustomerOK.clicked.connect(self.CustomersOkButtonClick)
         self.uic1.btnCustomerCancel.clicked.connect(self.CustomersCancelButtonClick)
         self.uic1.btnCustomerDisable.clicked.connect(self.CustomersDisableButtonClick)
-        self.uic1.cbActiveCustomer.setEnabled(False)
         self.uic1.btnLoadDataCustomer.clicked.connect(lambda: load_data_customers(self))
 
 
