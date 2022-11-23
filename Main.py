@@ -38,10 +38,7 @@ class MainWindow(QMainWindow):
        
 
         #Guest Registered tab button controller
-        self.uic1.btnGuestNew.clicked.connect(self.GuestNewButtonClick)
-        self.uic1.btnGuestDisable.clicked.connect(self.GuestDisableButtonclick)
-        self.uic1.btnGuestOk.clicked.connect(self.GuestOkButtonClick)
-        self.uic1.btnGuestCancel.clicked.connect(self.GuestCancelButtonClick)
+        self.uic1.btnGuestRegisDisable.clicked.connect(self.GuestDisableButtonclick)
         self.uic1.tblGuest.clicked.connect(self.onCell)
         self.uic1.btnLoadDataGuest.clicked.connect(lambda: load_data_guest_regis(self))
  
@@ -192,10 +189,8 @@ class MainWindow(QMainWindow):
 
     #Hide OK and Cancel button  
     def HideOkAndCancelButton(self):
-        self.uic1.btnGuestOk.setVisible(False)
         self.uic1.btnCustomerRegisOK.setVisible(False)
         self.uic1.btnCustomerOK.setVisible(False)
-        self.uic1.btnGuestCancel.setVisible(False)
         self.uic1.btnCustomerRegisCancel.setVisible(False)
         self.uic1.btnCustomerCancel.setVisible(False)
 

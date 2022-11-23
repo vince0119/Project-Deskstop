@@ -23,8 +23,11 @@
       <height>701</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>Input Card Id or Car Lincense to Disable</string>
+    </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="wgCarLog">
      <attribute name="title">
@@ -253,19 +256,6 @@
        <string>Car License</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="btnGuestNew">
-      <property name="geometry">
-       <rect>
-        <x>560</x>
-        <y>10</y>
-        <width>211</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>New</string>
-      </property>
-     </widget>
      <widget class="QTableWidget" name="tblGuest">
       <property name="geometry">
        <rect>
@@ -313,19 +303,6 @@
        </property>
       </column>
      </widget>
-     <widget class="QPushButton" name="btnGuestDisable">
-      <property name="geometry">
-       <rect>
-        <x>560</x>
-        <y>60</y>
-        <width>211</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Disable</string>
-      </property>
-     </widget>
      <widget class="QLabel" name="lblCardId">
       <property name="geometry">
        <rect>
@@ -339,43 +316,101 @@
        <string>Card Id</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="btnGuestOk">
-      <property name="geometry">
-       <rect>
-        <x>560</x>
-        <y>117</y>
-        <width>93</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>OK</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btnGuestCancel">
-      <property name="geometry">
-       <rect>
-        <x>680</x>
-        <y>120</y>
-        <width>93</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Cancel</string>
-      </property>
-     </widget>
      <widget class="QPushButton" name="btnLoadDataGuest">
       <property name="geometry">
        <rect>
-        <x>620</x>
-        <y>170</y>
+        <x>640</x>
+        <y>10</y>
         <width>93</width>
         <height>41</height>
        </rect>
       </property>
       <property name="text">
        <string>Load Data</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="chbInactiveGuestRegis">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>270</y>
+        <width>131</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Show inactive</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtSearchCardId">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>690</x>
+        <y>260</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="readOnly">
+       <bool>false</bool>
+      </property>
+      <property name="placeholderText">
+       <string>Search Card ID</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnGuestRegisDisable">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>70</y>
+        <width>211</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Disable</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtDisableByCarLicense">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>120</y>
+        <width>211</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Input Card Id or Car License to disable</string>
+      </property>
+      <property name="readOnly">
+       <bool>false</bool>
+      </property>
+      <property name="placeholderText">
+       <string/>
       </property>
      </widget>
     </widget>
@@ -536,7 +571,7 @@
       <property name="geometry">
        <rect>
         <x>560</x>
-        <y>117</y>
+        <y>160</y>
         <width>93</width>
         <height>41</height>
        </rect>
@@ -549,7 +584,7 @@
       <property name="geometry">
        <rect>
         <x>680</x>
-        <y>120</y>
+        <y>160</y>
         <width>93</width>
         <height>41</height>
        </rect>
@@ -561,8 +596,8 @@
      <widget class="QPushButton" name="btnLoadDataCustomerRegis">
       <property name="geometry">
        <rect>
-        <x>620</x>
-        <y>170</y>
+        <x>610</x>
+        <y>210</y>
         <width>93</width>
         <height>41</height>
        </rect>
@@ -677,9 +712,12 @@
       </property>
      </widget>
      <widget class="QLineEdit" name="txtSearchCustomer">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="geometry">
        <rect>
-        <x>480</x>
+        <x>710</x>
         <y>270</y>
         <width>181</width>
         <height>41</height>
@@ -688,19 +726,25 @@
       <property name="font">
        <font>
         <family>Times New Roman</family>
-        <pointsize>14</pointsize>
+        <pointsize>12</pointsize>
        </font>
       </property>
       <property name="readOnly">
-       <bool>true</bool>
+       <bool>false</bool>
+      </property>
+      <property name="placeholderText">
+       <string>Search Customer ID</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtSearchCardID">
+     <widget class="QLineEdit" name="txtDisableByCardID">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="geometry">
        <rect>
-        <x>700</x>
-        <y>270</y>
-        <width>181</width>
+        <x>560</x>
+        <y>110</y>
+        <width>211</width>
         <height>41</height>
        </rect>
       </property>
@@ -710,8 +754,32 @@
         <pointsize>14</pointsize>
        </font>
       </property>
+      <property name="toolTip">
+       <string>Input Card Id or Car License to disable</string>
+      </property>
       <property name="readOnly">
-       <bool>true</bool>
+       <bool>false</bool>
+      </property>
+      <property name="placeholderText">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>280</y>
+        <width>131</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Show inactive</string>
       </property>
      </widget>
     </widget>
@@ -922,6 +990,49 @@
       </property>
       <property name="text">
        <string>Room</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="checkBox_2">
+      <property name="geometry">
+       <rect>
+        <x>540</x>
+        <y>300</y>
+        <width>131</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Show inactive</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtSearchPersonalId">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>700</x>
+        <y>290</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="readOnly">
+       <bool>false</bool>
+      </property>
+      <property name="placeholderText">
+       <string>Search Personal ID</string>
       </property>
      </widget>
     </widget>
