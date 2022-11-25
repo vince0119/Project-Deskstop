@@ -124,6 +124,7 @@ class Ui_MainWindow1(object):
         self.btnLoadDataGuest = QtWidgets.QPushButton(self.wgCard)
         self.btnLoadDataGuest.setGeometry(QtCore.QRect(640, 10, 93, 41))
         self.btnLoadDataGuest.setObjectName("btnLoadDataGuest")
+
         self.chbInactiveGuestRegis = QtWidgets.QCheckBox(self.wgCard)
         self.chbInactiveGuestRegis.setGeometry(QtCore.QRect(530, 270, 131, 20))
         font = QtGui.QFont()
@@ -152,6 +153,7 @@ class Ui_MainWindow1(object):
         self.txtDisableByCarLicense.setReadOnly(False)
         self.txtDisableByCarLicense.setPlaceholderText("")
         self.txtDisableByCarLicense.setObjectName("txtDisableByCarLicense")
+
         self.wgTab.addTab(self.wgCard, "")
         self.wgCustomer = QtWidgets.QWidget()
         self.wgCustomer.setObjectName("wgCustomer")
@@ -253,6 +255,7 @@ class Ui_MainWindow1(object):
         self.lblCustomerPersonalId_4.setGeometry(QtCore.QRect(10, 210, 201, 41))
         self.lblCustomerPersonalId_4.setObjectName("lblCustomerPersonalId_4")
         self.txtSearchCustomer = QtWidgets.QLineEdit(self.wgCustomer)
+
         self.txtSearchCustomer.setEnabled(True)
         self.txtSearchCustomer.setGeometry(QtCore.QRect(710, 270, 181, 41))
         font = QtGui.QFont()
@@ -277,6 +280,7 @@ class Ui_MainWindow1(object):
         font.setPointSize(10)
         self.checkBox.setFont(font)
         self.checkBox.setObjectName("checkBox")
+
         self.wgTab.addTab(self.wgCustomer, "")
         self.wgCardType = QtWidgets.QWidget()
         self.wgCardType.setObjectName("wgCardType")
@@ -346,6 +350,7 @@ class Ui_MainWindow1(object):
         self.lblCustomerFullName_5 = QtWidgets.QLabel(self.wgCardType)
         self.lblCustomerFullName_5.setGeometry(QtCore.QRect(10, 110, 201, 41))
         self.lblCustomerFullName_5.setObjectName("lblCustomerFullName_5")
+
         self.checkBox_2 = QtWidgets.QCheckBox(self.wgCardType)
         self.checkBox_2.setGeometry(QtCore.QRect(540, 300, 131, 20))
         font = QtGui.QFont()
@@ -361,6 +366,7 @@ class Ui_MainWindow1(object):
         self.txtSearchPersonalId.setFont(font)
         self.txtSearchPersonalId.setReadOnly(False)
         self.txtSearchPersonalId.setObjectName("txtSearchPersonalId")
+
         self.wgTab.addTab(self.wgCardType, "")
         MainWindow1.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow1)
@@ -369,7 +375,9 @@ class Ui_MainWindow1(object):
         MainWindow1.setMenuBar(self.menubar)
 
         self.retranslateUi(MainWindow1)
+
         self.wgTab.setCurrentIndex(0)
+
         QtCore.QMetaObject.connectSlotsByName(MainWindow1)
 
     def retranslateUi(self, MainWindow1):
@@ -406,10 +414,12 @@ class Ui_MainWindow1(object):
         item.setText(_translate("MainWindow1", "Create Date"))
         self.lblCardId.setText(_translate("MainWindow1", "Card Id"))
         self.btnLoadDataGuest.setText(_translate("MainWindow1", "Load Data"))
+
         self.chbInactiveGuestRegis.setText(_translate("MainWindow1", "Show inactive"))
         self.txtSearchCardId.setPlaceholderText(_translate("MainWindow1", "Search Card ID"))
         self.btnGuestRegisDisable.setText(_translate("MainWindow1", "Disable"))
         self.txtDisableByCarLicense.setToolTip(_translate("MainWindow1", "Input Card Id or Car License to disable"))
+
         self.wgTab.setTabText(self.wgTab.indexOf(self.wgCard), _translate("MainWindow1", "Guest Registered"))
         self.lblCustomerFullName.setText(_translate("MainWindow1", "Card ID"))
         self.lblCustomerPersonalId.setText(_translate("MainWindow1", "Customer ID"))
@@ -437,9 +447,11 @@ class Ui_MainWindow1(object):
         self.lblCustomerPersonalId_2.setText(_translate("MainWindow1", "Car License"))
         self.lblCustomerPersonalId_3.setText(_translate("MainWindow1", "Car Color"))
         self.lblCustomerPersonalId_4.setText(_translate("MainWindow1", "Car Model"))
+
         self.txtSearchCustomer.setPlaceholderText(_translate("MainWindow1", "Search Customer ID"))
         self.txtDisableByCardID.setToolTip(_translate("MainWindow1", "Input Card Id or Car License to disable"))
         self.checkBox.setText(_translate("MainWindow1", "Show inactive"))
+
         self.wgTab.setTabText(self.wgTab.indexOf(self.wgCustomer), _translate("MainWindow1", "Customer Registered"))
         item = self.tblCustomer.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow1", "ID"))
@@ -459,8 +471,10 @@ class Ui_MainWindow1(object):
         self.lblCustomerFullName_3.setText(_translate("MainWindow1", "Full Name"))
         self.lblCustomerFullName_4.setText(_translate("MainWindow1", "Personal ID"))
         self.lblCustomerFullName_5.setText(_translate("MainWindow1", "Room"))
+
         self.checkBox_2.setText(_translate("MainWindow1", "Show inactive"))
         self.txtSearchPersonalId.setPlaceholderText(_translate("MainWindow1", "Search Personal ID"))
+
         self.wgTab.setTabText(self.wgTab.indexOf(self.wgCardType), _translate("MainWindow1", "Customers"))
 
 

@@ -38,7 +38,9 @@ class MainWindow(QMainWindow):
        
 
         #Guest Registered tab button controller
+
         self.uic1.btnGuestRegisDisable.clicked.connect(self.GuestDisableButtonclick)
+
         self.uic1.tblGuest.clicked.connect(self.onCell)
         self.uic1.btnLoadDataGuest.clicked.connect(lambda: load_data_guest_regis(self))
  
