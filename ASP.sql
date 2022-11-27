@@ -29,7 +29,8 @@ CREATE TABLE  CarLog (
 	 Id int auto_increment NOT NULL PRIMARY KEY,
 	 RegisteredId   int NOT NULL ,
 	 Date   datetime  NOT NULL default now() ,
-     Status  nvarchar(10)  NOT NULL #in or out
+     Status  nvarchar(10)  NOT NULL, #in or out
+     Customer bit not null
      );
 	
 

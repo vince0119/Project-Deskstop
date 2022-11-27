@@ -35,6 +35,7 @@ class MainWindow(QMainWindow):
         self.uic1.btnLoadDataCar.clicked.connect(lambda: load_data_car_log(self))
         self.uic1.tblCarLog.clicked.connect(self.onCellCarLog)
 
+
        
 
         #Guest Registered tab button controller
