@@ -10,7 +10,7 @@ from TableUI import Ui_MainWindow1
 # from liveRead import plate_Detection, OpenCamera
 from Crud import load_data_car_log, load_data_customer_regis, load_data_customers, load_data_guest_regis
 from AddNew import insert_data_customer_regis, insert_data_guest_regis, insert_data_customers
-from CheckExist import _car_log
+from CheckExist import _car_log, check_CardId_Customer_Registered,check_CardId_Guest_Registered,check_Customer
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -28,7 +28,6 @@ class MainWindow(QMainWindow):
         # self.sub_win.show()
         
         self.HideOkAndCancelButton()
-        # self.HideDisableButton()
         
         #Car log tab button controller
         # self.uic1.btnLoadDataCar.clicked.connect(_car_log)
@@ -85,20 +84,6 @@ class MainWindow(QMainWindow):
         self.uic1.txtCarLicenseGuest.setReadOnly(not _isEditing)
         self.uic1.txtCarLicenseGuest.setText("")
 
-    def GuestNewButtonClick(self):
-        self.GuestButtonEvent(True)
-        self.uic1.txtCardIdGuest.setFocus()
-    
-
-    def GuestOkButtonClick(self):
-        #get data and add to db
-        insert_data_guest_regis(self)
-        self.GuestButtonEvent(False)
-        load_data_guest_regis(self)
-
-    def GuestCancelButtonClick(self):
-        self.GuestButtonEvent(False)
-
     def GuestDisableButtonclick(self):
         status = self.uic1.btnGuestDisable.text()
         if status == "Disable" :
@@ -126,9 +111,9 @@ class MainWindow(QMainWindow):
     def CustomerRegisOkButtonClick(self):
          # Add new Customer function
          #get data from textfield
-        insert_data_customer_regis(self)
-        self.CustomerRegisButtonEnvent(False)
-        load_data_customer_regis(self)
+        if (insert_data_customer_regis(self)):
+            self.CustomerRegisButtonEnvent(False)
+            load_data_customer_regis(self)
         
 
     def CustomerCancelButtonClick(self):
@@ -159,20 +144,19 @@ class MainWindow(QMainWindow):
     def CustomersOkButtonClick(self):
          # Add new card  function
          #get data from textfield
-        insert_data_customers(self)
-        self.CustomersButtonEvent(False)
-        load_data_customers(self)
+        if (insert_data_customers(self)):
+            self.CustomersButtonEvent(False)
+            load_data_customers(self)
         
 
     def CustomersCancelButtonClick(self):
         self.CustomersButtonEvent(False)
 
     def CustomersDisableButtonClick(self):
-        status = self.uic1.btnCustomerDisable.text()
-        if status == "Disable" :
-            self.uic1.btnCustomerDisable.setText("Enable")
-        else:
-            self.uic1.btnCustomerDisable.setText("Disable")
+        CustomerId = self.uic1.txtd
+        result = check_Customer(self,CustomerId,0)
+        if (result==[]):
+            QMessageBox(self,)
 
     #End of Card type tab event
 
@@ -197,10 +181,7 @@ class MainWindow(QMainWindow):
         self.uic1.btnCustomerRegisCancel.setVisible(False)
         self.uic1.btnCustomerCancel.setVisible(False)
 
-    def HideDisableButton(self):
-        self.uic1.btnGuestDisable.setEnabled(False)
-        self.uic1.btnCustomerRegisDisable.setEnabled(False)
-        self.uic1.btnCustomerDisable.setEnabled(False)
+    
     
 
 if __name__ == "__main__":

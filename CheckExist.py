@@ -63,3 +63,4 @@ def check_CardId_Customer_Registered(self, CardId,showInactive): #dùng để ch
         db.close()
 
 def check_CardId_Guest_Registered(self, CardId,showInactive):
+    return
