@@ -153,10 +153,8 @@ class MainWindow(QMainWindow):
         self.CustomersButtonEvent(False)
 
     def CustomersDisableButtonClick(self):
-        CustomerId = self.uic1.txtd
-        result = check_Customer(self,CustomerId,0)
-        if (result==[]):
-            QMessageBox(self,)
+        CustomerId = self.uic1 #get on table
+            #run database to disable that customer
 
     #End of Card type tab event
 
