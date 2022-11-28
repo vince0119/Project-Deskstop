@@ -324,6 +324,12 @@
       <property name="text">
        <string>Disable</string>
       </property>
+      <property name="readOnly">
+       <bool>false</bool>
+      </property>
+      <property name="placeholderText">
+       <string>Search Card ID</string>
+      </property>
      </widget>
 
      <widget class="QLineEdit" name="txtDisableByCarLicense">
