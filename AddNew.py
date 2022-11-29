@@ -62,7 +62,6 @@ def insert_data_guest_regis(self):
 
         CardID = self.uic1.txtCardIdGuest.text()
         CarLicense = self.uic1.txtCarLicenseGuest.text()
-
         query = ("INSERT INTO guestregistered (CardID, CarLicense)" "VALUES (%s, %s)")
         val = (CardID, CarLicense )
 
