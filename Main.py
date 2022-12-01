@@ -101,8 +101,6 @@ class MainWindow(QMainWindow):
         else:   
             self.uic1.btnGuestRegisDisable.setText('Disbale')
 
-        
-
 
     #Start of Customer Registered tab Event
     def CustomerRegisButtonEnvent(self,_isEditing):
