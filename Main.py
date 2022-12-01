@@ -6,15 +6,21 @@ import numpy as np
 from PyQt5 import QtGui
 from PyQt5.QtCore import QThread,pyqtSignal,Qt, pyqtSlot,QThread
 from PyQt5.QtGui import QPixmap
+
 from PyQt5.QtWidgets import QApplication, QMainWindow, QHeaderView,QWidget
+
 from MainUI import Ui_MainWindow
 from TableUI import Ui_MainWindow1
 # from liveRead import plate_Detection, OpenCamera
 from Crud import load_data_car_log, load_data_customer_regis, load_data_customers, load_data_guest_regis
 from AddNew import insert_data_customer_regis, insert_data_guest_regis, insert_data_customers
 from CheckExist import _car_log, check_CardId_Customer_Registered,check_CardId_Guest_Registered,check_Customer
+
 import keyboard
 import liveRead
+
+from CheckDisable import Disable_Guest
+
 
 Status = "In"
 class VideoThread(QThread):
@@ -77,23 +83,29 @@ class MainWindow(QMainWindow):
         global Status
         Status="In"
     def showScreen(self):
+
         self.closeEvent()
-        
+
+        self.sub_win = QMainWindow()
         self.uic1 = Ui_MainWindow1()
-        self.uic1.setupUi(self)
-        
-        
+        self.uic1.setupUi(self.sub_win)
+        self.sub_win.show()
+
         self.HideOkAndCancelButton()
         
         #Car log tab button controller
         # self.uic1.btnLoadDataCar.clicked.connect(_car_log)
         self.uic1.btnLoadDataCar.clicked.connect(lambda: load_data_car_log(self))
         self.uic1.tblCarLog.clicked.connect(self.onCellCarLog)
+        self.uic1.tblCarLog.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
+
 
        
 
         #Guest Registered tab button controller
-        self.uic1.btnGuestRegisDisable.clicked.connect(self.GuestDisableButtonclick)
+
+        self.uic1.btnGuestRegisDisable.clicked.connect(lambda: Disable_Guest(self))
+
         self.uic1.tblGuest.clicked.connect(self.onCellGuest)
         self.uic1.tblGuest.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
         self.uic1.btnLoadDataGuest.clicked.connect(lambda: load_data_guest_regis(self))
@@ -102,6 +114,7 @@ class MainWindow(QMainWindow):
         self.uic1.btnCustomerRegisNew.clicked.connect(self.CustomerRegisNewButtonClick)
         self.uic1.btnCustomerRegisDisable.clicked.connect(self.CustomerRegisDisableButtonClick)
         self.uic1.btnCustomerRegisOK.clicked.connect(self.CustomerRegisOkButtonClick)
+
         self.uic1.btnCustomerRegisCancel.clicked.connect(self.CustomersCancelButtonClick)
         self.uic1.tblCustomerRegis.clicked.connect(self.onCellCustomerRegis)
         self.uic1.tblCustomerRegis.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
@@ -136,6 +149,7 @@ class MainWindow(QMainWindow):
     def GuestButtonEvent(self, _isEditing):
         self.uic1.txtDisableByCarLicense.setReadOnly(not _isEditing)
         self.uic1.txtDisableByCarLicense.setText("")
+
         
     def GuestDisableButtonclick(self):
         status = self.uic1.btnGuestRegisDisable.text()
@@ -143,6 +157,7 @@ class MainWindow(QMainWindow):
             self.uic1.btnGuestRegisDisable.setText("Enable")
         else:
             self.uic1.btnGuestRegisDisable.setText("Disable")
+
 
     # guest table click
     def onCellGuest(self):
@@ -156,6 +171,7 @@ class MainWindow(QMainWindow):
 
     def show_data_Guest(self, data):
         self.uic1.txtDisableByCarLicense.setText(data[2])
+
 
 
     #Start of Customer Registered tab Event
@@ -199,7 +215,9 @@ class MainWindow(QMainWindow):
     
     # customer regis table click
     def onCellCustomerRegis(self):
+
         self.CustomerCancelButtonClick()
+
         row = self.uic1.tblCustomerRegis.currentRow()
         list = []
         for i in range(self.uic1.tblCustomerRegis.columnCount()):
@@ -251,7 +269,9 @@ class MainWindow(QMainWindow):
 
     # show text
     def onCellCustomer(self):
+
         self.CustomersCancelButtonClick()
+
         row = self.uic1.tblCustomer.currentRow()
         list = []
         for i in range(self.uic1.tblCustomer.columnCount()):
@@ -289,6 +309,7 @@ class MainWindow(QMainWindow):
         convert_to_Qt_format = QtGui.QImage(rgb_image.data, w, h, bytes_per_line, QtGui.QImage.Format_RGB888)
         p = convert_to_Qt_format.scaled(640, 480, Qt.KeepAspectRatio)
         return QPixmap.fromImage(p)
+
     
 
 if __name__ == "__main__":
