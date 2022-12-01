@@ -79,14 +79,15 @@
       </property>
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
-
       </property>
       <property name="sortingEnabled">
        <bool>true</bool>
       </property>
-
       <attribute name="horizontalHeaderDefaultSectionSize">
        <number>150</number>
+      </attribute>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
       </attribute>
       <column>
        <property name="text">
@@ -230,6 +231,9 @@
       <attribute name="horizontalHeaderDefaultSectionSize">
        <number>150</number>
       </attribute>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
       <column>
        <property name="text">
         <string>ID</string>
@@ -259,8 +263,8 @@
      <widget class="QPushButton" name="btnLoadDataGuest">
       <property name="geometry">
        <rect>
-        <x>250</x>
-        <y>240</y>
+        <x>140</x>
+        <y>210</y>
         <width>93</width>
         <height>41</height>
        </rect>
@@ -269,32 +273,14 @@
        <string>Load Data</string>
       </property>
      </widget>
-     <widget class="QCheckBox" name="chbInactiveGuestRegis">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>150</y>
-        <width>131</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Show inactive</string>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="txtSearchCardId">
       <property name="enabled">
        <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>150</y>
+        <x>140</x>
+        <y>140</y>
         <width>181</width>
         <height>41</height>
        </rect>
@@ -315,7 +301,7 @@
      <widget class="QPushButton" name="btnGuestRegisDisable">
       <property name="geometry">
        <rect>
-        <x>330</x>
+        <x>400</x>
         <y>70</y>
         <width>211</width>
         <height>41</height>
@@ -324,21 +310,20 @@
       <property name="text">
        <string>Disable</string>
       </property>
-      <property name="readOnly">
+      <property name="readOnly" stdset="0">
        <bool>false</bool>
       </property>
-      <property name="placeholderText">
+      <property name="placeholderText" stdset="0">
        <string>Search Card ID</string>
       </property>
      </widget>
-
      <widget class="QLineEdit" name="txtDisableByCarLicense">
       <property name="enabled">
        <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
-        <x>70</x>
+        <x>140</x>
         <y>70</y>
         <width>211</width>
         <height>41</height>
@@ -360,7 +345,19 @@
        <string/>
       </property>
      </widget>
-
+     <widget class="QLabel" name="lblCarLogCarNumber_3">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>70</y>
+        <width>201</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Car License</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="wgCustomer">
      <attribute name="title">
@@ -410,9 +407,12 @@
       <attribute name="horizontalHeaderDefaultSectionSize">
        <number>120</number>
       </attribute>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
       <column>
        <property name="text">
-        <string>Id</string>
+        <string>ID</string>
        </property>
       </column>
       <column>
@@ -660,14 +660,12 @@
       </property>
      </widget>
      <widget class="QLineEdit" name="txtSearchCustomer">
-
       <property name="enabled">
        <bool>true</bool>
       </property>
       <property name="geometry">
        <rect>
         <x>710</x>
-
         <y>270</y>
         <width>181</width>
         <height>41</height>
@@ -680,7 +678,6 @@
        </font>
       </property>
       <property name="readOnly">
-
        <bool>false</bool>
       </property>
       <property name="placeholderText">
@@ -696,7 +693,6 @@
         <x>560</x>
         <y>110</y>
         <width>211</width>
-
         <height>41</height>
        </rect>
       </property>
@@ -706,7 +702,6 @@
         <pointsize>14</pointsize>
        </font>
       </property>
-
       <property name="toolTip">
        <string>Input Card Id or Car License to disable</string>
       </property>
@@ -715,25 +710,6 @@
       </property>
       <property name="placeholderText">
        <string/>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="checkBox">
-      <property name="geometry">
-       <rect>
-        <x>550</x>
-        <y>280</y>
-        <width>131</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Show inactive</string>
-
       </property>
      </widget>
     </widget>
@@ -756,6 +732,9 @@
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
       <column>
        <property name="text">
         <string>ID</string>
@@ -779,6 +758,11 @@
       <column>
        <property name="text">
         <string>Active</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Created Date</string>
        </property>
       </column>
      </widget>
@@ -946,24 +930,6 @@
        <string>Room</string>
       </property>
      </widget>
- <widget class="QCheckBox" name="checkBox_2">
-      <property name="geometry">
-       <rect>
-        <x>540</x>
-        <y>300</y>
-        <width>131</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Show inactive</string>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="txtSearchPersonalId">
       <property name="enabled">
        <bool>true</bool>
@@ -989,7 +955,6 @@
        <string>Search Personal ID</string>
       </property>
      </widget>
-
     </widget>
    </widget>
   </widget>
@@ -999,7 +964,7 @@
      <x>0</x>
      <y>0</y>
      <width>935</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

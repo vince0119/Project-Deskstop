@@ -33,9 +33,9 @@ CREATE TABLE  CarLog (
      Customer bit not null
      );
 	
-
-
-
+Drop database APS
+use APS
+Create Database APS
 
 
 

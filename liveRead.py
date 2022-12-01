@@ -18,8 +18,8 @@ def plate_Detection(img):
     cnts = cv.findContours(edged.copy(), cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
     cnts = imutils.grab_contours(cnts)
     cnts = sorted(cnts, key=cv.contourArea, reverse=True)
-    cv.imshow("gray",gray)
-    cv.imshow("edge",edged)
+    # cv.imshow("gray",gray)
+    # cv.imshow("edge",edged)
     screenCnt = None
 
     #loop over our contours
@@ -39,36 +39,34 @@ def plate_Detection(img):
             (bottomx, bottomy) = (np.max(x), np.max(y))
             Cropped = gray[topx:bottomx +10, topy:bottomy + 10]
             _,img_otsu = cv.threshold(Cropped,127,255, cv.THRESH_BINARY+cv.THRESH_OTSU)
-            cv.imshow('Liscense plate', img_otsu)
+            # cv.imshow('Liscense plate', img_otsu)
             result = pytesseract.pytesseract.image_to_string(img_otsu)
             return result
             
 
-def OpenCamera():
-    cap  = cv.VideoCapture(0)
-
-    while True:
-        _, img = cap.read()
-        
-        gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-        # if (keyboard.is_pressed("c")):
-        #     file =open("report.txt","w")
-        #     for x in range(100) :
-        #         string = plate_Detection(img)
-        #         if (string == None):
-        #             string = ""
-        #         file.write(string)
-        #         file.write('\n')
-        #     file.close()
-        cv.imshow('img',img)
-        string = plate_Detection(img)
-        print(string)
-        
-        if(keyboard.is_pressed("x")):
-            cv.imwrite("./1.jpg",img)
-        k=cv.waitKey(30) & 0xff
-        if k==27:
-            break
-
-    cap.release()
+def OpenCamera(img):
+    
+    file =open("report.txt","w")
+    
+    string = plate_Detection(img)
+    if (string == None):
+        string = ""
+    file.write(string)
+    
+    file = open("report.txt","r")
+    result= file.read()
+    file.close()
+    
+    filter = ""
+    for i in result:
+        if (i.isnumeric() or i.isalpha()):
+            filter+=i
+    return filter
+    
+    
+    
+    # k=cv.waitKey(30) & 0xff
+    # if k==27:
+    #     break
+       
 

@@ -2,7 +2,7 @@ import mysql.connector
 from PyQt5.QtWidgets import QTableWidgetItem, QMessageBox
 
 
-
+db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
 def _car_log(self, CardId):
     CarLogDB = "SELECT * FROM customerregistered WHERE CardId = %s"
     try:
@@ -22,16 +22,16 @@ def _car_log(self, CardId):
     except mysql.connector.Error as e:  
         print('Fail')
 
-def check_Customer(self,CustomerId,showInactive):
+def check_Customer(self,CustomerId,Inactive):
     CustomerDB = "SELECT * FROM customers WHERE Id = %s"
-    if(not showInactive):
+    if(not Inactive):
         CustomerDB+=" and active =1"
     
     try:
         db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
-        value = (CustomerId)
+        value = CustomerId
         mycuror =db.cursor()
-        mycuror.execute(CustomerDB, value)
+        mycuror.execute(CustomerDB, (value,))
         
         result = mycuror.fetchall()
 
@@ -42,16 +42,17 @@ def check_Customer(self,CustomerId,showInactive):
     finally:
         db.close()
 
-def check_CardId_Customer_Registered(self, CardId,showInactive): #dùng để check card id, cái showInactive để true khi search, false khi thêm mới
+def check_CardId_Customer_Registered(self, CardId,Inactive): #dùng để check card id, cái showInactive để true khi search, false khi thêm mới
     CustomerRegisteredDB = "SELECT * FROM customerregistered WHERE CardId = %s"
-    if(not showInactive):
+    if(not Inactive):
         CustomerRegisteredDB+=" and active =1"
     
     try:
         db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
-        value = (CardId)
+        value = CardId
         mycuror =db.cursor()
-        mycuror.execute(CustomerRegisteredDB, value)
+   
+        mycuror.execute(CustomerRegisteredDB, (value,))
         
         result = mycuror.fetchall()
 
@@ -59,19 +60,19 @@ def check_CardId_Customer_Registered(self, CardId,showInactive): #dùng để ch
 
     except mysql.connector.Error as e:  
         QMessageBox.about(self, ' Fail', 'Connect database failed!!!')
-    finally:
+    finally: 
         db.close()
 
-def check_CardId_Guest_Registered(self, CardId,showInactive):
+def check_CardId_Guest_Registered(self, CardId,Inactive):
     GuestRegisteredDB = "SELECT * FROM Guestregistered WHERE CardId = %s"
-    if(not showInactive):
+    if(not Inactive):
         GuestRegisteredDB+=" and active =1"
     
     try:
         db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
         value = (CardId)
         mycuror =db.cursor()
-        mycuror.execute(GuestRegisteredDB, value)
+        mycuror.execute(GuestRegisteredDB, (value,))
         
         result = mycuror.fetchall()
 
