@@ -11,6 +11,7 @@ from TableUI import Ui_MainWindow1
 from Crud import load_data_car_log, load_data_customer_regis, load_data_customers, load_data_guest_regis
 from AddNew import insert_data_customer_regis, insert_data_guest_regis, insert_data_customers
 from CheckExist import _car_log, check_CardId_Customer_Registered,check_CardId_Guest_Registered,check_Customer
+from CheckDisable import Disable_Guest
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -22,10 +23,10 @@ class MainWindow(QMainWindow):
         
 
     def showScreen(self):
-        # self.sub_win = QMainWindow()
+        self.sub_win = QMainWindow()
         self.uic1 = Ui_MainWindow1()
-        self.uic1.setupUi(self)
-        # self.sub_win.show()
+        self.uic1.setupUi(self.sub_win)
+        self.sub_win.show()
         
         self.HideOkAndCancelButton()
         
@@ -39,7 +40,7 @@ class MainWindow(QMainWindow):
        
 
         #Guest Registered tab button controller
-        self.uic1.btnGuestRegisDisable.clicked.connect(self.GuestDisableButtonclick)
+        self.uic1.btnGuestRegisDisable.clicked.connect(lambda: Disable_Guest(self))
         self.uic1.tblGuest.clicked.connect(self.onCellGuest)
         self.uic1.tblGuest.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
         self.uic1.btnLoadDataGuest.clicked.connect(lambda: load_data_guest_regis(self))
@@ -82,13 +83,6 @@ class MainWindow(QMainWindow):
     def GuestButtonEvent(self, _isEditing):
         self.uic1.txtDisableByCarLicense.setReadOnly(not _isEditing)
         self.uic1.txtDisableByCarLicense.setText("")
-        
-    def GuestDisableButtonclick(self):
-        status = self.uic1.btnGuestRegisDisable.text()
-        if status == "Disable" :
-            self.uic1.btnGuestRegisDisable.setText("Enable")
-        else:
-            self.uic1.btnGuestRegisDisable.setText("Disable")
 
     # guest table click
     def onCellGuest(self):
@@ -102,6 +96,10 @@ class MainWindow(QMainWindow):
 
     def show_data_Guest(self, data):
         self.uic1.txtDisableByCarLicense.setText(data[2])
+        if(data[3] == '1'):
+            self.uic1.btnGuestRegisDisable.setText('Enable')
+        else:   
+            self.uic1.btnGuestRegisDisable.setText('Disbale')
 
 
     #Start of Customer Registered tab Event

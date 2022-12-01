@@ -27,7 +27,7 @@
      <string>Input Card Id or Car Lincense to Disable</string>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="wgCarLog">
      <attribute name="title">
