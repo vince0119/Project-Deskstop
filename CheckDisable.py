@@ -1,20 +1,42 @@
 import mysql.connector
 from PyQt5.QtWidgets import QMessageBox
 
-def Disable_Guest(self):
+def Disable_Customer(self,id):
     db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
     mycursor = db.cursor()
-    check = self.uic1.btnGuestRegisDisable.text()
-    query = "UPDATE * FROM Guestregistered WHERE Active = %s"
+    value = (id)
+    query = "UPDATE customers SET active = 0 WHERE id = %s"
     try:
-        mycursor.execute(query)
+        mycursor.execute(query,(value,))
         db.commit()
-        
-    except :  
+        return True
+    except:
         db.rollback()
-    
-    query = "SELECT* from guestregistered "
+        return False
 
-    mycursor.execute(query)
+def Disable_Customer_regis(self,id):
+    db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
+    mycursor = db.cursor()
+    value = (id)
+    query = "UPDATE customerregistered SET active = 0 WHERE id = %s"
+    try:
+        mycursor.execute(query,(value,))
+        db.commit()
+        return True
+    except:
+        db.rollback()
+        return False
+        
 
-    print(mycursor.fetchall())
+def Disable_Guest_regis(self,id):
+    db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
+    mycursor = db.cursor()
+    value = (id)
+    query = "UPDATE guestregistered SET active = 0 WHERE id = %s"
+    try:
+        mycursor.execute(query,(value,))
+        db.commit()
+        return True
+    except:
+        db.rollback()
+        return False

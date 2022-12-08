@@ -45,28 +45,16 @@ def plate_Detection(img):
             
 
 def OpenCamera(img):
-    
-    file =open("report.txt","w")
-    
+
     string = plate_Detection(img)
     if (string == None):
         string = ""
-    file.write(string)
-    
-    file = open("report.txt","r")
-    result= file.read()
-    file.close()
     
     filter = ""
-    for i in result:
+    for i in string:
         if (i.isnumeric() or i.isalpha()):
             filter+=i
     return filter
     
-    
-    
-    # k=cv.waitKey(30) & 0xff
-    # if k==27:
-    #     break
        
 

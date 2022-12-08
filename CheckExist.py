@@ -100,7 +100,7 @@ def check_CardId_Guest_Registered(self, CardId,showInactive):
         db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
         value = (CardId)
         mycuror =db.cursor()
-        mycuror.execute(GuestRegisteredDB, value)
+        mycuror.execute(GuestRegisteredDB, (value,))
         
         result = mycuror.fetchall()
 

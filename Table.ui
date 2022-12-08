@@ -27,9 +27,7 @@
      <string>Input Card Id or Car Lincense to Disable</string>
     </property>
     <property name="currentIndex">
-
-     <number>0</number>
-
+     <number>2</number>
     </property>
     <widget class="QWidget" name="wgCarLog">
      <attribute name="title">
@@ -207,6 +205,54 @@
        <bool>true</bool>
       </property>
      </widget>
+     <widget class="QLabel" name="lblCarLogType_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>240</y>
+        <width>201</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Customer</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="cbCarLogCustomer">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>240</y>
+        <width>161</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+      <property name="currentText">
+       <string>No</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>No</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Yes</string>
+       </property>
+      </item>
+     </widget>
     </widget>
     <widget class="QWidget" name="wgCard">
      <attribute name="title">
@@ -293,11 +339,14 @@
         <pointsize>12</pointsize>
        </font>
       </property>
+      <property name="toolTip">
+       <string>Search Card Id or Car License</string>
+      </property>
       <property name="readOnly">
        <bool>false</bool>
       </property>
       <property name="placeholderText">
-       <string>Search Card ID</string>
+       <string/>
       </property>
      </widget>
      <widget class="QPushButton" name="btnGuestRegisDisable">
@@ -317,47 +366,6 @@
       </property>
       <property name="placeholderText" stdset="0">
        <string>Search Card ID</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="txtDisableByCarLicense">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>140</x>
-        <y>70</y>
-        <width>211</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="toolTip">
-       <string>Input Card Id or Car License to disable</string>
-      </property>
-      <property name="readOnly">
-       <bool>false</bool>
-      </property>
-      <property name="placeholderText">
-       <string/>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lblCarLogCarNumber_3">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>70</y>
-        <width>201</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Car License</string>
       </property>
      </widget>
     </widget>
@@ -521,7 +529,7 @@
       <property name="geometry">
        <rect>
         <x>560</x>
-        <y>160</y>
+        <y>110</y>
         <width>93</width>
         <height>41</height>
        </rect>
@@ -534,7 +542,7 @@
       <property name="geometry">
        <rect>
         <x>680</x>
-        <y>160</y>
+        <y>110</y>
         <width>93</width>
         <height>41</height>
        </rect>
@@ -547,7 +555,7 @@
       <property name="geometry">
        <rect>
         <x>610</x>
-        <y>210</y>
+        <y>160</y>
         <width>93</width>
         <height>41</height>
        </rect>
@@ -679,33 +687,8 @@
         <pointsize>12</pointsize>
        </font>
       </property>
-      <property name="readOnly">
-       <bool>false</bool>
-      </property>
-      <property name="placeholderText">
-       <string>Search Customer ID</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="txtDisableByCardID">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>560</x>
-        <y>110</y>
-        <width>211</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Times New Roman</family>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
       <property name="toolTip">
-       <string>Input Card Id or Car License to disable</string>
+       <string>Search by Customer Id or Card Id</string>
       </property>
       <property name="readOnly">
        <bool>false</bool>
@@ -966,7 +949,7 @@
      <x>0</x>
      <y>0</y>
      <width>935</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

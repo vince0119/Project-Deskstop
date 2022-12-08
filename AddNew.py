@@ -89,5 +89,22 @@ def insert_data_guest_regis(self):
     finally:
         db.close()
 
-    
+def insert_car_log(self, regisID, Status, Customer):
+    try:
+        db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
+        mycursor = db.cursor()
+
+        query = ("INSERT INTO carlog (RegisteredId, Status, Customer)" "VALUES (%s, %s, %s)")
+        val = (regisID, Status, Customer)
+
+        result = mycursor.execute(query, val)
+
+        db.commit()
+        QMessageBox.about(self, 'Inserted', 'Data insert successfully')
+        
+    except mysql.connector.Error as e:
+        return False
+    finally:
+        db.close()
+        
         

@@ -14,12 +14,11 @@ from TableUI import Ui_MainWindow1
 # from liveRead import plate_Detection, OpenCamera
 from Crud import load_data_car_log, load_data_customer_regis, load_data_customers, load_data_guest_regis
 from AddNew import insert_data_customer_regis, insert_data_guest_regis, insert_data_customers
-from CheckExist import _car_log, check_CardId_Customer_Registered,check_CardId_Guest_Registered,check_Customer
-
+# from CheckExist import _car_log, check_CardId_Customer_Registered,check_CardId_Guest_Registered,check_Customer
 import keyboard
-import liveRead
+# from liveRead import OpenCamera
 
-from CheckDisable import Disable_Guest
+from CheckDisable import Disable_Customer, Disable_Customer_regis, Disable_Guest_regis
 
 
 Status = "In"
@@ -40,14 +39,16 @@ class VideoThread(QThread):
             
             now ="today"  
             if self.index==0:
-                if  Status=="In":
-                    CarLicense = liveRead.OpenCamera(cv_img)
-                    print(CarLicense)
-                    # Status="None"
+                # if  Status=="In":
+                    # CarLicense = self.OpenCamera(cv_img)
+                #     print(CarLicense)
+                #     # Status="None"
                 if(keyboard.is_pressed("x")):
                     
                     cv2.imwrite('./image_log/in-'+now+'.jpg',cv_img)
             if self.index==1:
+                # CarLicense = liveRead.OpenCamera(cv_img)
+                # print(CarLicense)
                 if(keyboard.is_pressed("z")):
                     cv2.imwrite("./image_log/out-.jpg",cv_img)
         cap.release()
@@ -84,7 +85,6 @@ class MainWindow(QMainWindow):
         Status="In"
     def showScreen(self):
 
-        self.closeEvent()
 
         self.sub_win = QMainWindow()
         self.uic1 = Ui_MainWindow1()
@@ -100,11 +100,9 @@ class MainWindow(QMainWindow):
         self.uic1.tblCarLog.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
 
-       
-
         #Guest Registered tab button controller
 
-        self.uic1.btnGuestRegisDisable.clicked.connect(lambda: Disable_Guest(self))
+        self.uic1.btnGuestRegisDisable.clicked.connect(self.GuestDisableButtonclick)
 
         self.uic1.tblGuest.clicked.connect(self.onCellGuest)
         self.uic1.tblGuest.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
@@ -142,21 +140,19 @@ class MainWindow(QMainWindow):
 
     def show_data_Car(self, data):
         self.uic1.cbCarLogStatus.setCurrentIndex(int(data[3]))
-        self.uic1.txtRegisteredId.setText(data[1])
-
 
     #Start of Guest tab Event
-    def GuestButtonEvent(self, _isEditing):
-        self.uic1.txtDisableByCarLicense.setReadOnly(not _isEditing)
-        self.uic1.txtDisableByCarLicense.setText("")
+    
+       
 
         
     def GuestDisableButtonclick(self):
-        status = self.uic1.btnGuestRegisDisable.text()
-        if status == "Disable" :
-            self.uic1.btnGuestRegisDisable.setText("Enable")
+        row = self.uic1.tblGuest.currentRow()
+        id = self.uic1.tblGuest.item(row,0).text()
+        if(Disable_Guest_regis(self, id)):
+            load_data_guest_regis(self)
         else:
-            self.uic1.btnGuestRegisDisable.setText("Disable")
+            print('fail')
 
 
     # guest table click
@@ -168,9 +164,13 @@ class MainWindow(QMainWindow):
             list.append(out)
         data = list
         self.show_data_Guest(data)
+       
 
     def show_data_Guest(self, data):
-        self.uic1.txtDisableByCarLicense.setText(data[2])
+        if (data[3]=='0'):
+            self.uic1.btnGuestRegisDisable.setEnabled(False)
+        else:
+            self.uic1.btnGuestRegisDisable.setEnabled(True)
 
 
 
@@ -207,16 +207,18 @@ class MainWindow(QMainWindow):
         self.CustomerRegisButtonEnvent(False)
 
     def CustomerRegisDisableButtonClick(self):
-        status = self.uic1.btnCustomerRegisDisable.text()
-        if status == "Disable" :
-            self.uic1.btnCustomerRegisDisable.setText("Enable")
+        row = self.uic1.tblCustomerRegis.currentRow()
+        id = self.uic1.tblCustomerRegis.item(row,0).text()
+        # print('true',)
+        if(Disable_Customer_regis(self, id)):
+            load_data_customer_regis(self)
         else:
-            self.uic1.btnCustomerRegisDisable.setText("Disable")
+            print('fail')
     
     # customer regis table click
     def onCellCustomerRegis(self):
 
-        self.CustomerCancelButtonClick()
+        self.CustomerRegisteredCancelButtonClick()
 
         row = self.uic1.tblCustomerRegis.currentRow()
         list = []
@@ -262,8 +264,14 @@ class MainWindow(QMainWindow):
         self.CustomersButtonEvent(False)
 
     def CustomersDisableButtonClick(self):
-        CustomerId = self.uic1 #get on table
-            #run database to disable that customer
+        row = self.uic1.tblCustomer.currentRow()
+        id = self.uic1.tblCustomer.item(row,0).text()
+        # print('true',)
+        if(Disable_Customer(self, id)):
+            load_data_customers(self)
+        else:
+            print('fail')
+        
 
     #End of Card type tab event
 
@@ -284,6 +292,11 @@ class MainWindow(QMainWindow):
         self.uic1.txtFullName.setText(data[1])
         self.uic1.txtPersonalID.setText(data[2])
         self.uic1.txtRoom.setText(data[3])
+        if (data[4]=='0'):
+            self.uic1.btnCustomerDisable.setEnabled(False)
+        else:
+            self.uic1.btnCustomerDisable.setEnabled(True)
+
 
     #Hide OK and Cancel button  
     def HideOkAndCancelButton(self):
