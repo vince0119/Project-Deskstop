@@ -1,6 +1,7 @@
 import mysql.connector
 from PyQt5.QtWidgets import QMessageBox
 import Validation
+import CheckExist
 
 db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
 
@@ -15,17 +16,29 @@ def insert_data_customer_regis(self):
         CarLicense = self.uic1.txtCarLicenseCustomer.text()
         CarColor = self.uic1.txtCarColor.text()
         CarModel = self.uic1.txtCarModel.text()
-        
-        query = ("INSERT INTO customerregistered (CardID, CustomerID, CarLicense, CarColor, CarModel)" "VALUES (%s, %s, %s, %s, %s)")
-        val = (CardID, CustomerID, CarLicense, CarColor, CarModel)
+        if Validation.CustomerRegisteredCheckValidation(self,CardID,CustomerID,CarLicense,CarColor,CarModel):
+            cardIsRegistered = CheckExist.check_CardId_Customer_Registered(self,CardID,0)==[] and CheckExist.check_CardId_Guest_Registered(self,CardID,0)==[]
+            customerIsExist =CheckExist.check_Customer(self,CustomerID,0)
+            if cardIsRegistered:
+                if customerIsExist:
+                    query = ("INSERT INTO customerregistered (CardID, CustomerID, CarLicense, CarColor, CarModel)" "VALUES (%s, %s, %s, %s, %s)")
+                    val = (CardID, CustomerID, CarLicense, CarColor, CarModel)
 
-        result = mycursor.execute(query, val)
+                    result = mycursor.execute(query, val)
 
-        db.commit()
-        QMessageBox.about(self, 'Inserted', 'Data insert successfully')
+                    db.commit()
+                    QMessageBox.about(self, 'Inserted', 'Data insert successfully')
+                    return True
+                else:
+                    QMessageBox.about(self, 'Warning', 'This Customer is not active or does not exist')
+                    return False
+            else:
+                QMessageBox.about(self, 'Warning', 'This Card Id is registered, please disable or change card')
+                return False
 
     except mysql.connector.Error as e:
         QMessageBox.about(self, ' Fail', 'Insert Failed!!!')
+        return False
     finally:
         db.close()
         
@@ -76,5 +89,22 @@ def insert_data_guest_regis(self):
     finally:
         db.close()
 
-    
+def insert_car_log(self, regisID, Status, Customer):
+    try:
+        db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
+        mycursor = db.cursor()
+
+        query = ("INSERT INTO carlog (RegisteredId, Status, Customer)" "VALUES (%s, %s, %s)")
+        val = (regisID, Status, Customer)
+
+        result = mycursor.execute(query, val)
+
+        db.commit()
+        QMessageBox.about(self, 'Inserted', 'Data insert successfully')
+        
+    except mysql.connector.Error as e:
+        return False
+    finally:
+        db.close()
+        
         

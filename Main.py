@@ -1,33 +1,96 @@
+from ast import List
+import datetime
 import sys
 import cv2
 import numpy as np
 from PyQt5 import QtGui
-from PyQt5.QtCore import QThread,pyqtSignal,Qt
+from PyQt5.QtCore import QThread,pyqtSignal,Qt, pyqtSlot,QThread
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QApplication, QMainWindow, QHeaderView
+
+from PyQt5.QtWidgets import QApplication, QMainWindow, QHeaderView,QWidget
+
 from MainUI import Ui_MainWindow
 from TableUI import Ui_MainWindow1
 # from liveRead import plate_Detection, OpenCamera
 from Crud import load_data_car_log, load_data_customer_regis, load_data_customers, load_data_guest_regis
 from AddNew import insert_data_customer_regis, insert_data_guest_regis, insert_data_customers
-from CheckExist import _car_log, check_CardId_Customer_Registered,check_CardId_Guest_Registered,check_Customer
-from CheckDisable import Disable_Guest
+# from CheckExist import _car_log, check_CardId_Customer_Registered,check_CardId_Guest_Registered,check_Customer
+import keyboard
+# from liveRead import OpenCamera
 
+from CheckDisable import Disable_Customer, Disable_Customer_regis, Disable_Guest_regis
+
+
+Status = "In"
+class VideoThread(QThread):
+    change_pixmap_signal = pyqtSignal(np.ndarray)
+    def __init__(self, index):
+        self.index = index
+        super(VideoThread, self).__init__()
+    def run(self):
+        cap = cv2.VideoCapture(self.index)
+        
+        while cap.isOpened():
+            ret, cv_img = cap.read()
+           
+            if ret:
+                self.change_pixmap_signal.emit(cv_img)
+            global Status  
+            
+            now ="today"  
+            if self.index==0:
+                # if  Status=="In":
+                    # CarLicense = self.OpenCamera(cv_img)
+                #     print(CarLicense)
+                #     # Status="None"
+                if(keyboard.is_pressed("x")):
+                    
+                    cv2.imwrite('./image_log/in-'+now+'.jpg',cv_img)
+            if self.index==1:
+                # CarLicense = liveRead.OpenCamera(cv_img)
+                # print(CarLicense)
+                if(keyboard.is_pressed("z")):
+                    cv2.imwrite("./image_log/out-.jpg",cv_img)
+        cap.release()
+
+    def stop(self):
+        self.terminate()
+        
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.uic = Ui_MainWindow()
         self.uic.setupUi(self)
         
+        self.threads: List[VideoThread] =[]
+        self.thread0 = VideoThread(0)
+        self.thread1=VideoThread(1)
+        # connect its signal to the update_image slot
+        self.thread0.change_pixmap_signal.connect(self.update_image_in)
+        self.thread1.change_pixmap_signal.connect(self.update_image_out)
+        self.threads.append(self.thread1)
+        self.threads.append(self.thread0)
+        # start the thread
+        for slot in self.threads:
+            slot.start()
         self.uic.btnTable.clicked.connect(self.showScreen)
         
-
+        
+    def closeEvent(self):
+        self.thread0.stop()
+        self.thread1.stop()
+        
+    def read():
+        global Status
+        Status="In"
     def showScreen(self):
+
+
         self.sub_win = QMainWindow()
         self.uic1 = Ui_MainWindow1()
         self.uic1.setupUi(self.sub_win)
         self.sub_win.show()
-        
+
         self.HideOkAndCancelButton()
         
         #Car log tab button controller
@@ -37,10 +100,10 @@ class MainWindow(QMainWindow):
         self.uic1.tblCarLog.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
 
 
-       
-
         #Guest Registered tab button controller
-        self.uic1.btnGuestRegisDisable.clicked.connect(lambda: Disable_Guest(self))
+
+        self.uic1.btnGuestRegisDisable.clicked.connect(self.GuestDisableButtonclick)
+
         self.uic1.tblGuest.clicked.connect(self.onCellGuest)
         self.uic1.tblGuest.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
         self.uic1.btnLoadDataGuest.clicked.connect(lambda: load_data_guest_regis(self))
@@ -49,7 +112,8 @@ class MainWindow(QMainWindow):
         self.uic1.btnCustomerRegisNew.clicked.connect(self.CustomerRegisNewButtonClick)
         self.uic1.btnCustomerRegisDisable.clicked.connect(self.CustomerRegisDisableButtonClick)
         self.uic1.btnCustomerRegisOK.clicked.connect(self.CustomerRegisOkButtonClick)
-        self.uic1.btnCustomerRegisCancel.clicked.connect(self.CustomerCancelButtonClick)
+
+        self.uic1.btnCustomerRegisCancel.clicked.connect(self.CustomersCancelButtonClick)
         self.uic1.tblCustomerRegis.clicked.connect(self.onCellCustomerRegis)
         self.uic1.tblCustomerRegis.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
         self.uic1.btnLoadDataCustomerRegis.clicked.connect(lambda: load_data_customer_regis(self))
@@ -76,13 +140,20 @@ class MainWindow(QMainWindow):
 
     def show_data_Car(self, data):
         self.uic1.cbCarLogStatus.setCurrentIndex(int(data[3]))
-        self.uic1.txtRegisteredId.setText(data[1])
-
 
     #Start of Guest tab Event
-    def GuestButtonEvent(self, _isEditing):
-        self.uic1.txtDisableByCarLicense.setReadOnly(not _isEditing)
-        self.uic1.txtDisableByCarLicense.setText("")
+    
+       
+
+        
+    def GuestDisableButtonclick(self):
+        row = self.uic1.tblGuest.currentRow()
+        id = self.uic1.tblGuest.item(row,0).text()
+        if(Disable_Guest_regis(self, id)):
+            load_data_guest_regis(self)
+        else:
+            print('fail')
+
 
     # guest table click
     def onCellGuest(self):
@@ -93,13 +164,14 @@ class MainWindow(QMainWindow):
             list.append(out)
         data = list
         self.show_data_Guest(data)
+       
 
     def show_data_Guest(self, data):
-        self.uic1.txtDisableByCarLicense.setText(data[2])
-        if(data[3] == '1'):
-            self.uic1.btnGuestRegisDisable.setText('Enable')
-        else:   
-            self.uic1.btnGuestRegisDisable.setText('Disbale')
+        if (data[3]=='0'):
+            self.uic1.btnGuestRegisDisable.setEnabled(False)
+        else:
+            self.uic1.btnGuestRegisDisable.setEnabled(True)
+
 
 
     #Start of Customer Registered tab Event
@@ -112,6 +184,11 @@ class MainWindow(QMainWindow):
         self.uic1.txtCarLicenseCustomer.setReadOnly(not _isEditing)
         self.uic1.txtCarColor.setReadOnly(not _isEditing)
         self.uic1.txtCarModel.setReadOnly(not _isEditing)
+        self.uic1.txtCardIDCustomer.setText("") 
+        self.uic1.txtCustomerId.setText("")
+        self.uic1.txtCarLicenseCustomer.setText("")
+        self.uic1.txtCarColor.setText("")
+        self.uic1.txtCarModel.setText("")
 
 
     def CustomerRegisNewButtonClick(self):
@@ -126,18 +203,23 @@ class MainWindow(QMainWindow):
             load_data_customer_regis(self)
         
 
-    def CustomerCancelButtonClick(self):
+    def CustomerRegisteredCancelButtonClick(self):
         self.CustomerRegisButtonEnvent(False)
 
     def CustomerRegisDisableButtonClick(self):
-        status = self.uic1.btnCustomerRegisDisable.text()
-        if status == "Disable" :
-            self.uic1.btnCustomerRegisDisable.setText("Enable")
+        row = self.uic1.tblCustomerRegis.currentRow()
+        id = self.uic1.tblCustomerRegis.item(row,0).text()
+        # print('true',)
+        if(Disable_Customer_regis(self, id)):
+            load_data_customer_regis(self)
         else:
-            self.uic1.btnCustomerRegisDisable.setText("Disable")
+            print('fail')
     
     # customer regis table click
     def onCellCustomerRegis(self):
+
+        self.CustomerRegisteredCancelButtonClick()
+
         row = self.uic1.tblCustomerRegis.currentRow()
         list = []
         for i in range(self.uic1.tblCustomerRegis.columnCount()):
@@ -162,6 +244,9 @@ class MainWindow(QMainWindow):
         self.uic1.txtFullName.setReadOnly(not _isEditing)
         self.uic1.txtPersonalID.setReadOnly(not _isEditing)
         self.uic1.txtRoom.setReadOnly(not _isEditing)
+        self.uic1.txtFullName.setText("")
+        self.uic1.txtPersonalID.setText("")
+        self.uic1.txtRoom.setText("")
 
     def CustomersNewButtonClick(self):
         self.CustomersButtonEvent(True)
@@ -179,13 +264,22 @@ class MainWindow(QMainWindow):
         self.CustomersButtonEvent(False)
 
     def CustomersDisableButtonClick(self):
-        CustomerId = self.uic1 #get on table
-            #run database to disable that customer
+        row = self.uic1.tblCustomer.currentRow()
+        id = self.uic1.tblCustomer.item(row,0).text()
+        # print('true',)
+        if(Disable_Customer(self, id)):
+            load_data_customers(self)
+        else:
+            print('fail')
+        
 
     #End of Card type tab event
 
     # show text
     def onCellCustomer(self):
+
+        self.CustomersCancelButtonClick()
+
         row = self.uic1.tblCustomer.currentRow()
         list = []
         for i in range(self.uic1.tblCustomer.columnCount()):
@@ -198,6 +292,11 @@ class MainWindow(QMainWindow):
         self.uic1.txtFullName.setText(data[1])
         self.uic1.txtPersonalID.setText(data[2])
         self.uic1.txtRoom.setText(data[3])
+        if (data[4]=='0'):
+            self.uic1.btnCustomerDisable.setEnabled(False)
+        else:
+            self.uic1.btnCustomerDisable.setEnabled(True)
+
 
     #Hide OK and Cancel button  
     def HideOkAndCancelButton(self):
@@ -207,6 +306,23 @@ class MainWindow(QMainWindow):
         self.uic1.btnCustomerCancel.setVisible(False)
 
     
+    #Image captured show
+    @pyqtSlot(np.ndarray)
+    def update_image_in(self, cv_img):
+        qt_img = self.convert_cv_qt(cv_img)
+        self.uic.CamIn.setPixmap(qt_img)
+    def update_image_out(self, cv_img):
+        qt_img = self.convert_cv_qt(cv_img)
+        self.uic.CamOut.setPixmap(qt_img)
+    
+    def convert_cv_qt(self, cv_img):
+        rgb_image = cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)
+        h, w, ch = rgb_image.shape
+        bytes_per_line = ch * w
+        convert_to_Qt_format = QtGui.QImage(rgb_image.data, w, h, bytes_per_line, QtGui.QImage.Format_RGB888)
+        p = convert_to_Qt_format.scaled(640, 480, Qt.KeepAspectRatio)
+        return QPixmap.fromImage(p)
+
     
 
 if __name__ == "__main__":
@@ -214,3 +330,4 @@ if __name__ == "__main__":
     main_win = MainWindow()
     main_win.show()
     sys.exit(app.exec())
+
