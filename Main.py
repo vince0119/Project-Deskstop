@@ -13,50 +13,152 @@ from MainUI import Ui_MainWindow
 from TableUI import Ui_MainWindow1
 # from liveRead import plate_Detection, OpenCamera
 from Crud import load_data_car_log, load_data_customer_regis, load_data_customers, load_data_guest_regis
-from AddNew import insert_data_customer_regis, insert_data_guest_regis, insert_data_customers
+from AddNew import insert_data_customer_regis, insert_data_guest_regis, insert_data_customers, insert_car_log
 # from CheckExist import _car_log, check_CardId_Customer_Registered,check_CardId_Guest_Registered,check_Customer
 import keyboard
-# from liveRead import OpenCamera
-
+from liveRead import OpenCamera
+import Validation
 from CheckDisable import Disable_Customer, Disable_Customer_regis, Disable_Guest_regis
+import CheckExist
+
+Way = "In"
+CardId="OIMKMLA"
+CarLicense="29E23467"
+Date=""
 
 
-Status = "In"
 class VideoThread(QThread):
     change_pixmap_signal = pyqtSignal(np.ndarray)
     def __init__(self, index):
         self.index = index
         super(VideoThread, self).__init__()
+    def clearGlobal(self,message):
+        global  Way,Message,Date,CardId,CarLicense  
+        
+        Way =""
+        Date=""
+        CardId=""
+        CarLicense="" 
+        print(message) 
     def run(self):
-        cap = cv2.VideoCapture(self.index)
+        cap = cv2.VideoCapture(self.index,cv2.CAP_DSHOW)
         
         while cap.isOpened():
             ret, cv_img = cap.read()
            
             if ret:
                 self.change_pixmap_signal.emit(cv_img)
-            global Status  
+            global Way,Date,CardId,CarLicense  
             
-            now ="today"  
+           
             if self.index==0:
-                # if  Status=="In":
-                    # CarLicense = self.OpenCamera(cv_img)
-                #     print(CarLicense)
-                #     # Status="None"
-                if(keyboard.is_pressed("x")):
-                    
-                    cv2.imwrite('./image_log/in-'+now+'.jpg',cv_img)
+               if (Date!="" and Way=="In"):
+                    cv2.imwrite("./Carlog/"+Date+"-Front-In",cv_img)
+                    self.clearGlobal("1In")
             if self.index==1:
-                # CarLicense = liveRead.OpenCamera(cv_img)
-                # print(CarLicense)
-                if(keyboard.is_pressed("z")):
-                    cv2.imwrite("./image_log/out-.jpg",cv_img)
+                if (Date!="" and Way=="Out"):
+                    cv2.imwrite("./Carlog/"+Date+"-Front-Out",cv_img)
+                    self.clearGlobal("1Out")
+            if self.index==2:
+                if (Way=="In"):
+                    # CarLicense=OpenCamera(cv_img)
+                    if (Validation.ValidCarLicense(CarLicense)):
+                        resultCustomer =CheckExist.check_CardId_Customer_Registered(self,CardId,0)
+                        if(resultCustomer ==[] ):
+                            resultGuest=CheckExist.check_CardId_Guest_Registered(self,CardId,0)
+                            if(resultGuest!=[]):
+                                self.clearGlobal("0In")
+                            else:
+                                guestLastId=insert_data_guest_regis(self,CardId,CarLicense)
+                                if(guestLastId!= -1):
+                                    CarLogLastId = insert_car_log(self,guestLastId,0,0)
+                                    if(CarLogLastId != -1):
+                                        result = CheckExist.Get_Date_Car_log_by_id(id)
+                                        print('abc',result)
+                                        if (result!=[]):
+                                            Date = result[2]
+                                            if (Date != ""):
+                                                cv2.imwrite("./Carlog/"+Date+"-Back-In",cv_img)
+                                            else:
+                                                self.clearGlobal("0In")
+                                        else:
+                                            self.clearGlobal("0In")
+                                else:
+                                    self.clearGlobal("0In")
+                        else:
+                            lastCarLog= CheckExist.get_last_Car_log_by_regisId(resultCustomer[0],1)
+                            if(lastCarLog==[]):
+                                CarLogLastId =insert_car_log(self,resultCustomer[0],0,1)
+                                if(CarLogLastId!=-1):
+                                    result= CheckExist.Get_Date_Car_log_by_id(CarLogLastId)
+                                    if (result!=[]):
+                                        Date=result[2]
+                                        if (Date != ""):
+                                            cv2.imwrite("./Carlog/"+Date+"-Back-In",cv_img)
+                                        else: 
+                                            self.clearGlobal("0In")
+                                    else: 
+                                            self.clearGlobal("0In")
+                                else: 
+                                    self.clearGlobal("0In")
+                            else:
+                                self.clearGlobal("0In")
+                    else:
+                        self.clearGlobal("0In")
+            if self.index==3:
+                if (Way=="Out"):
+                    # CarLicense=OpenCamera(cv_img)
+                    if (Validation.ValidCarLicense(CarLicense)):
+                        resultCustomer =CheckExist.check_CardId_Customer_Registered(self,CardId,0)
+                        if(resultCustomer ==[] ):
+                            resultGuest=CheckExist.check_CardId_Guest_Registered(self,CardId,0)
+                            if(resultGuest==[]):
+                                self.clearGlobal("0Out")
+                            else:
+                                if (Disable_Guest_regis(self,resultGuest[0])):
+                                    CarLogLastId = insert_car_log(self,resultGuest[0],1,0)
+                                    if(CarLogLastId!=-1):
+                                        result = CheckExist.Get_Date_Car_log_by_id(self,id)
+                                        if(result!=[]):
+                                            Date =result[2]
+                                            if (Date != ""):
+                                                cv2.imwrite("./Carlog/"+Date+"-Back-Out",cv_img)
+                                            else: 
+                                                self.clearGlobal("0Out")
+                                        else: 
+                                                self.clearGlobal("0Out")        
+                                else:
+                                    self.clearGlobal("0Out")
+
+                                        
+                        else:
+                            lastCarLog= CheckExist.get_last_Car_log_by_regisId(resultCustomer[0],1)
+                            if(lastCarLog==[]):
+                                CarLogLastId =insert_car_log(self,resultCustomer[0],1,1)
+                                if(CarLogLastId!=-1):
+                                    result= CheckExist.Get_Date_Car_log_by_id(CarLogLastId)
+                                    if (result!=[]):
+                                        Date = result[2]
+                                        if (Date != ""):
+                                            cv2.imwrite("./Carlog/"+Date+"-Back-Out",cv_img)
+                                        else: 
+                                            self.clearGlobal("0Out")
+                                    else: 
+                                        self.clearGlobal("0Out")
+                                else: 
+                                    self.clearGlobal("0Out")
+                            else:
+                                self.clearGlobal("0Out")
+                    else:
+                        self.clearGlobal("0Out")
+
         cap.release()
 
     def stop(self):
         self.terminate()
         
 class MainWindow(QMainWindow):
+      
     def __init__(self):
         super().__init__()
         self.uic = Ui_MainWindow()
@@ -65,24 +167,30 @@ class MainWindow(QMainWindow):
         self.threads: List[VideoThread] =[]
         self.thread0 = VideoThread(0)
         self.thread1=VideoThread(1)
+        self.thread2=VideoThread(2)
+        self.thread3=VideoThread(3)
         # connect its signal to the update_image slot
-        self.thread0.change_pixmap_signal.connect(self.update_image_in)
-        self.thread1.change_pixmap_signal.connect(self.update_image_out)
-        self.threads.append(self.thread1)
+        self.thread0.change_pixmap_signal.connect(self.update_image_front_in)
+        self.thread1.change_pixmap_signal.connect(self.update_image_front_out)
+        self.thread2.change_pixmap_signal.connect(self.update_image_back_in)
+        self.thread3.change_pixmap_signal.connect(self.update_image_back_out)
         self.threads.append(self.thread0)
+        self.threads.append(self.thread1)
+        self.threads.append(self.thread2)
+        self.threads.append(self.thread3)
         # start the thread
         for slot in self.threads:
             slot.start()
         self.uic.btnTable.clicked.connect(self.showScreen)
         
         
+    
+        
     def closeEvent(self):
         self.thread0.stop()
         self.thread1.stop()
         
-    def read():
-        global Status
-        Status="In"
+   
     def showScreen(self):
 
 
@@ -308,12 +416,18 @@ class MainWindow(QMainWindow):
     
     #Image captured show
     @pyqtSlot(np.ndarray)
-    def update_image_in(self, cv_img):
+    def update_image_front_in(self, cv_img):
         qt_img = self.convert_cv_qt(cv_img)
-        self.uic.CamIn.setPixmap(qt_img)
-    def update_image_out(self, cv_img):
+        self.uic.CamFrontIn.setPixmap(qt_img)
+    def update_image_front_out(self, cv_img):
         qt_img = self.convert_cv_qt(cv_img)
-        self.uic.CamOut.setPixmap(qt_img)
+        self.uic.CamFrontOut.setPixmap(qt_img)
+    def update_image_back_out(self, cv_img):
+        qt_img = self.convert_cv_qt(cv_img)
+        self.uic.CamBackOut.setPixmap(qt_img)
+    def update_image_back_in(self, cv_img):
+        qt_img = self.convert_cv_qt(cv_img)
+        self.uic.CamBackIn.setPixmap(qt_img)
     
     def convert_cv_qt(self, cv_img):
         rgb_image = cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)

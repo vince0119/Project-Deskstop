@@ -111,3 +111,45 @@ def check_CardId_Guest_Registered(self, CardId,showInactive):
     finally:
 
         db.close()
+
+def Get_Date_Car_log_by_id(id):
+    CarLogDB = "SELECT * FROM carlog WHERE Id = %s"
+    
+    try:
+        db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
+        value = (id)
+        mycuror =db.cursor()
+        a=mycuror.execute(CarLogDB, (value,))
+        
+        print('123',a)
+        
+        result = mycuror.fetchall()
+        
+        return result
+
+    except mysql.connector.Error as e: 
+        print('fail')
+        print(e) 
+    finally:
+
+        db.close()
+
+def get_last_Car_log_by_regisId(self, RegisId,Status):
+    CarLogDB = "SELECT * FROM aps.carlog where RegisteredId =%s and Status =%s ORDER BY ID DESC LIMIT 1"
+    
+    
+    try:
+        db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
+        value = (RegisId,Status)
+        mycuror =db.cursor()
+        mycuror.execute(CarLogDB, (value,))
+        
+        result = mycuror.fetchall()
+
+        return result
+
+    except mysql.connector.Error as e:  
+        QMessageBox.about(self, ' Fail', 'Connect database failed!!!')
+    finally:
+
+        db.close()

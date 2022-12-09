@@ -62,3 +62,12 @@ def CustomerRegisteredCheckValidation(self,CardID, CustomerID, CarLicense, CarCo
                                         else:
                                             return True
 
+def ValidCarLicense(CarLicense):
+    if (len(CarLicense)==8):
+        if (CarLicense[2].isalpha()):
+            cut =CarLicense[0:2]+CarLicense[3:8]
+            print(cut)
+            if cut.isnumeric():
+                return True
+
+    return False

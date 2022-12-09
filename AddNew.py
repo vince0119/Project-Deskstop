@@ -67,25 +67,22 @@ def insert_data_customers(self):
     finally:
         db.close()
 
-def insert_data_guest_regis(self):
+def insert_data_guest_regis(self,CardID,CarLicense):
     try:
         db = mysql.connector.connect(user='root', password='1234', host='127.0.0.1', database='APS')
 
         mycursor = db.cursor()
 
-        CardID = self.uic1.txtCardIdGuest.text()
-        CarLicense = self.uic1.txtCarLicenseGuest.text()
         query = ("INSERT INTO guestregistered (CardID, CarLicense)" "VALUES (%s, %s)")
         val = (CardID, CarLicense )
 
         result = mycursor.execute(query, val)
 
         db.commit()
-        QMessageBox.about(self, 'Inserted', 'Data insert successfully')
+        return mycursor.lastrowid
         
     except mysql.connector.Error as e:
-        QMessageBox.about(self, ' Fail', 'Insert Failed!!!')
-        return False
+        return -1
     finally:
         db.close()
 
@@ -100,10 +97,10 @@ def insert_car_log(self, regisID, Status, Customer):
         result = mycursor.execute(query, val)
 
         db.commit()
-        QMessageBox.about(self, 'Inserted', 'Data insert successfully')
+        return mycursor.lastrowid
         
     except mysql.connector.Error as e:
-        return False
+        return -1
     finally:
         db.close()
         
